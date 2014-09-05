@@ -6,43 +6,38 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="1" author="viktor" context="main">
-        <createTable tableName="deliveryItems">
-            <column name="deliveryItemId" type="BIGINT" autoIncrement="true">
+    <changeSet id="1" author="MumboJumbo" context="main">
+        <createTable tableName="orders">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="deliveryId" type="BIGINT">
+            <column name="shippingAddress" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="productTitle" type="varchar(100)">
+            <column name="billingAddress" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="productWeightInGram" type="int">
+            <column name="billingSameAsShipping" type="boolean" defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="productPrice" type="NUMERIC(19,2)">
+            <column name="orderDate" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="productDeliveryPrice" type="NUMERIC(19,2)">
+            <column name="deliveryDate" type="TIMESTAMP">
                 <constraints nullable="false"/>
-            </column>            
+            </column>
+            <!--
+           <column name="totalOrderPrice" type="numeric(19,2)">
+               <constraints nullable="true"/>
+           </column>
+           -->
+
         </createTable>
-
-        <addForeignKeyConstraint baseTableName="deliveryItems"
-                                 baseColumnNames="deliveryId"
-                                 constraintName="fk_deliveryItems_delivery"
-                                 deferrable="false"
-                                 initiallyDeferred="false"
-                                 onDelete="CASCADE"
-                                 onUpdate="CASCADE"
-                                 referencedColumnNames="deliveryId"
-                                 referencedTableName="deliveries"/>
-
     </changeSet>
 
 </databaseChangeLog>

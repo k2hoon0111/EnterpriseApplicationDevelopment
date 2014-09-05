@@ -10,11 +10,11 @@
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <context:component-scan base-package="lv.javaguru.ee.bookstore" />
+    <context:component-scan base-package="lv.javaguru.ee.bookshop" />
 
     <context:property-placeholder location='database-test.properties'/>
 
     <bean id="sessionFactoryConfiguration"
-          class="lv.javaguru.ee.bookstore.config.SessionFactoryConfiguration" />
+          class="lv.javaguru.ee.bookshop.config.SessionFactoryConfiguration" />
 
 </beans>
