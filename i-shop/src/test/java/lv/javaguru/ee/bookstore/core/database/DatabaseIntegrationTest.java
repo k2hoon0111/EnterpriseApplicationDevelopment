@@ -1,12 +1,10 @@
 package lv.javaguru.ee.bookstore.core.database;
 
 //import lv.javaguru.ee.deliveryagency.core.domain.*;
-import  lv.javaguru.ee.bookstore.core.domain.*;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,10 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import static lv.javaguru.ee.bookstore.core.domain.support.*;
 
 //import static lv.javaguru.ee.deliveryagency.core.domain.DeliveryAddressBuilder.*;
 //import static lv.javaguru.ee.deliveryagency.core.domain.DeliveryAddressBuilder.createDeliveryAddress;
@@ -35,6 +30,52 @@ public abstract class DatabaseIntegrationTest {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+    @Autowired
+    private AccountDAO accountDAO;
+
+    @Autowired
+    private AddressDAO addressDAO;
+
+    @Autowired
+    private BookDAO bookDAO;
+
+    @Autowired
+    private CategoryDAO categoryDAO;
+
+    @Autowired
+    private OrderDAO orderDAO;
+
+    @Autowired
+    private OrderDetailDAO orderDetailDAO;
+
+    @Autowired
+    private PermissionDAO permissionDAO;
+
+    @Autowired
+    private RoleDAO roleDAO;
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void cleanDatabase() {
+        Session session = sessionFactory.getCurrentSession();
+        List<String> tableNames = getTableNames();
+        for(String tableName : tableNames) {
+            String queryString = "DELETE FROM " + tableName;
+            Query query = session.createSQLQuery(queryString);
+            query.executeUpdate();
+        }
+    }
+
+    private List<String> getTableNames() {
+        List<String> tableNames = new ArrayList<>();
+        tableNames.add("deliveryItems");
+        tableNames.add("clients");
+        tableNames.add("deliveryAddresses");
+        tableNames.add("deliveryInfos");
+        tableNames.add("deliveries");
+        return tableNames;
+    }
+
+/*
     @Autowired
     private ClientDAO clientDAO;
 
@@ -136,5 +177,5 @@ public abstract class DatabaseIntegrationTest {
 		saveDeliveryInfo(deliveryInfo);
 		return deliveryInfo;
 	}
-	
+*/
 }

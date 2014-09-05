@@ -1,5 +1,6 @@
 package lv.javaguru.ee.bookstore.core.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -7,20 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,7 +18,6 @@ import javax.persistence.Table;
  */
 
 @Entity
-// order is a reserved SQL keyword, hence the explicit table definition
 @Table(name = "orders")
 public class Order implements Serializable {
 
@@ -40,21 +26,21 @@ public class Order implements Serializable {
     private Long id;
 
     @Embedded
-    @AttributeOverrides({ @AttributeOverride(name = "street", column = @Column(name = "shipping_street")),
+    @AttributeOverrides({@AttributeOverride(name = "street", column = @Column(name = "shipping_street")),
             @AttributeOverride(name = "houseNumber", column = @Column(name = "shipping_houseNumber")),
             @AttributeOverride(name = "boxNumber", column = @Column(name = "shipping_boxNumber")),
             @AttributeOverride(name = "city", column = @Column(name = "shipping_city")),
             @AttributeOverride(name = "postalCode", column = @Column(name = "shipping_postalCode")),
-            @AttributeOverride(name = "country", column = @Column(name = "shipping_country")) })
+            @AttributeOverride(name = "country", column = @Column(name = "shipping_country"))})
     private Address shippingAddress;
 
     @Embedded
-    @AttributeOverrides({ @AttributeOverride(name = "street", column = @Column(name = "billing_street")),
+    @AttributeOverrides({@AttributeOverride(name = "street", column = @Column(name = "billing_street")),
             @AttributeOverride(name = "houseNumber", column = @Column(name = "billing_houseNumber")),
             @AttributeOverride(name = "boxNumber", column = @Column(name = "billing_boxNumber")),
             @AttributeOverride(name = "city", column = @Column(name = "billing_city")),
             @AttributeOverride(name = "postalCode", column = @Column(name = "billing_postalCode")),
-            @AttributeOverride(name = "country", column = @Column(name = "billing_country")) })
+            @AttributeOverride(name = "country", column = @Column(name = "billing_country"))})
     private Address billingAddress;
 
     @ManyToOne(optional = false)

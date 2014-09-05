@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "role" }) })
+@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = {"role"})})
 public class Role implements Serializable {
 
     @Id

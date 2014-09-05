@@ -11,7 +11,7 @@ import java.io.Serializable;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "permission" }) })
+@Table(name = "permissions", uniqueConstraints = {@UniqueConstraint(columnNames = {"permission"})})
 public class Permission implements Serializable {
 
     @Id

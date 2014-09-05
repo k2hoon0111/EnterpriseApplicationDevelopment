@@ -13,6 +13,7 @@ import java.math.BigDecimal;
  */
 
 @Entity
+@Table(name = "orderDetails")
 public class OrderDetail implements Serializable {
 
     @Id

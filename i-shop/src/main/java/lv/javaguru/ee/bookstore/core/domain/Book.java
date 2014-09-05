@@ -1,21 +1,15 @@
 package lv.javaguru.ee.bookstore.core.domain;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
-import javax.persistence.Cacheable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,6 +20,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 
 @Entity
+@Table(name = "books")
 @Cacheable
 @Cache(region = "books", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Book implements Serializable {

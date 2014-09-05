@@ -22,6 +22,7 @@ import java.io.Serializable;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
+@Table(name = "categories")
 @Cacheable
 @Cache(region = "categories", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Category implements Serializable {
