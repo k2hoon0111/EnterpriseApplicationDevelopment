@@ -2,9 +2,11 @@ package lv.javaguru.ee.bookstore.core.database;
 
 //import lv.javaguru.ee.deliveryagency.core.domain.*;
 
+import lv.javaguru.ee.bookstore.core.domain.Address;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,8 +29,8 @@ import java.util.List;
 @Transactional
 public abstract class DatabaseIntegrationTest {
 
-	@Autowired
-	private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Autowired
     private AccountDAO accountDAO;
@@ -54,11 +56,12 @@ public abstract class DatabaseIntegrationTest {
     @Autowired
     private RoleDAO roleDAO;
 
+    @Before
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void cleanDatabase() {
         Session session = sessionFactory.getCurrentSession();
         List<String> tableNames = getTableNames();
-        for(String tableName : tableNames) {
+        for (String tableName : tableNames) {
             String queryString = "DELETE FROM " + tableName;
             Query query = session.createSQLQuery(queryString);
             query.executeUpdate();
@@ -67,52 +70,34 @@ public abstract class DatabaseIntegrationTest {
 
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<>();
-        tableNames.add("deliveryItems");
-        tableNames.add("clients");
-        tableNames.add("deliveryAddresses");
-        tableNames.add("deliveryInfos");
-        tableNames.add("deliveries");
+        tableNames.add("accounts");
+        tableNames.add("addresses");
+        tableNames.add("books");
+        tableNames.add("categories");
+        tableNames.add("orders");
+        tableNames.add("orderDetails");
+        tableNames.add("permissions");
+        tableNames.add("roles");
+
         return tableNames;
     }
 
+    protected Address getDefaultAddress() {
+        return new Address();
+    }
+
+    protected void saveAddress(Address address) {
+        addressDAO.create(address);
+    }
+
+    protected Address createDefaultAddress() {
+        Address address = getDefaultAddress();
+        saveAddress(address);
+        return address;
+    }
+
 /*
-    @Autowired
-    private ClientDAO clientDAO;
-
-    @Autowired
-    private DeliveryAddressDAO deliveryAddressDAO;
-
-    @Autowired
-    private DeliveryInfoDAO deliveryInfoDAO;
-
-	@Autowired
-	private DeliveryDAO deliveryDAO;
-	
-
-    @Before
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void cleanDatabase() {
-		Session session = sessionFactory.getCurrentSession();
-		List<String> tableNames = getTableNames();
-		for(String tableName : tableNames) {
-			String queryString = "DELETE FROM " + tableName;
-			Query query = session.createSQLQuery(queryString);
-			query.executeUpdate();
-		}
-	}
-
-	private List<String> getTableNames() {
-		List<String> tableNames = new ArrayList<>();
-        tableNames.add("deliveryItems");
-		tableNames.add("clients");
-		tableNames.add("deliveryAddresses");
-		tableNames.add("deliveryInfos");		
-		tableNames.add("deliveries");
-		return tableNames;
-	}	
-			
-	
-	protected Delivery getDefaultDelivery() {
+       protected Delivery getDefaultDelivery() {
 		return new Delivery();
 	}
 	
