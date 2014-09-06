@@ -12,6 +12,10 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
+            <column name="accountId" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+
             <column name="shippingAddress" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>

@@ -18,6 +18,16 @@
                                  referencedColumnNames="categoryId"
                                  referencedTableName="categories"/>
 
+        <addForeignKeyConstraint baseTableName="orders"
+                                 baseColumnNames="accountId"
+                                 constraintName="fk_orders_accounts"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="accountId"
+                                 referencedTableName="accounts"/>
+
     </changeSet>
 
 </databaseChangeLog>

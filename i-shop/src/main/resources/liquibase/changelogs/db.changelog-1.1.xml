@@ -36,6 +36,31 @@
                 <constraints nullable="false"/>
             </column>
 
+            <!-- Embeddable Address -->
+            <column name="street" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="houseNumber" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="boxNumber" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="city" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="postalCode" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="country" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
         </createTable>
     </changeSet>
 

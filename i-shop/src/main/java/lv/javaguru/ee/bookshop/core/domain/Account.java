@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +24,7 @@ public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "accountId")
     private Long accountId;
 
     public Long getAccountId() {
@@ -38,9 +40,9 @@ public class Account implements Serializable {
 
     private Date dateOfBirth;
 
-//    @Embedded
-//    @Valid
-//    private Address address = new Address();
+    @Embedded
+    @Valid
+    private Address address = new Address();
 
     @NotEmpty
     @Email
@@ -93,13 +95,13 @@ public class Account implements Serializable {
         this.password = password;
     }
 
-//    public Address getAddress() {
-//        return this.address;
-//    }
-//
-//    public void setAddress(Address address) {
-//        this.address = address;
-//    }
+    public Address getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public Date getDateOfBirth() {
         return this.dateOfBirth;

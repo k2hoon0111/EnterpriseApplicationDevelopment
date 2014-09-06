@@ -3,7 +3,6 @@ package lv.javaguru.ee.bookshop.core.domain;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Table;
 import java.io.Serializable;
 
 
@@ -16,7 +15,7 @@ import java.io.Serializable;
  */
 
 @Embeddable
-@Table(name = "addresses")
+//@Table(name = "addresses")
 public class Address implements Serializable {
 
     @NotEmpty
