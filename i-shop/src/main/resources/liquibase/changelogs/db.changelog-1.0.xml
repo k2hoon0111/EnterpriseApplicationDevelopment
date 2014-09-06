@@ -12,6 +12,10 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
+            <column name="categoryId" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+
             <column name="title" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>

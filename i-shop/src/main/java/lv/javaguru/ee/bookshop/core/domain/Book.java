@@ -46,8 +46,9 @@ public class Book implements Serializable {
 
     private String Isbn;
 
-//    @ManyToOne(optional = false)
-//    private Category category;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "categoryId")
+    private Category category;
 
     public String getTitle() {
         return this.title;
@@ -89,13 +90,13 @@ public class Book implements Serializable {
         this.author = author;
     }
 
-//    public Category getCategory() {
-//        return this.category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
+    public Category getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public String getIsbn() {
         return this.Isbn;
