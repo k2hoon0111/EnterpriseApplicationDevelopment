@@ -8,15 +8,30 @@
 
     <changeSet id="1" author="MumboJumbo" context="main">
         <createTable tableName="orderDetails">
-            <column name="id" type="BIGINT" autoIncrement="true">
+            <column name="orderDetailId" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="quantity" type="int" defaultValue="1">
+            <column name="bookId" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
 
+            <column name="quantity" type="int" defaultValue="1">
+                <constraints nullable="true"/>
+            </column>
+
         </createTable>
+
+        <addForeignKeyConstraint baseTableName="orderDetails"
+                                 baseColumnNames="bookId"
+                                 constraintName="fk_orderDetails_books"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedTableName="books"
+                                 referencedColumnNames="bookId"/>
+
     </changeSet>
 
 </databaseChangeLog>

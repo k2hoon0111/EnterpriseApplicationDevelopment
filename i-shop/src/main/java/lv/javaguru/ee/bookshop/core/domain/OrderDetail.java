@@ -18,9 +18,18 @@ public class OrderDetail implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long orderDetailId;
 
-    @ManyToOne(optional = false)
+    public Long getOrderDetailId() {
+        return orderDetailId;
+    }
+
+    public void setOrderDetailId(Long orderDetailId) {
+        this.orderDetailId = orderDetailId;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "bookId")
     private Book book;
 
     private int quantity = 1;
@@ -33,10 +42,6 @@ public class OrderDetail implements Serializable {
         super();
         this.book = book;
         this.quantity = quantity;
-    }
-
-    public Long getId() {
-        return this.id;
     }
 
     public int getQuantity() {

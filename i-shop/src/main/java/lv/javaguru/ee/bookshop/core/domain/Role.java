@@ -19,7 +19,7 @@ public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long roleId;
 
     private String role;
 
@@ -34,16 +34,20 @@ public class Role implements Serializable {
         this.role = role;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public List<Permission> getPermissions() {

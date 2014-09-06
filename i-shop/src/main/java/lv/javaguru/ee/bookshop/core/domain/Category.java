@@ -8,8 +8,8 @@ package lv.javaguru.ee.bookshop.core.domain;
  * To change this template use File | Settings | File Templates.
  */
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+//import org.hibernate.annotations.Cache;
+//import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,13 +23,13 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "categories")
-@Cacheable
-@Cache(region = "categories", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//@Cacheable
+//@Cache(region = "categories", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Category implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long categoryId;
 
     @Basic(optional = false)
     private String name;
@@ -41,12 +41,16 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Long getId() {
-        return this.id;
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.categoryId = id;
     }
 
     public void setName(String name) {

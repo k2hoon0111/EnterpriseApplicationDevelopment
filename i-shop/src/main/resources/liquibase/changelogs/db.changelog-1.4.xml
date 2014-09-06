@@ -8,7 +8,7 @@
 
     <changeSet id="1" author="MumboJumbo" context="main">
         <createTable tableName="orders">
-            <column name="id" type="BIGINT" autoIncrement="true">
+            <column name="orderId" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 

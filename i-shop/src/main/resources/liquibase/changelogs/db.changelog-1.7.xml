@@ -8,7 +8,7 @@
 
     <changeSet id="1" author="MumboJumbo" context="main">
         <createTable tableName="roles">
-            <column name="id" type="BIGINT" autoIncrement="true">
+            <column name="roleId" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -17,6 +17,7 @@
             </column>
 
         </createTable>
+
     </changeSet>
 
 </databaseChangeLog>

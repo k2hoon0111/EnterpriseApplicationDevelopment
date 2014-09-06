@@ -14,11 +14,11 @@
             </column>
 
             <column name="houseNumber" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="boxNumber" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="city" type="varchar(255)">
@@ -26,7 +26,7 @@
             </column>
 
             <column name="postalCode" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="country" type="varchar(255)">
@@ -34,6 +34,12 @@
             </column>
 
         </createTable>
+
+    </changeSet>
+
+    <changeSet id="2" author="MumboJumbo" context="main">
+        <addPrimaryKey tableName="addresses"
+                       columnNames="street,houseNumber, boxNumber, city, postalCode, country"/>
     </changeSet>
 
 </databaseChangeLog>

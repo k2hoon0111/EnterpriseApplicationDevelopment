@@ -8,7 +8,7 @@
 
     <changeSet id="1" author="MumboJumbo" context="main">
         <createTable tableName="permissions">
-            <column name="deliveryId" type="BIGINT" autoIncrement="true">
+            <column name="permissionId" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 

@@ -4,12 +4,12 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+//import org.hibernate.annotations.Cache;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,27 +21,33 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "books")
-@Cacheable
-@Cache(region = "books", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//@Cacheable
+//@Cache(region = "books", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name="bookId")
+    private Long bookId;
 
     private String title;
     private String description;
     private BigDecimal price;
     private Integer year;
     private String author;
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
+    }
+
     private String Isbn;
 
-    @ManyToOne(optional = false)
-    private Category category;
-
-    public Long getId() {
-        return this.id;
-    }
+//    @ManyToOne(optional = false)
+//    private Category category;
 
     public String getTitle() {
         return this.title;
@@ -83,13 +89,13 @@ public class Book implements Serializable {
         this.author = author;
     }
 
-    public Category getCategory() {
-        return this.category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+//    public Category getCategory() {
+//        return this.category;
+//    }
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
 
     public String getIsbn() {
         return this.Isbn;

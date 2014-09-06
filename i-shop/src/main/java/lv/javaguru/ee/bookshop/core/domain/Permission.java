@@ -6,17 +6,27 @@ import java.io.Serializable;
 /**
  * Created with IntelliJ IDEA.
  * User: MumboJumbo
- * Date: 05/09/14
- * Time: 10:19
+ * Date: 06/09/14
+ * Time: 10:36
  * To change this template use File | Settings | File Templates.
  */
+
 @Entity
 @Table(name = "permissions", uniqueConstraints = {@UniqueConstraint(columnNames = {"permission"})})
 public class Permission implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "permissionId")
+    private Long permissionId;
+
+    public Long getPermissionId() {
+        return permissionId;
+    }
+
+    public void setPermissionId(Long permissionId) {
+        this.permissionId = permissionId;
+    }
 
     private String permission;
 
@@ -26,10 +36,6 @@ public class Permission implements Serializable {
 
     public Permission(String permission) {
         this.permission = permission;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getPermission() {
