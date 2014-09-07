@@ -8,8 +8,8 @@ package lv.javaguru.ee.bookshop.core.domain;
  * To change this template use File | Settings | File Templates.
  */
 
-//import org.hibernate.annotations.Cache;
-//import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,8 +23,8 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "categories")
-//@Cacheable
-//@Cache(region = "categories", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cacheable
+@Cache(region = "categories", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Category implements Serializable {
 
     @Id

@@ -46,6 +46,8 @@
         <hibernate-core.version>4.1.4.Final</hibernate-core.version>
         <hibernate-entitymanager.version>4.1.4.Final</hibernate-entitymanager.version>
         <hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
+        <hibernateVersion>4.1.0.Final</hibernateVersion>
+        <ehcacheVersion>2.6.9</ehcacheVersion>
 
         <!-- Logging dependencies -->
         <slf4j-api.version>1.7.7</slf4j-api.version>
@@ -147,6 +149,18 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache-core</artifactId>
+                <version>${ehcacheVersion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-ehcache</artifactId>
+                <version>${hibernateVersion}</version>
             </dependency>
 
             <!-- Logging dependencies -->

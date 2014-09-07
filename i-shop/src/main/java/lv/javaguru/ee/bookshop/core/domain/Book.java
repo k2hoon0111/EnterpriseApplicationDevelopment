@@ -4,12 +4,12 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-
-//import org.hibernate.annotations.Cache;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,8 +21,8 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "books")
-//@Cacheable
-//@Cache(region = "books", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cacheable
+@Cache(region = "books", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Book implements Serializable {
 
     @Id
