@@ -12,8 +12,12 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
+            <column name="orderDetailId" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="accountId" type="BIGINT">
-                <constraints nullable="true"/>
+                <constraints nullable="false"/>
             </column>
 
             <column name="shippingAddress" type="varchar(255)">
@@ -29,11 +33,11 @@
             </column>
 
             <column name="orderDate" type="TIMESTAMP">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="deliveryDate" type="TIMESTAMP">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <!--
            <column name="totalOrderPrice" type="numeric(19,2)">

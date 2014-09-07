@@ -23,10 +23,10 @@ public class Role implements Serializable {
 
     private String role;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Permission> permissions = new ArrayList<Permission>();
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private transient List<Permission> permissions = new ArrayList<Permission>();
 
-    Role() {
+    public Role() {
         // For ORM
     }
 

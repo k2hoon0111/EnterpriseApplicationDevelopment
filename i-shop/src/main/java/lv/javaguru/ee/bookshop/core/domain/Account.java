@@ -52,8 +52,8 @@ public class Account implements Serializable {
     @NotEmpty
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Role> roles = new ArrayList<Role>();
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private transient List<Role> roles = new ArrayList<Role>();
 
     public String getFirstName() {
         return this.firstName;
