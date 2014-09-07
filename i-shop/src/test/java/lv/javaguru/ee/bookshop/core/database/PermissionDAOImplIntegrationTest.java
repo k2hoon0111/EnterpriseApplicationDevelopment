@@ -1,20 +1,20 @@
 package lv.javaguru.ee.bookshop.core.database;
 
+import lv.javaguru.ee.bookshop.core.domain.Permission;
 import org.junit.Test;
 
 /**
  * Created with IntelliJ IDEA.
  * User: MumboJumbo
- * Date: 05/09/14
- * Time: 14:36
+ * Date: 06/09/14
+ * Time: 23:59
  * To change this template use File | Settings | File Templates.
  */
-public class AccountDAOImplIntegrationTest extends DatabaseIntegrationTest {
+public class PermissionDAOImplIntegrationTest extends DatabaseIntegrationTest {
 
     @Test
-    public void testCreateAccount() {
-//        Account account =  createDefaultAccount();
-//        Address address =
+    public void testCreatePermission() {
+        Permission permission = createDefaultPermission();
 //        Delivery delivery = createDefaultDelivery();
 //        Client client = getDefaultClient(delivery);
 //        assertThat(client.getClientId(), is(nullValue()));

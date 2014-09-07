@@ -30,8 +30,8 @@ public class Permission implements Serializable {
 
     private String permission;
 
-    Permission() {
-        // Form ORM
+    public Permission() {
+        // Form ORM ???
     }
 
     public Permission(String permission) {
