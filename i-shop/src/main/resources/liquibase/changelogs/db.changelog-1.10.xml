@@ -28,15 +28,17 @@
                                  referencedColumnNames="accountId"
                                  referencedTableName="accounts"/>
 
-        <addForeignKeyConstraint baseTableName="orders"
-                                 baseColumnNames="orderDetailId"
-                                 constraintName="fk_orders_orderDetails"
+        <addForeignKeyConstraint baseTableName="orderDetails"
+                                 baseColumnNames="orderId"
+                                 constraintName="fk_orderDetails_orders"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="CASCADE"
                                  onUpdate="CASCADE"
-                                 referencedColumnNames="orderDetailId"
-                                 referencedTableName="orderDetails"/>
+                                 referencedColumnNames="orderId"
+                                 referencedTableName="orders"/>
+
+
     </changeSet>
 
 </databaseChangeLog>

@@ -12,19 +12,71 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="orderDetailId" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
+            <!--<column name="orderDetailId" type="BIGINT">-->
+            <!--<constraints nullable="false"/>-->
+            <!--</column>-->
 
             <column name="accountId" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
 
+            <!--
             <column name="shippingAddress" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
 
             <column name="billingAddress" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            -->
+
+            <!-- Embeddable shipping Address -->
+            <column name="shipping_street" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="shipping_houseNumber" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="shipping_boxNumber" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="shipping_city" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="shipping_postalCode" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="shipping_country" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- Embeddable billing Address -->
+            <column name="billing_street" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="billing_houseNumber" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="billing_boxNumber" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="billing_city" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="billing_postalCode" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="billing_country" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
 
@@ -39,11 +91,10 @@
             <column name="deliveryDate" type="TIMESTAMP">
                 <constraints nullable="true"/>
             </column>
-            <!--
-           <column name="totalOrderPrice" type="numeric(19,2)">
-               <constraints nullable="true"/>
-           </column>
-           -->
+
+            <column name="totalOrderPrice" type="numeric(19,2)">
+                <constraints nullable="true"/>
+            </column>
 
         </createTable>
     </changeSet>

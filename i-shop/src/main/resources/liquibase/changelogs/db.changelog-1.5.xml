@@ -12,6 +12,10 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
+            <column name="orderId" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="bookId" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
