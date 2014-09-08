@@ -3,6 +3,9 @@ package lv.javaguru.ee.bookshop.core.database;
 import lv.javaguru.ee.bookshop.core.domain.Permission;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 /**
  * Created with IntelliJ IDEA.
  * User: MumboJumbo
@@ -15,10 +18,8 @@ public class PermissionDAOImplIntegrationTest extends DatabaseIntegrationTest {
     @Test
     public void testCreatePermission() {
         Permission permission = createDefaultPermission();
-//        Delivery delivery = createDefaultDelivery();
-//        Client client = getDefaultClient(delivery);
-//        assertThat(client.getClientId(), is(nullValue()));
-//        saveClient(client);
-//        assertThat(client.getClientId(), is(notNullValue()));
+        assertThat(permission.getPermissionId(), is(nullValue()));
+        savePermission(permission);
+        assertThat(permission.getPermissionId(), is(notNullValue()));
     }
 }

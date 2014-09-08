@@ -26,15 +26,6 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "accountId")
     private Long accountId;
-
-    public Long getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
-
     private String firstName;
     private String lastName;
 
@@ -117,6 +108,14 @@ public class Account implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
 }

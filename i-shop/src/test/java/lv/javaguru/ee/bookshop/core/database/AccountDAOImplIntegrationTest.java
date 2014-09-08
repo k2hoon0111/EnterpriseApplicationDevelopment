@@ -1,6 +1,9 @@
 package lv.javaguru.ee.bookshop.core.database;
 
+import lv.javaguru.ee.bookshop.core.domain.Account;
 import org.junit.Test;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,12 +16,9 @@ public class AccountDAOImplIntegrationTest extends DatabaseIntegrationTest {
 
     @Test
     public void testCreateAccount() {
-//        Account account =  createDefaultAccount();
-//        Address address =
-//        Delivery delivery = createDefaultDelivery();
-//        Client client = getDefaultClient(delivery);
-//        assertThat(client.getClientId(), is(nullValue()));
-//        saveClient(client);
-//        assertThat(client.getClientId(), is(notNullValue()));
+        Account account = createDefaultAccount();
+        assertThat(account.getAccountId(), is(nullValue()));
+        saveAccount(account);
+        assertThat(account.getAccountId(), is(notNullValue()));
     }
 }

@@ -21,7 +21,7 @@
             </column>
 
             <column name="dateOfBirth" type="TIMESTAMP">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="emailAddress" type="varchar(255)">

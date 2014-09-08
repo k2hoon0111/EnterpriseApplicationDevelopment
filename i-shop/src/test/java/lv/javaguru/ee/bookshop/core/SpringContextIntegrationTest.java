@@ -17,8 +17,8 @@ public class SpringContextIntegrationTest {
 
 	@Autowired
 	private ApplicationContext applicationContext;
-	
-	
+
+
 	@Test
 	public void appContextShouldBeNotNull() {
 		assertThat(applicationContext, is(notNullValue()));

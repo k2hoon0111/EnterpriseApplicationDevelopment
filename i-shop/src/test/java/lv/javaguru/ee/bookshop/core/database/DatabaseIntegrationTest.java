@@ -1,7 +1,9 @@
 package lv.javaguru.ee.bookshop.core.database;
 
 import lv.javaguru.ee.bookshop.core.domain.Account;
+import lv.javaguru.ee.bookshop.core.domain.Address;
 import lv.javaguru.ee.bookshop.core.domain.Permission;
+import lv.javaguru.ee.bookshop.core.domain.Role;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,8 +45,8 @@ public abstract class DatabaseIntegrationTest {
     @Autowired
     private CategoryDAO categoryDAO;
 
-//    @Autowired
-//    private OrderDAO orderDAO;
+    @Autowired
+    private OrderDAO orderDAO;
 
     @Autowired
     private OrderDetailDAO orderDetailDAO;
@@ -81,117 +83,100 @@ public abstract class DatabaseIntegrationTest {
         return tableNames;
     }
 
-    protected Account createDefaultAccount() {
-        Account account = getDefaultAccount();
-        saveAccount(account);
-        return account;
-    }
-
-    protected Account getDefaultAccount() {
-        return new Account();
-    }
-
-    protected void saveAccount(Account account) {
-        accountDAO.create(account);
-    }
-
-
+    // Permission
     protected Permission createDefaultPermission() {
         Permission permission = getDefaultPermission();
-        savePermission(permission);
         return permission;
     }
 
     protected Permission getDefaultPermission() {
-        Permission permission = new Permission();
-        permission.setPermission("ALLOW_ALL");
-        return permission;
+        Permission permissionAddCategories = new Permission("PERM_ADD_CATEGORIES");
+        return permissionAddCategories;
     }
 
     protected void savePermission(Permission permission) {
         permissionDAO.create(permission);
     }
 
-/*
-    protected Address getDefaultAddress() {
-        return new Address();
+    // Permission list
+    protected List<Permission> createDefaulPermissionsList() {
+
+        List<Permission> permissions = new ArrayList<Permission>();
+        permissions.add(new Permission("PERM_ADD_CATEGORIES"));
+        permissions.add(new Permission("PERM_ADD_BOOKS"));
+        permissions.add(new Permission("PERM_CREATE_ORDER"));
+        return permissions;
     }
 
-    protected void saveAddress(Address address) {
-        addressDAO.create(address);
+    // Roles
+    protected Role createDefaultRole() {
+        Role role = getDefaultRole();
+        return role;
     }
 
-    protected Address createDefaultAddress() {
-        Address address = getDefaultAddress();
-        saveAddress(address);
+    protected Role getDefaultRole() {
+        Role roleCustomer = new Role("ROLE_CUSTOMER");
+        roleCustomer.setPermissions(createDefaulPermissionsList());
+        return roleCustomer;
+    }
+
+    protected void saveRole(Role role) {
+        roleDAO.create(role);
+    }
+
+    // Roles list
+    protected List<Role> createDefaulRolesList() {
+
+        List<Role> roles = new ArrayList<Role>();
+        roles.add(createDefaultRole());
+        return roles;
+    }
+
+    // Address
+    protected Address createDefaulAddress() {
+
+        Address address = new Address();
+        address.setCountry("Latvia");
+        address.setCity("Riga");
+        address.setStreet("Brivibas");
         return address;
     }
 
+    // Account
+    protected Account createDefaultAccount() {
+        Account account = getDefaultAccount();
+        return account;
+    }
 
-       protected Delivery getDefaultDelivery() {
-		return new Delivery();
-	}
-	
-	protected void saveDelivery(Delivery delivery) {
-		deliveryDAO.create(delivery);
-	}
-	
-	protected Delivery createDefaultDelivery() {
-		Delivery delivery = getDefaultDelivery();
-		saveDelivery(delivery);
-		return delivery;
-	}
+    protected Account getDefaultAccount() {
+        Account johnDoe = new Account();
+        johnDoe.setAddress(createDefaulAddress());
+        johnDoe.setEmailAddress("bar@test.com");
+        johnDoe.setFirstName("Vasja");
+        johnDoe.setLastName("Pupkin");
+        johnDoe.setUsername("user");
+        johnDoe.setPassword("password");
+        johnDoe.setRoles(createDefaulRolesList());
 
-	protected void saveClient(Client client) {
-		clientDAO.create(client);
-	}
+//        Account johnDoe =
+//
+//                new AccountBuilder() {
+//                    {
+//                        address("Antwerp", "2000", "Meir", "1", "A", "BE");
+//                        email("bar@test.com");
+//                        credentials("admin", "secret");
+//                        name("Super", "User");
+//                        roleWithPermissions(createDefaultRole(),
+//                                createDefaultPermission()
+//                        );
+//                    }
+//                }.build();
 
-	protected Client getDefaultClient(Delivery delivery) {
-		return ClientBuilder.createClient()
-				.with(delivery)
-				.withFirstName("Vasja")
-				.withLastName("Pupkin")
-				.withEmail("vasja.pupkin@gmail.com")
-				.withPhone("12345")
-				.withSpecialNotes("notes").build();
-	}
+        return johnDoe;
+    }
 
-	protected void saveDeliveryAddress(DeliveryAddress deliveryAddress) {
-		deliveryAddressDAO.create(deliveryAddress);
-	}
+    protected void saveAccount(Account account) {
+        accountDAO.create(account);
+    }
 
-	protected DeliveryAddress getDefaultDeliveryAddress(Delivery delivery) {
-		return createDeliveryAddress()
-				.with(delivery)
-				.withCity("Riga")
-				.withPostIndex("LV-10")
-				.withStreet("Lomonosova")
-				.withHouse("1")
-				.withFlat("1").build();
-	}
-
-	protected DeliveryAddress createDefaultDeliveryAddress(Delivery delivery) {
-		DeliveryAddress deliveryAddress = getDefaultDeliveryAddress(delivery);
-		saveDeliveryAddress(deliveryAddress);
-		return deliveryAddress;
-	}
-
-	protected void saveDeliveryInfo(DeliveryInfo deliveryInfo) {
-		deliveryInfoDAO.create(deliveryInfo);
-	}
-
-	protected DeliveryInfo getDefaultDeliveryInfo() {
-		return createDeliveryInfo()
-				.withDesiredDeliveryDate(new Date())
-				.withDesiredDeliveryTimeFrom("10:00")
-				.withDesiredDeliveryTimeTo("12:00")
-				.withDeliveryNotes("kod 123").build();
-	}
-
-	protected DeliveryInfo createDefaultDeliveryInfo() {
-		DeliveryInfo deliveryInfo = getDefaultDeliveryInfo();
-		saveDeliveryInfo(deliveryInfo);
-		return deliveryInfo;
-	}
-*/
 }
