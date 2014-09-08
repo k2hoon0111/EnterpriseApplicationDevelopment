@@ -1,5 +1,7 @@
 package lv.javaguru.ee.bookshop.validation;
 
+import lv.javaguru.ee.bookshop.core.domain.Address;
+import lv.javaguru.ee.bookshop.core.domain.Order;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
