@@ -3,3 +3,4 @@
 3. exclude from compile
 4. Second level cache
 5.@ComponentScan(basePackages = {"lv.javaguru.ee.bookshop"})
+6
