@@ -1,9 +1,6 @@
 package lv.javaguru.ee.bookshop.core.database;
 
-import lv.javaguru.ee.bookshop.core.domain.Account;
-import lv.javaguru.ee.bookshop.core.domain.Address;
-import lv.javaguru.ee.bookshop.core.domain.Permission;
-import lv.javaguru.ee.bookshop.core.domain.Role;
+import lv.javaguru.ee.bookshop.core.domain.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,13 +13,9 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
-//import static lv.javaguru.ee.deliveryagency.core.domain.DeliveryAddressBuilder.*;
-//import static lv.javaguru.ee.deliveryagency.core.domain.DeliveryAddressBuilder.createDeliveryAddress;
-//import static lv.javaguru.ee.deliveryagency.core.domain.DeliveryInfoBuilder.*;
-//import static lv.javaguru.ee.deliveryagency.core.domain.DeliveryInfoBuilder.createDeliveryInfo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/integrationTestApplicationContext.xml")
@@ -158,20 +151,6 @@ public abstract class DatabaseIntegrationTest {
         johnDoe.setPassword("password");
         johnDoe.setRoles(createDefaulRolesList());
 
-//        Account johnDoe =
-//
-//                new AccountBuilder() {
-//                    {
-//                        address("Antwerp", "2000", "Meir", "1", "A", "BE");
-//                        email("bar@test.com");
-//                        credentials("admin", "secret");
-//                        name("Super", "User");
-//                        roleWithPermissions(createDefaultRole(),
-//                                createDefaultPermission()
-//                        );
-//                    }
-//                }.build();
-
         return johnDoe;
     }
 
@@ -179,4 +158,62 @@ public abstract class DatabaseIntegrationTest {
         accountDAO.create(account);
     }
 
+    // Book
+    protected Book createDefaultBook() {
+        Book book = getDefaultBook();
+        return book;
+    }
+
+    protected Book getDefaultBook() {
+        Category category = createDefaultCategory();
+        categoryDAO.create(category);
+
+        Book effectiveJava = new Book();
+        effectiveJava.setAuthor("Joshua Bloch");
+        effectiveJava.setCategory(category);
+        effectiveJava.setDescription("Brings together seventy-eight indispensable programmer's rules of thumb.");
+        effectiveJava.setIsbn("9780321356680");
+        effectiveJava.setPrice(new BigDecimal("20.20"));
+        effectiveJava.setTitle("Effective Java");
+        effectiveJava.setYear(2008);
+//        final Book effectiveJava = new BookBuilder() {
+//            {
+//                title("Effective Java");
+//                isbn("9780321356680");
+//                description("Brings together seventy-eight indispensable programmer's rules of thumb.");
+//                author("Joshua Bloch");
+//                year(2008);
+//                price("31.20");
+//                category(createDefaultCategory());
+//            }
+//        }.build();
+        return effectiveJava;
+
+    }
+
+    protected void saveBoook(Book book) {
+        bookDAO.create(book);
+    }
+
+    // Category
+    protected Category createDefaultCategory() {
+        Category category = getDefaultCategory();
+        return category;
+    }
+
+    protected Category getDefaultCategory() {
+
+//        Category category = new CategoryBuilder() {
+//            {
+//                name("Java");
+//            }
+//        }.build();
+        Category category = new Category();
+        category.setName("Java");
+        return category;
+    }
+
+    protected void saveCategory(Category category) {
+        categoryDAO.create(category);
+    }
 }

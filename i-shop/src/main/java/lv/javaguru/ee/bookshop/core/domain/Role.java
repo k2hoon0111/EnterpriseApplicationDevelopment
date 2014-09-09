@@ -26,7 +26,7 @@ public class Role implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private transient List<Permission> permissions = new ArrayList<Permission>();
 
-    public Role() {
+    Role() {
         // For ORM
     }
 
