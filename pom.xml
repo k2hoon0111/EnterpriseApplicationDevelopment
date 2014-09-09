@@ -46,6 +46,8 @@
         <hibernate-core.version>4.1.4.Final</hibernate-core.version>
         <hibernate-entitymanager.version>4.1.4.Final</hibernate-entitymanager.version>
         <hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
+        <hibernateVersion>4.1.0.Final</hibernateVersion>
+        <ehcacheVersion>2.6.9</ehcacheVersion>
 
         <!-- Logging dependencies -->
         <slf4j-api.version>1.7.7</slf4j-api.version>
@@ -57,6 +59,12 @@
         <junit.version>4.11</junit.version>
         <mockito-all.version>1.9.5</mockito-all.version>
         <spring-test.version>4.0.3.RELEASE</spring-test.version>
+
+        <!-- commons-lang3 dependencies -->
+        <commons-lang3.version>3.3.2</commons-lang3.version>
+
+        <!-- commons-codec-->
+        <commons-codec.version>1.9</commons-codec.version>
 
         <!-- Plugins dependencies -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -143,6 +151,18 @@
                 <version>${hibernate-validator.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache-core</artifactId>
+                <version>${ehcacheVersion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-ehcache</artifactId>
+                <version>${hibernateVersion}</version>
+            </dependency>
+
             <!-- Logging dependencies -->
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -190,6 +210,20 @@
                 <artifactId>spring-test</artifactId>
                 <version>${spring-test.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- commons-lang3 dependencies -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <!-- commons-codec-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
             </dependency>
 
         </dependencies>

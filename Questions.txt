@@ -1,0 +1,5 @@
+1. @Embeddable and db table
+2. @ManyToMany
+3. exclude from compile
+4. Second level cache
+5.@ComponentScan(basePackages = {"lv.javaguru.ee.bookshop"})
