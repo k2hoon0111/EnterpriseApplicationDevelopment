@@ -44,7 +44,11 @@ public class Account implements Serializable {
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private transient List<Role> roles = new ArrayList<Role>();
+    @JoinTable(name = "accounts_roles", joinColumns = {
+            @JoinColumn(name = "accountId", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "roleId",
+                    nullable = false, updatable = false)})
+    private transient List<Role> roles = new ArrayList<Role>(0);
 
     public String getFirstName() {
         return this.firstName;

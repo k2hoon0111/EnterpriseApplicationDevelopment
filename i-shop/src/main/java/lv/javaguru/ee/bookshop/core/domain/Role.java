@@ -19,12 +19,17 @@ public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "roleId")
     private Long roleId;
 
     private String role;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private transient List<Permission> permissions = new ArrayList<Permission>();
+    @JoinTable(name = "roles_permissions", joinColumns = {
+            @JoinColumn(name = "roleId", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "permissionId",
+                    nullable = false, updatable = false)})
+    private transient List<Permission> permissions = new ArrayList<Permission>(0);
 
     Role() {
         // For ORM

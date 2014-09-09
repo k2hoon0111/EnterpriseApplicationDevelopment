@@ -72,6 +72,8 @@ public abstract class DatabaseIntegrationTest {
         tableNames.add("orderDetails");
         tableNames.add("permissions");
         tableNames.add("roles");
+        tableNames.add("roles_permissions");
+
 
         return tableNames;
     }
@@ -170,12 +172,12 @@ public abstract class DatabaseIntegrationTest {
 
         Book effectiveJava = new Book();
         effectiveJava.setAuthor("Joshua Bloch");
-        effectiveJava.setCategory(category);
+       // effectiveJava.setCategory(category);
         effectiveJava.setDescription("Brings together seventy-eight indispensable programmer's rules of thumb.");
         effectiveJava.setIsbn("9780321356680");
         effectiveJava.setPrice(new BigDecimal("20.20"));
         effectiveJava.setTitle("Effective Java");
-        effectiveJava.setYear(2008);
+    //    effectiveJava.setYear(2008);
 //        final Book effectiveJava = new BookBuilder() {
 //            {
 //                title("Effective Java");

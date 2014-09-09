@@ -30,10 +30,19 @@ public class Book implements Serializable {
     @Column(name = "bookId")
     private Long bookId;
 
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "price")
     private BigDecimal price;
+
+    @Column(name = "year")
     private Integer year;
+
+    @Column(name = "author")
     private String author;
 
     public Long getBookId() {

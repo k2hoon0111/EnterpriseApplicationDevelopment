@@ -8,19 +8,19 @@
 
     <changeSet id="1" author="MumboJumbo" context="main">
         <createTable tableName="accounts_roles">
-            <column name="accounts_accountId" type="BIGINT">
+            <column name="accountId" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="roles_roleId" type="BIGINT">
+            <column name="roleId" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
 
         </createTable>
-        <addPrimaryKey tableName="accounts_roles" columnNames="accounts_accountId,roles_roleId"/>
+        <addPrimaryKey tableName="accounts_roles" columnNames="accountId,roleId"/>
 
         <addForeignKeyConstraint baseTableName="accounts_roles"
-                                 baseColumnNames="accounts_accountId"
+                                 baseColumnNames="accountId"
                                  constraintName="fk_accounts_roles_accounts"
                                  deferrable="false"
                                  initiallyDeferred="false"
@@ -30,7 +30,7 @@
                                  referencedTableName="accounts"/>
 
         <addForeignKeyConstraint baseTableName="accounts_roles"
-                                 baseColumnNames="roles_roleId"
+                                 baseColumnNames="roleId"
                                  constraintName="fk_accounts_roles_roles"
                                  deferrable="false"
                                  initiallyDeferred="false"

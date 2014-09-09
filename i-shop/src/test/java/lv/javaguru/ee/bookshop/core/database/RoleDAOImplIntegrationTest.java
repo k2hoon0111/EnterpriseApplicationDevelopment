@@ -4,6 +4,10 @@ import lv.javaguru.ee.bookshop.core.domain.Role;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 /**
  * Created with IntelliJ IDEA.
  * User: MumboJumbo
@@ -16,7 +20,8 @@ public class RoleDAOImplIntegrationTest extends DatabaseIntegrationTest {
     public void testCreateRole() {
         Role role = createDefaultRole();
         Assert.assertNotNull(role);
-//        saveRole(role);
+        assertThat(role.getRoleId(), is(nullValue()));
+        saveRole(role);
 //        assertThat(role.getRoleId(), is(notNullValue()));
     }
 }
