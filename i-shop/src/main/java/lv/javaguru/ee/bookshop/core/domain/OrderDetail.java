@@ -18,6 +18,7 @@ public class OrderDetail implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "orderDetailId")
     private Long orderDetailId;
 
     public Long getOrderDetailId() {

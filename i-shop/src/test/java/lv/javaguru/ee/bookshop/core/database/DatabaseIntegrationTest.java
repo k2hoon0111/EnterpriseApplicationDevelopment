@@ -209,12 +209,6 @@ public abstract class DatabaseIntegrationTest {
     }
 
     protected Order getDefaultOrder() {
-
-//        Category category = new CategoryBuilder() {
-//            {
-//                name("Java");
-//            }
-//        }.build();
         Address address = createDefaulAddress();
         Account account = getDefaultAccount();
         saveAccount(account);
@@ -242,6 +236,7 @@ public abstract class DatabaseIntegrationTest {
     protected OrderDetail getDefaultOrderDetail() {
         Book book = getDefaultBook();
         saveBoook(book);
+        Order order =getDefaultOrder();
 
         OrderDetail orderDetail = new OrderDetail();
         orderDetail.setBook(book);
