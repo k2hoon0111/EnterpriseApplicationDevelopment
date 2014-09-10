@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -22,6 +23,6 @@ public class BookDAOImplIntegrationTest extends DatabaseIntegrationTest {
         Assert.assertNotNull(book);
         assertThat(book.getBookId(), is(nullValue()));
         saveBoook(book);
-//        assertThat(book.getBookId(), is(notNullValue()));
+        assertThat(book.getBookId(), is(notNullValue()));
     }
 }

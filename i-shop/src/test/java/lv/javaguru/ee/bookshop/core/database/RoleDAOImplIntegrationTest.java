@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -22,6 +23,6 @@ public class RoleDAOImplIntegrationTest extends DatabaseIntegrationTest {
         Assert.assertNotNull(role);
         assertThat(role.getRoleId(), is(nullValue()));
         saveRole(role);
-//        assertThat(role.getRoleId(), is(notNullValue()));
+        assertThat(role.getRoleId(), is(notNullValue()));
     }
 }
