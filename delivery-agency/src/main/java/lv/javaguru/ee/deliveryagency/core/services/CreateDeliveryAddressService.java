@@ -2,7 +2,7 @@ package lv.javaguru.ee.deliveryagency.core.services;
 
 import lv.javaguru.ee.deliveryagency.core.DomainCommandService;
 import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryAddressCommand;
-import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryAddressResult;
+import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryAddressCommandResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CreateDeliveryAddressService
-        implements DomainCommandService<CreateDeliveryAddressCommand, CreateDeliveryAddressResult> {
+        implements DomainCommandService<CreateDeliveryAddressCommand, CreateDeliveryAddressCommandResult> {
 
 
     @Override
-    public CreateDeliveryAddressResult execute(CreateDeliveryAddressCommand command) {
+    public CreateDeliveryAddressCommandResult execute(CreateDeliveryAddressCommand command) {
 
 
         return null;
