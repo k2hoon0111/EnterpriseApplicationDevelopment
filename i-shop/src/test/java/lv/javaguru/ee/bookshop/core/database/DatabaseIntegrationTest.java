@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -72,6 +73,8 @@ public abstract class DatabaseIntegrationTest {
         tableNames.add("orderDetails");
         tableNames.add("permissions");
         tableNames.add("roles");
+        tableNames.add("roles_permissions");
+
 
         return tableNames;
     }
@@ -170,23 +173,11 @@ public abstract class DatabaseIntegrationTest {
 
         Book effectiveJava = new Book();
         effectiveJava.setAuthor("Joshua Bloch");
-        effectiveJava.setCategory(category);
+        // effectiveJava.setCategory(category);
         effectiveJava.setDescription("Brings together seventy-eight indispensable programmer's rules of thumb.");
         effectiveJava.setIsbn("9780321356680");
         effectiveJava.setPrice(new BigDecimal("20.20"));
         effectiveJava.setTitle("Effective Java");
-        effectiveJava.setYear(2008);
-//        final Book effectiveJava = new BookBuilder() {
-//            {
-//                title("Effective Java");
-//                isbn("9780321356680");
-//                description("Brings together seventy-eight indispensable programmer's rules of thumb.");
-//                author("Joshua Bloch");
-//                year(2008);
-//                price("31.20");
-//                category(createDefaultCategory());
-//            }
-//        }.build();
         return effectiveJava;
 
     }
@@ -202,12 +193,6 @@ public abstract class DatabaseIntegrationTest {
     }
 
     protected Category getDefaultCategory() {
-
-//        Category category = new CategoryBuilder() {
-//            {
-//                name("Java");
-//            }
-//        }.build();
         Category category = new Category();
         category.setName("Java");
         return category;
@@ -215,5 +200,51 @@ public abstract class DatabaseIntegrationTest {
 
     protected void saveCategory(Category category) {
         categoryDAO.create(category);
+    }
+
+    // Category
+    protected Order createDefaultOrder() {
+        Order order = getDefaultOrder();
+        return order;
+    }
+
+    protected Order getDefaultOrder() {
+        Address address = createDefaulAddress();
+        Account account = getDefaultAccount();
+        saveAccount(account);
+
+        Order order = new Order();
+        order.setAccount(account);
+        order.setBillingAddress(address);
+        order.setShippingAddress(address);
+        order.setDeliveryDate(new Date());
+        order.setOrderDate(new Date());
+        order.setBillingSameAsShipping(true);
+        return order;
+    }
+
+    protected void saveOrder(Order order) {
+        orderDAO.create(order);
+    }
+
+    // OrderDetail
+    protected OrderDetail createDefaultOrderDetail() {
+        OrderDetail orderDetail = getDefaultOrderDetail();
+        return orderDetail;
+    }
+
+    protected OrderDetail getDefaultOrderDetail() {
+        Book book = getDefaultBook();
+        saveBoook(book);
+        Order order = getDefaultOrder();
+
+        OrderDetail orderDetail = new OrderDetail();
+        orderDetail.setBook(book);
+        orderDetail.setQuantity(3);
+        return orderDetail;
+    }
+
+    protected void saveOrderDetail(OrderDetail orderDetail) {
+        orderDetailDAO.create(orderDetail);
     }
 }

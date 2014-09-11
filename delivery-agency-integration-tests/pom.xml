@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>delivery-agency</artifactId>
+    <artifactId>delivery-agency-integration-tests</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
@@ -16,6 +16,12 @@
     </parent>
 
     <dependencies>
+
+        <dependency>
+            <groupId>lv.javaguru.ee</groupId>
+            <artifactId>delivery-agency</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <!-- HSQLDB dependency - used as embedded database -->
         <dependency>
@@ -57,11 +63,6 @@
             <artifactId>spring-tx</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-        </dependency>
-
         <!-- Hibernate dependencies -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -82,7 +83,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-envers</artifactId>
         </dependency>
-        
+
         <!-- Logging dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -144,19 +145,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.11</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit47</artifactId>
-                        <version>2.12</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <includes>
-                        <include>**/*.class</include>
-                    </includes>
-                </configuration>
             </plugin>
 
         </plugins>

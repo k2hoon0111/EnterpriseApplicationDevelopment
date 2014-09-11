@@ -1,6 +1,7 @@
 package lv.javaguru.ee.bookshop.core.database;
 
 import lv.javaguru.ee.bookshop.core.domain.Account;
+
 import org.junit.Assert;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;
@@ -20,7 +21,7 @@ public class AccountDAOImplIntegrationTest extends DatabaseIntegrationTest {
         Account account = createDefaultAccount();
         Assert.assertNotNull(account);
         assertThat(account.getAccountId(), is(nullValue()));
-//        saveAccount(account);
-//        assertThat(account.getAccountId(), is(notNullValue()));
+        saveAccount(account);
+        assertThat(account.getAccountId(), is(notNullValue()));
     }
 }

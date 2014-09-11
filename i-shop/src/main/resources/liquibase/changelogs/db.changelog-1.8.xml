@@ -8,19 +8,19 @@
 
     <changeSet id="1" author="MumboJumbo" context="main">
         <createTable tableName="roles_permissions">
-            <column name="roles_roleId" type="BIGINT">
+            <column name="roleId" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="permissions_permissionId" type="BIGINT">
+            <column name="permissionId" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
 
         </createTable>
-        <addPrimaryKey tableName="roles_permissions" columnNames="roles_roleId,permissions_permissionId"/>
+        <addPrimaryKey tableName="roles_permissions" columnNames="roleId,permissionId"/>
 
         <addForeignKeyConstraint baseTableName="roles_permissions"
-                                 baseColumnNames="permissions_permissionId"
+                                 baseColumnNames="permissionId"
                                  constraintName="fk_roles_permissions_permissions"
                                  deferrable="false"
                                  initiallyDeferred="false"
@@ -30,7 +30,7 @@
                                  referencedTableName="permissions"/>
 
         <addForeignKeyConstraint baseTableName="roles_permissions"
-                                 baseColumnNames="roles_roleId"
+                                 baseColumnNames="roleId"
                                  constraintName="fk_roles_permissions_roles"
                                  deferrable="false"
                                  initiallyDeferred="false"

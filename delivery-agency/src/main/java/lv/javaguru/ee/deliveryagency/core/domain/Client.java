@@ -10,11 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
+
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 /**
  * Created by Viktor on 26/07/2014.
  */
 @Entity
+@Audited
 @Table(name="clients")
 public class Client {
 
@@ -23,14 +28,19 @@ public class Client {
     @Column(name="clientId", nullable = false)
     private Long clientId;
 
+	@Version
+	@Column(name = "OPTIMISTIC_LOCK", nullable = false)
+	private Long version;
+	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "deliveryId", nullable = false)
+	@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 	private Delivery delivery;
 
-	@Column(name="first_name", nullable = false)
+	@Column(name="firstName", nullable = false)
     private String firstName;
 
-    @Column(name="last_name", nullable = false)
+    @Column(name="lastName", nullable = false)
     private String lastName;
 
     @Column(name="email", nullable = true)
