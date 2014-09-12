@@ -13,6 +13,7 @@
         <module>delivery-agency</module>
         <module>delivery-agency-integration-tests</module>
         <module>i-shop</module>
+        <module>i-shop-integration-tests</module>
         <module>warehouse</module>
     </modules>
 
@@ -57,6 +58,7 @@
         <jcl-over-slf4j.version>1.7.0</jcl-over-slf4j.version>
         <slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
         <log4j.version>1.2.17</log4j.version>
+        <com.google.guava.version>18.0</com.google.guava.version>
 
         <!-- Testing lib dependencies -->
         <junit.version>4.11</junit.version>
@@ -208,7 +210,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>18.0</version>
+                <version>${com.google.guava.version}</version>
             </dependency>
 
             <!-- Testing lib dependencies -->

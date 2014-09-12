@@ -1,5 +1,6 @@
-package lv.javaguru.ee.bookshop.core.database;
+package lv.javaguru.ee.bookshop.core.database.hibernate;
 
+import lv.javaguru.ee.bookshop.core.database.CRUDOperationDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

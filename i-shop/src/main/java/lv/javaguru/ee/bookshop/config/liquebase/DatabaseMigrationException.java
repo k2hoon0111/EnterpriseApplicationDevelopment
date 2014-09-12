@@ -1,4 +1,4 @@
-package lv.javaguru.ee.bookshop.config;
+package lv.javaguru.ee.bookshop.config.liquebase;
 
 public class DatabaseMigrationException extends RuntimeException {
 

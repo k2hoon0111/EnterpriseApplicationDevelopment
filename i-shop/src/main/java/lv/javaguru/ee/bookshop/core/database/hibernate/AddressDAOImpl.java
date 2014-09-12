@@ -1,5 +1,6 @@
-package lv.javaguru.ee.bookshop.core.database;
+package lv.javaguru.ee.bookshop.core.database.hibernate;
 
+import lv.javaguru.ee.bookshop.core.database.AddressDAO;
 import lv.javaguru.ee.bookshop.core.domain.Address;
 import org.springframework.stereotype.Component;
 

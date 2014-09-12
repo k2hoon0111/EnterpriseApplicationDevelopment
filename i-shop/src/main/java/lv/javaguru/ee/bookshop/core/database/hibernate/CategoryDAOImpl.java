@@ -1,5 +1,6 @@
-package lv.javaguru.ee.bookshop.core.database;
+package lv.javaguru.ee.bookshop.core.database.hibernate;
 
+import lv.javaguru.ee.bookshop.core.database.CategoryDAO;
 import lv.javaguru.ee.bookshop.core.domain.Category;
 import org.springframework.stereotype.Component;
 
