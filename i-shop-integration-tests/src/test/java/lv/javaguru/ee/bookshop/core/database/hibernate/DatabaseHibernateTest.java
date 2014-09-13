@@ -192,11 +192,12 @@ public abstract class DatabaseHibernateTest {
 
         Book effectiveJava = new Book();
         effectiveJava.setAuthor("Joshua Bloch");
-        // effectiveJava.setCategory(category);
+        effectiveJava.setCategory(category);
         effectiveJava.setDescription("Brings together seventy-eight indispensable programmer's rules of thumb.");
         effectiveJava.setIsbn("9780321356680");
         effectiveJava.setPrice(new BigDecimal("20.20"));
         effectiveJava.setTitle("Effective Java");
+        effectiveJava.setYear(2002);
         return effectiveJava;
 
     }

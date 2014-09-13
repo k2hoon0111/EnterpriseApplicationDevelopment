@@ -25,10 +25,10 @@ public class BooksAuditTest extends DatabaseHibernateTest {
                 assertThat(book.getBookId(), is(notNullValue()));
 
 
-//                Delivery delivery = createDefaultDelivery();
-//                Client client = getDefaultClient(delivery);
-//                clientDAO.create(client);
-//                clientId.set(client.getClientId());
+                Book book = createDefaultBook();
+                Client client = getDefaultClient(delivery);
+                clientDAO.create(client);
+                clientId.set(client.getClientId());
             }
         });
 

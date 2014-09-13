@@ -7,7 +7,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="1" author="Nikolay" context="main">
-        <addColumn tableName="Books">
+        <addColumn tableName="books">
             <column name="optimistic_lock" type="BIGINT"/>
         </addColumn>
     </changeSet>

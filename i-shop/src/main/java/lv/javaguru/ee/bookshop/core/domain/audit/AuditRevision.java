@@ -13,11 +13,12 @@ import java.util.Date;
 @RevisionEntity(AuditRevisionListener.class)
 public class AuditRevision {
 
-	@Id
-	@GeneratedValue(generator = "AUDIT_REVISIONS_SEQ", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "AUDIT_REVISIONS_SEQ", sequenceName = "AUDIT_REVISIONS_SEQ", allocationSize = 1)
-	@Column(name = "ID")
-	@RevisionNumber
+    @Id
+//	@GeneratedValue(generator = "AUDIT_REVISIONS_SEQ", strategy = GenerationType.SEQUENCE)
+//	@SequenceGenerator(name = "AUDIT_REVISIONS_SEQ", sequenceName = "AUDIT_REVISIONS_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    @RevisionNumber
 	private Long id;
 
 	@Column(name = "REVISION_DATE")
