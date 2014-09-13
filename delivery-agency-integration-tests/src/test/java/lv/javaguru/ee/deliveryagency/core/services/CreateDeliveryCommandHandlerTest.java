@@ -1,22 +1,22 @@
 package lv.javaguru.ee.deliveryagency.core.services;
 
-import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryCommand;
-import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryCommandResult;
-import lv.javaguru.ee.deliveryagency.core.database.hibernate.DatabaseHibernateTest;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryCommand;
+import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryCommandResult;
+import lv.javaguru.ee.deliveryagency.core.database.hibernate.DatabaseHibernateTest;
 
 /**
  * Created by Viktor on 08/09/2014.
  */
-public class CreateDeliveryServiceTest extends DatabaseHibernateTest {
+public class CreateDeliveryCommandHandlerTest extends DatabaseHibernateTest {
 
     @Autowired
-    private DomainCommandServiceExecutor serviceExecutor;
+    private DomainCommandHandlerExecutor serviceExecutor;
 
     @Test
     public void testCommand() {

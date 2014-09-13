@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by Viktor on 27/07/2014.
  */
 @Component
-public class DomainCommandServiceExecutorImpl implements DomainCommandServiceExecutor {
+public class DomainCommandHandlerExecutorImpl implements DomainCommandHandlerExecutor {
 
     @Autowired
     private List<DomainCommandService> services;

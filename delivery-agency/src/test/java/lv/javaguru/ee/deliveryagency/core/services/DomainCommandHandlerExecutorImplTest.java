@@ -15,9 +15,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
-public class DomainCommandServiceExecutorImplTest {
+public class DomainCommandHandlerExecutorImplTest {
 
-    private DomainCommandServiceExecutorImpl serviceExecutor;
+    private DomainCommandHandlerExecutorImpl serviceExecutor;
 
 
     @Before
@@ -48,7 +48,7 @@ public class DomainCommandServiceExecutorImplTest {
     }
 
     private void initExecutorService(List<DomainCommandService> services) {
-        serviceExecutor = new DomainCommandServiceExecutorImpl();
+        serviceExecutor = new DomainCommandHandlerExecutorImpl();
         ReflectionTestUtils.setField(serviceExecutor, "services", services);
         serviceExecutor.init();
     }

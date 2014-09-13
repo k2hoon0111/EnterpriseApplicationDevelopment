@@ -5,7 +5,7 @@ import lv.javaguru.ee.deliveryagency.core.DomainCommandResult;
 /**
  * Created by Viktor on 27/07/2014.
  */
-public class CreateDeliveryAddressCommandResult implements DomainCommandResult {
+public class CreateDeliveryAddressResult implements DomainCommandResult {
 
 
 }

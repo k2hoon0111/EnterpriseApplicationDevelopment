@@ -1,18 +1,19 @@
 package lv.javaguru.ee.deliveryagency.core.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import lv.javaguru.ee.deliveryagency.core.DomainCommandService;
 import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryCommand;
 import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryCommandResult;
 import lv.javaguru.ee.deliveryagency.core.database.DeliveryDAO;
 import lv.javaguru.ee.deliveryagency.core.domain.Delivery;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by Viktor on 08/09/2014.
  */
 @Component
-public class CreateDeliveryService
+public class CreateDeliveryCommandHandler
         implements DomainCommandService<CreateDeliveryCommand, CreateDeliveryCommandResult> {
 
     @Autowired
