@@ -13,6 +13,7 @@
         <module>delivery-agency</module>
         <module>delivery-agency-integration-tests</module>
         <module>i-shop</module>
+        <module>i-shop-integration-tests</module>
         <module>warehouse</module>
     </modules>
 
@@ -39,24 +40,25 @@
         <liquibase-core.version>3.2.2</liquibase-core.version>
 
         <!-- Spring Framework dependencies -->
-        <spring-context.version>4.0.3.RELEASE</spring-context.version>
-        <spring-tx.version>4.0.3.RELEASE</spring-tx.version>
-        <spring-orm.version>4.0.3.RELEASE</spring-orm.version>
+        <spring-context.version>4.0.7.RELEASE</spring-context.version>
+        <spring-tx.version>4.0.7.RELEASE</spring-tx.version>
+        <spring-orm.version>4.0.7.RELEASE</spring-orm.version>
         <spring-data-jpa.version>1.5.2.RELEASE</spring-data-jpa.version>
 
         <!-- Hibernate dependencies -->
-        <hibernate-core.version>4.1.4.Final</hibernate-core.version>
-        <hibernate-entitymanager.version>4.1.4.Final</hibernate-entitymanager.version>
-        <hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
-        <hibernateVersion>4.1.0.Final</hibernateVersion>
-        <ehcacheVersion>2.6.9</ehcacheVersion>
+        <hibernate-core.version>4.3.6.Final</hibernate-core.version>
+        <hibernate-entitymanager.version>4.3.6.Final</hibernate-entitymanager.version>
+        <hibernate-validator.version>4.3.2.Final</hibernate-validator.version>
         <hibernate-envers.version>4.3.6.Final</hibernate-envers.version>
+        <ehcacheVersion>2.6.9</ehcacheVersion>
+        <hibernateVersion>4.3.6.Final</hibernateVersion>
 
         <!-- Logging dependencies -->
         <slf4j-api.version>1.7.7</slf4j-api.version>
         <jcl-over-slf4j.version>1.7.0</jcl-over-slf4j.version>
         <slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
         <log4j.version>1.2.17</log4j.version>
+        <com.google.guava.version>18.0</com.google.guava.version>
 
         <!-- Testing lib dependencies -->
         <junit.version>4.11</junit.version>
@@ -73,7 +75,6 @@
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-release-plugin.version>2.2.1</maven-release-plugin.version>
         <liquibase-maven-plugin.version>3.2.1</liquibase-maven-plugin.version>
-        <maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
         <maven-surefire-plugin.version>2.11</maven-surefire-plugin.version>
         <surefire-junit47.version>2.12</surefire-junit47.version>
     </properties>
@@ -208,7 +209,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>18.0</version>
+                <version>${com.google.guava.version}</version>
             </dependency>
 
             <!-- Testing lib dependencies -->
@@ -296,35 +297,7 @@
                         <includes>
                             <include>**/*.class</include>
                         </includes>
-                        <excludes>
-                            <exclude>**/*IntegrationTest.class</exclude>
-                        </excludes>
                     </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>${maven-failsafe-plugin.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.apache.maven.surefire</groupId>
-                            <artifactId>surefire-junit47</artifactId>
-                            <version>${surefire-junit47.version}</version>
-                        </dependency>
-                    </dependencies>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>integration-test</goal>
-                            </goals>
-                            <configuration>
-                                <includes>
-                                    <include>**/*IntegrationTest.class</include>
-                                </includes>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
 
             </plugins>
