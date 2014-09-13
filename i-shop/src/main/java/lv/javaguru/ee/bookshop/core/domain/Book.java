@@ -4,6 +4,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,6 +20,7 @@ import java.math.BigDecimal;
  */
 
 @Entity
+@Audited
 @Table(name = "books")
 //@Cacheable
 //@Cache(region = "books", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -55,6 +58,7 @@ public class Book implements Serializable {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "categoryId")
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Category category;
 
     public String getTitle() {

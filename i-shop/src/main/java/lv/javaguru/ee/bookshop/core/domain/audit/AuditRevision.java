@@ -9,7 +9,7 @@ import org.hibernate.proxy.HibernateProxy;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "AUDIT_REVISIONS")
+@Entity(name = "audit_revisions")
 @RevisionEntity(AuditRevisionListener.class)
 public class AuditRevision {
 

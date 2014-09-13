@@ -45,7 +45,7 @@ public abstract class DatabaseHibernateTest {
     private AddressDAO addressDAO;
 
     @Autowired
-    private BookDAO bookDAO;
+    protected BookDAO bookDAO;
 
     @Autowired
     private CategoryDAO categoryDAO;
@@ -83,9 +83,9 @@ public abstract class DatabaseHibernateTest {
         List<String> tableNames = new ArrayList<>();
 
         // audit tables
-        tableNames.add("booksAudit");
+        tableNames.add("books_AUD");
 
-        // real tables
+        // domen tables
         tableNames.add("accounts");
         tableNames.add("books");
         tableNames.add("categories");
