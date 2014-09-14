@@ -1,6 +1,7 @@
 package lv.javaguru.ee.bookshop.core.database;
 
 import lv.javaguru.ee.bookshop.core.domain.Book;
+import org.hibernate.LockOptions;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,5 +12,6 @@ import lv.javaguru.ee.bookshop.core.domain.Book;
  */
 
 public interface BookDAO extends CRUDOperationDAO<Book, Long> {
+    Book getById(Long bookId, LockOptions lockOptions);
 
 }
