@@ -1,7 +1,7 @@
 package lv.javaguru.ee.bookshop.core.services;
 
-import lv.javaguru.ee.deliveryagency.core.DomainCommandService;
-import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryAddressCommand;
+import lv.javaguru.ee.bookshop.core.DomainCommandService;
+import lv.javaguru.ee.bookshop.core.commands.CreateBookCommand;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -11,11 +11,9 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
+public class DomainCommandHandlerExecutorImplTest {
 
-public class DomainCommandServiceExecutorTest {
-
-    private DomainCommandServiceExecutor serviceExecutor;
-
+    private DomainCommandHandlerExecutorImpl serviceExecutor;
 
     @Before
     public void init() {
@@ -25,27 +23,27 @@ public class DomainCommandServiceExecutorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionForUnknownDomainCommand() {
-        CreateDeliveryAddressCommand command = new CreateDeliveryAddressCommand(null, null, null, null, null);
+        CreateBookCommand command = new CreateBookCommand(null, null, null, null, null, null, null);
         serviceExecutor.execute(command);
     }
 
     @Test
     public void executeKnownCommand() {
         DomainCommandService commandService = mock(DomainCommandService.class);
-        doReturn(CreateDeliveryAddressCommand.class).when(commandService).getCommandType();
+        doReturn(CreateBookCommand.class).when(commandService).getCommandType();
         List<DomainCommandService> services = new ArrayList<>();
         services.add(commandService);
 
         initExecutorService(services);
 
-        CreateDeliveryAddressCommand command = new CreateDeliveryAddressCommand(null, null, null, null, null);
+        CreateBookCommand command = new CreateBookCommand(null, null, null, null, null, null, null);
         serviceExecutor.execute(command);
 
         verify(commandService, times(1)).execute(command);
     }
 
     private void initExecutorService(List<DomainCommandService> services) {
-        serviceExecutor = new DomainCommandServiceExecutor();
+        serviceExecutor = new DomainCommandHandlerExecutorImpl();
         ReflectionTestUtils.setField(serviceExecutor, "services", services);
         serviceExecutor.init();
     }

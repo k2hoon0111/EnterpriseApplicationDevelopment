@@ -12,9 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Viktor on 27/07/2014.
- */
 @Component
 public class DomainCommandHandlerExecutorImpl implements DomainCommandHandlerExecutor {
 
