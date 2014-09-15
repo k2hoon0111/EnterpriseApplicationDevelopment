@@ -2,6 +2,7 @@ package lv.javaguru.ee.bookshop.core.database.hibernate;
 
 import lv.javaguru.ee.bookshop.core.database.BookDAO;
 import lv.javaguru.ee.bookshop.core.domain.Book;
+import org.hibernate.LockOptions;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,5 +14,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class BookDAOImpl extends CRUDOperationDAOImpl<Book, Long> implements BookDAO {
+    public Book getById(Long bookId, LockOptions lockOptions) {
+        return (Book) getCurrentSession().get(Book.class, bookId, lockOptions);
+    }
 
 }

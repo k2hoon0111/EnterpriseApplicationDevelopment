@@ -31,6 +31,10 @@ public class Book implements Serializable {
     @Column(name = "bookId")
     private Long bookId;
 
+    @Version
+    @Column(name = "optimistic_lock", nullable = false)
+    private Long version;
+
     @Column(name = "title")
     private String title;
 
