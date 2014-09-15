@@ -1,7 +1,6 @@
 package lv.javaguru.ee.bookshop.core.commands;
 
 import lv.javaguru.ee.bookshop.core.DomainCommand;
-import lv.javaguru.ee.bookshop.core.domain.Category;
 
 import java.math.BigDecimal;
 
@@ -14,7 +13,7 @@ public class CreateBookCommand implements DomainCommand {
     private Integer year;
     private String author;
     private String Isbn;
-    private Category category;
+    private Long categoryId;
 
     public CreateBookCommand(Long bookId,
                              String title,
@@ -23,7 +22,7 @@ public class CreateBookCommand implements DomainCommand {
                              Integer year,
                              String author,
                              String Isbn,
-                             Category category
+                             Long categoryId
     ) {
         this.bookId = bookId;
         this.title = title;
@@ -32,7 +31,7 @@ public class CreateBookCommand implements DomainCommand {
         this.year = year;
         this.author = author;
         this.Isbn = Isbn;
-        this.category = category;
+        this.categoryId = categoryId;
     }
 
     public Long getBookId() {
@@ -63,7 +62,7 @@ public class CreateBookCommand implements DomainCommand {
         return Isbn;
     }
 
-    public Category getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 }
