@@ -1,42 +1,34 @@
 package lv.javaguru.ee.bookshop.core.commands;
 
 import lv.javaguru.ee.bookshop.core.DomainCommand;
-import lv.javaguru.ee.bookshop.core.domain.Category;
 
 import java.math.BigDecimal;
 
-public class CreateBookCommand implements DomainCommand {
-
-    private Long bookId;
+public class CreateBookCommand implements DomainCommand<CreateBookCommandResult> {
     private String title;
     private String description;
     private BigDecimal price;
     private Integer year;
     private String author;
     private String Isbn;
-    private Category category;
+    private Long categoryId;
 
-    public CreateBookCommand(Long bookId,
-                             String title,
-                             String description,
-                             BigDecimal price,
-                             Integer year,
-                             String author,
-                             String Isbn,
-                             Category category
+    public CreateBookCommand(
+            String title,
+            String description,
+            BigDecimal price,
+            Integer year,
+            String author,
+            String Isbn,
+            Long categoryId
     ) {
-        this.bookId = bookId;
         this.title = title;
         this.description = description;
         this.price = price;
         this.year = year;
         this.author = author;
         this.Isbn = Isbn;
-        this.category = category;
-    }
-
-    public Long getBookId() {
-        return bookId;
+        this.categoryId = categoryId;
     }
 
     public String getTitle() {
@@ -63,7 +55,7 @@ public class CreateBookCommand implements DomainCommand {
         return Isbn;
     }
 
-    public Category getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 }

@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CreateOrderCommand implements DomainCommand {
-    private Long orderId;
+public class CreateOrderCommand implements DomainCommand<CreateOrderCommandResult> {
     private Address shippingAddress;
     private Address billingAddress;
     private Account account;
@@ -21,15 +20,14 @@ public class CreateOrderCommand implements DomainCommand {
     private BigDecimal totalOrderPrice = null;
     private final List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 
-    public CreateOrderCommand(Long orderId,
-                              Address shippingAddress,
-                              Address billingAddress,
-                              Account account,
-                              boolean billingSameAsShipping,
-                              Date orderDate,
-                              Date deliveryDate,
-                              BigDecimal totalOrderPrice) {
-        this.orderId = orderId;
+    public CreateOrderCommand(
+            Address shippingAddress,
+            Address billingAddress,
+            Account account,
+            boolean billingSameAsShipping,
+            Date orderDate,
+            Date deliveryDate,
+            BigDecimal totalOrderPrice) {
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
         this.account = account;
@@ -37,10 +35,6 @@ public class CreateOrderCommand implements DomainCommand {
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.totalOrderPrice = totalOrderPrice;
-    }
-
-    public Long getOrderId() {
-        return orderId;
     }
 
     public Address getShippingAddress() {

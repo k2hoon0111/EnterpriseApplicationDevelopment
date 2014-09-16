@@ -3,3 +3,6 @@
 3. exclude from compile
 4. Second level cache
 5.@ComponentScan(basePackages = {"lv.javaguru.ee.bookshop"})
+
+1. should commands fields contain only primitive data types
+
