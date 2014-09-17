@@ -46,7 +46,6 @@ public class CreateBookCommandHandler
     }
 
     private void validateCommand(CreateBookCommand command) {
-
         checkNotNull(command, "CreateBookCommand must not be null");
         checkNotNull(command.getTitle(), "Title must not be null");
         checkNotNull(command.getDescription(), "Description must not be null");
@@ -54,8 +53,7 @@ public class CreateBookCommandHandler
         checkNotNull(command.getYear(), "Year must not be null");
         checkNotNull(command.getAuthor(), "Author name must not be null");
         checkNotNull(command.getIsbn(), "Isbn name must not be null");
-
-
+        checkNotNull(command.getCategoryId(), "Category Id must not be null");
     }
 
     @Override

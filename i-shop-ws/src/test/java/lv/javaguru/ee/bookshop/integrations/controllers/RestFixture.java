@@ -49,9 +49,9 @@ public class RestFixture {
         }
     */
 ////////////// Book methods ////////////////
-
-    public static ResponseEntity<BookDTO> createBook(BookDTO bookDTO) {
-        return REST_TEMPLATE.postForEntity(BASE_URL + "/rest/book",
+    public static ResponseEntity<BookDTO> createBook(Long categoryId,
+                                                     BookDTO bookDTO) {
+        return REST_TEMPLATE.postForEntity(BASE_URL + "/rest/category/" + categoryId + "/book",
                 bookDTO, BookDTO.class, new HashMap<String, String>()
         );
     }
@@ -61,10 +61,4 @@ public class RestFixture {
                 BookDTO.class, new HashMap<String, String>());
     }
 
-    public static BookDTO createBook() {
-        BookDTO bookDTO = new BookDTO();
-        ResponseEntity<BookDTO> createBookResponse
-                = RestFixture.createBook(bookDTO);
-        return createBookResponse.getBody();
-    }
 }
