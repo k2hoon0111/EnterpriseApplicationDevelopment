@@ -1,11 +1,10 @@
 package lv.javaguru.ee.deliveryagency.core.services;
 
+import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import lv.javaguru.ee.deliveryagency.core.DomainCommandService;
 import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryCommand;
-import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryCommandResult;
 import lv.javaguru.ee.deliveryagency.core.database.DeliveryDAO;
 import lv.javaguru.ee.deliveryagency.core.domain.Delivery;
 
@@ -14,17 +13,17 @@ import lv.javaguru.ee.deliveryagency.core.domain.Delivery;
  */
 @Component
 public class CreateDeliveryCommandHandler
-        implements DomainCommandService<CreateDeliveryCommand, CreateDeliveryCommandResult> {
+        implements DomainCommandHandler<CreateDeliveryCommand, CreateDeliveryResult> {
 
     @Autowired
     private DeliveryDAO deliveryDAO;
 
 
     @Override
-    public CreateDeliveryCommandResult execute(CreateDeliveryCommand command) {
+    public CreateDeliveryResult execute(CreateDeliveryCommand command) {
         Delivery delivery = new Delivery();
         deliveryDAO.create(delivery);
-        return new CreateDeliveryCommandResult(delivery);
+        return new CreateDeliveryResult(delivery);
     }
 
     @Override

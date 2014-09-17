@@ -1,7 +1,5 @@
 package lv.javaguru.ee.deliveryagency.core.commands;
 
-import lv.javaguru.ee.deliveryagency.core.DomainCommandResult;
-
 /**
  * Created by Viktor on 31/08/2014.
  */

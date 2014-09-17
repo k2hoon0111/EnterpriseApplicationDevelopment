@@ -14,7 +14,6 @@ import org.springframework.core.io.Resource;
 public class AppPropertiesConfig {
 
     @Bean
-    @Profile("prod")
     public static PropertySourcesPlaceholderConfigurer prodPropertiesPlaceholderConfigurer() {
         PropertySourcesPlaceholderConfigurer p = new PropertySourcesPlaceholderConfigurer();
         Resource[] resourceLocations = new Resource[] {
@@ -24,6 +23,7 @@ public class AppPropertiesConfig {
         return p;
     }
 
+/*
     @Bean
     @Profile("test")
     public static PropertySourcesPlaceholderConfigurer testPropertiesPlaceholderConfigurer() {
@@ -34,5 +34,6 @@ public class AppPropertiesConfig {
         p.setLocations(resourceLocations);
         return p;
     }
+*/
 
 }
