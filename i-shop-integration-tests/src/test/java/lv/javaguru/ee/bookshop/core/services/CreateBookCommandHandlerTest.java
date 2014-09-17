@@ -1,6 +1,5 @@
 package lv.javaguru.ee.bookshop.core.services;
 
-
 import lv.javaguru.ee.bookshop.core.commands.CreateBookCommand;
 import lv.javaguru.ee.bookshop.core.commands.CreateBookCommandResult;
 import lv.javaguru.ee.bookshop.core.database.hibernate.DatabaseHibernateTest;

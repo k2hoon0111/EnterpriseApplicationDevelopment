@@ -33,7 +33,7 @@ public class BookController {
     @RequestMapping(method = RequestMethod.GET, value = "/rest/book/{bookId}")
     public
     @ResponseBody
-    BookDTO getDelivery(@PathVariable Long bookId) {
+    BookDTO getBook(@PathVariable Long bookId) {
         GetBookCommand command = new GetBookCommand(bookId);
         GetBookResult result = commandExecutor.execute(command);
         Book book = result.getBook();

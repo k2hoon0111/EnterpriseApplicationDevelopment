@@ -55,6 +55,7 @@ public class CreateBookCommandHandler
         checkNotNull(command.getAuthor(), "Author name must not be null");
         checkNotNull(command.getIsbn(), "Isbn name must not be null");
 
+
     }
 
     @Override
