@@ -1,7 +1,5 @@
 package lv.javaguru.ee.bookshop.core.commands;
 
-import lv.javaguru.ee.bookshop.core.DomainCommandResult;
-
 /**
  * Created by Viktor on 31/08/2014.
  */

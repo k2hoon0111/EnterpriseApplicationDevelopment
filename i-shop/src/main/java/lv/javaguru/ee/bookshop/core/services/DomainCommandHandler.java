@@ -4,10 +4,12 @@ import lv.javaguru.ee.bookshop.core.commands.DomainCommand;
 import lv.javaguru.ee.bookshop.core.commands.DomainCommandResult;
 
 /**
- * Created by Viktor on 08/09/2014.
+ * Created by Viktor on 27/07/2014.
  */
-public interface DomainCommandHandlerExecutor {
+public interface DomainCommandHandler<C extends DomainCommand, R extends DomainCommandResult> {
 
-    <T extends DomainCommandResult> T execute(DomainCommand<T> domainCommand);
+    R execute(C command);
+
+    Class getCommandType();
 
 }

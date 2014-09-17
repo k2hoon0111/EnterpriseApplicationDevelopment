@@ -1,6 +1,5 @@
 package lv.javaguru.ee.bookshop.core.commands;
 
-import lv.javaguru.ee.bookshop.core.DomainCommand;
 import lv.javaguru.ee.bookshop.core.domain.Account;
 import lv.javaguru.ee.bookshop.core.domain.Address;
 import lv.javaguru.ee.bookshop.core.domain.OrderDetail;

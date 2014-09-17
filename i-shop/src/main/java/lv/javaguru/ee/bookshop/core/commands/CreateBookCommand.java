@@ -1,7 +1,5 @@
 package lv.javaguru.ee.bookshop.core.commands;
 
-import lv.javaguru.ee.bookshop.core.DomainCommand;
-
 import java.math.BigDecimal;
 
 public class CreateBookCommand implements DomainCommand<CreateBookCommandResult> {

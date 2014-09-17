@@ -1,6 +1,5 @@
 package lv.javaguru.ee.bookshop.core.commands;
 
-import lv.javaguru.ee.bookshop.core.DomainCommandResult;
 import lv.javaguru.ee.bookshop.core.domain.Order;
 
 public class CreateOrderCommandResult implements DomainCommandResult {
