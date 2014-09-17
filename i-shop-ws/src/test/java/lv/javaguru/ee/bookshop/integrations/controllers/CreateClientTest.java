@@ -11,8 +11,8 @@
 //import static org.hamcrest.MatcherAssert.assertThat;
 //
 ///**
-// * Created by Viktor on 16/09/2014.
-// */
+//* Created by Viktor on 16/09/2014.
+//*/
 //public class CreateClientTest extends EmbeddedJettyTest {
 //
 //    @Test

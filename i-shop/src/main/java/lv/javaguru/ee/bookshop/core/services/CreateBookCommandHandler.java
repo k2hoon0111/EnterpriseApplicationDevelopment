@@ -1,6 +1,5 @@
 package lv.javaguru.ee.bookshop.core.services;
 
-import lv.javaguru.ee.bookshop.core.DomainCommandService;
 import lv.javaguru.ee.bookshop.core.commands.CreateBookCommand;
 import lv.javaguru.ee.bookshop.core.commands.CreateBookCommandResult;
 import lv.javaguru.ee.bookshop.core.database.BookDAO;
@@ -14,7 +13,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 @Component
 public class CreateBookCommandHandler
-        implements DomainCommandService<CreateBookCommand, CreateBookCommandResult> {
+        implements DomainCommandHandler<CreateBookCommand, CreateBookCommandResult> {
 
     @Autowired
     private BookDAO bookDAO;
