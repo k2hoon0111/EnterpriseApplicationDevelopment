@@ -2,6 +2,7 @@ package lv.javaguru.ee.bookshop.integrations.controllers;
 
 import lv.javaguru.ee.bookshop.integrations.Server;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
+import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -59,6 +60,18 @@ public class RestFixture {
     public static ResponseEntity<BookDTO> getBook(Long bookId) {
         return REST_TEMPLATE.getForEntity(BASE_URL + "/rest/book/" + bookId,
                 BookDTO.class, new HashMap<String, String>());
+    }
+
+    ////////////// Category methods ////////////////
+    public static ResponseEntity<CategoryDTO> createCategory(CategoryDTO categoryDTO) {
+        return REST_TEMPLATE.postForEntity(BASE_URL + "/rest/category/",
+                categoryDTO, CategoryDTO.class, new HashMap<String, String>()
+        );
+    }
+
+    public static ResponseEntity<CategoryDTO> getCategory(Long categoryId) {
+        return REST_TEMPLATE.getForEntity(BASE_URL + "/rest/category/" + categoryId,
+                CategoryDTO.class, new HashMap<String, String>());
     }
 
 }
