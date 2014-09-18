@@ -1,7 +1,7 @@
 package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.CreateBookCommand;
-import lv.javaguru.ee.bookshop.core.commands.CreateBookCommandResult;
+import lv.javaguru.ee.bookshop.core.commands.CreateBookResult;
 import lv.javaguru.ee.bookshop.core.database.BookDAO;
 import lv.javaguru.ee.bookshop.core.database.CategoryDAO;
 import lv.javaguru.ee.bookshop.core.domain.Book;
@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 @Component
 public class CreateBookCommandHandler
-        implements DomainCommandHandler<CreateBookCommand, CreateBookCommandResult> {
+        implements DomainCommandHandler<CreateBookCommand, CreateBookResult> {
 
     @Autowired
     private BookDAO bookDAO;
@@ -23,14 +23,14 @@ public class CreateBookCommandHandler
 
 
     @Override
-    public CreateBookCommandResult execute(CreateBookCommand command) {
+    public CreateBookResult execute(CreateBookCommand command) {
         validateCommand(command);
 
         Category category = categoryDAO.getById(command.getCategoryId());
         Book book = createBookEntityFromCommand(command, category);
         bookDAO.create(book);
 
-        return new CreateBookCommandResult(book);
+        return new CreateBookResult(book);
     }
 
     private Book createBookEntityFromCommand(CreateBookCommand command, Category category) {

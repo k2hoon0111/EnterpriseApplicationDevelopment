@@ -1,7 +1,7 @@
 package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.CreateBookCommand;
-import lv.javaguru.ee.bookshop.core.commands.CreateBookCommandResult;
+import lv.javaguru.ee.bookshop.core.commands.CreateBookResult;
 import lv.javaguru.ee.bookshop.core.database.hibernate.DatabaseHibernateTest;
 import lv.javaguru.ee.bookshop.core.domain.Book;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class CreateBookCommandHandlerTest extends DatabaseHibernateTest {
                 book.getIsbn(),
                 book.getCategory().getCategoryId()
         );
-        CreateBookCommandResult commandResult = serviceExecutor.execute(command);
+        CreateBookResult commandResult = serviceExecutor.execute(command);
         assertThat(commandResult, is(notNullValue()));
         assertThat(commandResult.getBook(), is(notNullValue()));
         assertThat(commandResult.getBook().getBookId(), is(notNullValue()));

@@ -2,7 +2,7 @@ package lv.javaguru.ee.bookshop.integrations.controllers;
 
 import lv.javaguru.ee.bookshop.core.CommandExecutor;
 import lv.javaguru.ee.bookshop.core.commands.CreateBookCommand;
-import lv.javaguru.ee.bookshop.core.commands.CreateBookCommandResult;
+import lv.javaguru.ee.bookshop.core.commands.CreateBookResult;
 import lv.javaguru.ee.bookshop.core.commands.GetBookCommand;
 import lv.javaguru.ee.bookshop.core.commands.GetBookResult;
 import lv.javaguru.ee.bookshop.core.domain.Book;
@@ -31,7 +31,7 @@ public class BookController {
     public ResponseEntity<BookDTO> createBook(@PathVariable Long categoryId,
                                               @RequestBody BookDTO bookDTO) {
         CreateBookCommand command = createBookCommand(categoryId, bookDTO);
-        CreateBookCommandResult result = commandExecutor.execute(command);
+        CreateBookResult result = commandExecutor.execute(command);
 
         Book book = result.getBook();
         BookDTO resultDTO = createBookDTO(book);

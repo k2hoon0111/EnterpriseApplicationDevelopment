@@ -2,11 +2,11 @@ package lv.javaguru.ee.bookshop.core.commands;
 
 import lv.javaguru.ee.bookshop.core.domain.Book;
 
-public class CreateBookCommandResult implements DomainCommandResult {
+public class CreateBookResult implements DomainCommandResult {
 
     private Book book;
 
-    public CreateBookCommandResult(Book book) {
+    public CreateBookResult(Book book) {
         this.book = book;
     }
 
