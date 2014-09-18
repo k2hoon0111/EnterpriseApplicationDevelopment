@@ -3,23 +3,22 @@ package lv.javaguru.ee.bookshop.integrations.controllers;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
 import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.math.BigDecimal;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static junit.framework.TestCase.assertEquals;
 
-public class CreateBookTest extends EmbeddedJettyTest {
+/**
+ * Created by Viktor on 16/09/2014.
+ */
+public class DeleteBookTest extends EmbeddedJettyTest {
 
     @Test
-    public void testCreateBook() {
-//        CategoryDTO createCategoryDTO = RestFixture.createCategory();
-//        assertThat(createBookDTO.getBookId(), is(notNullValue()));
-
+    public void testDeleteBook() {
         BookDTO bookDTO = new BookDTO();
-
         bookDTO.setTitle("Test title");
         bookDTO.setDescription("Test des");
         bookDTO.setPrice(new BigDecimal("22.20"));
@@ -27,13 +26,23 @@ public class CreateBookTest extends EmbeddedJettyTest {
         bookDTO.setAuthor("Test author");
         bookDTO.setIsbn("19384601239756");
 
-
         ResponseEntity<BookDTO> createBookResponse
 //                = RestFixture.createBook(createDeliveryDTO.getDeliveryId(), bookDTO);
                 = RestFixture.createBook(Long.valueOf(26), bookDTO);
-        BookDTO createdBookDTO = createBookResponse.getBody();
+        BookDTO createBookDTO = createBookResponse.getBody();
 
-        assertThat(createdBookDTO.getBookId(), is(notNullValue()));
+        Long bookId = createBookDTO.getBookId();
+
+        RestFixture.deleteBook(bookId);
+
+
+        try {
+            RestFixture.getBook(Long.valueOf(bookId));
+        } catch (HttpClientErrorException e) {
+            assertEquals("Book id not valid", e.getResponseBodyAsString());
+            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
+        }
+
     }
 
 }

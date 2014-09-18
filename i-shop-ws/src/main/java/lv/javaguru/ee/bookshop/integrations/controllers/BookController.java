@@ -1,10 +1,7 @@
 package lv.javaguru.ee.bookshop.integrations.controllers;
 
 import lv.javaguru.ee.bookshop.core.CommandExecutor;
-import lv.javaguru.ee.bookshop.core.commands.CreateBookCommand;
-import lv.javaguru.ee.bookshop.core.commands.CreateBookResult;
-import lv.javaguru.ee.bookshop.core.commands.GetBookCommand;
-import lv.javaguru.ee.bookshop.core.commands.GetBookResult;
+import lv.javaguru.ee.bookshop.core.commands.*;
 import lv.javaguru.ee.bookshop.core.domain.Book;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,4 +71,38 @@ public class BookController {
         return new ResponseEntity<BookDTO>(bookDTO, HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/rest/book/{bookId}")
+    public ResponseEntity<BookDTO> UpdateBook(@RequestBody BookDTO bookDTO) {
+
+        UpdateBookCommand command = updateBookCommand(bookDTO);
+        UpdateBookResult result = commandExecutor.execute(command);
+
+//        Book book = result.getBook();
+//        BookDTO resultDTO = createBookDTO(book);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    private UpdateBookCommand updateBookCommand(BookDTO bookDTO) {
+        return new UpdateBookCommand(
+                bookDTO.getBookId(),
+                bookDTO.getTitle(),
+                bookDTO.getDescription(),
+                bookDTO.getPrice(),
+                bookDTO.getYear(),
+                bookDTO.getAuthor(),
+                bookDTO.getIsbn(),
+                bookDTO.getCategoryId()
+        );
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/book/{bookId}")
+    public ResponseEntity<BookDTO> deleteBook(@PathVariable Long bookId) {
+
+        DeleteBookCommand command = new DeleteBookCommand(bookId);
+        DeleteBookResult result = commandExecutor.execute(command);
+//        Book book = result.getBook();
+//        BookDTO bookDTO = createBookDTO(book);
+        return new ResponseEntity<BookDTO>(HttpStatus.OK);
+    }
 }

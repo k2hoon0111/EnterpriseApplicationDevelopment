@@ -57,8 +57,19 @@ public class RestFixture {
         );
     }
 
+    public static void updateBook(BookDTO bookDTO) {
+        REST_TEMPLATE.put(BASE_URL + "/rest/book/" + bookDTO.getBookId(),
+                bookDTO, BookDTO.class, new HashMap<String, String>()
+        );
+    }
+
     public static ResponseEntity<BookDTO> getBook(Long bookId) {
         return REST_TEMPLATE.getForEntity(BASE_URL + "/rest/book/" + bookId,
+                BookDTO.class, new HashMap<String, String>());
+    }
+
+    public static void deleteBook(Long bookId) {
+        REST_TEMPLATE.delete(BASE_URL + "/rest/book/" + bookId,
                 BookDTO.class, new HashMap<String, String>());
     }
 
