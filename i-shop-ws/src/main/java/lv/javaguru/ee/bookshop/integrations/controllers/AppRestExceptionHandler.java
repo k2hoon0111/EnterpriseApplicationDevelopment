@@ -26,7 +26,8 @@ public class AppRestExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("Exception in rest service invocation!", e);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.TEXT_XML);
 
         return handleExceptionInternal(e, ire.getMessage(), headers, HttpStatus.UNPROCESSABLE_ENTITY, request);
     }
