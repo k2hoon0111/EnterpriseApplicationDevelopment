@@ -103,6 +103,6 @@ public class BookController {
         DeleteBookResult result = commandExecutor.execute(command);
 //        Book book = result.getBook();
 //        BookDTO bookDTO = createBookDTO(book);
-        return new ResponseEntity<BookDTO>(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

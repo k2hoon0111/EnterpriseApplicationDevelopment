@@ -69,8 +69,7 @@ public class RestFixture {
     }
 
     public static void deleteBook(Long bookId) {
-        REST_TEMPLATE.delete(BASE_URL + "/rest/book/" + bookId,
-                BookDTO.class, new HashMap<String, String>());
+        REST_TEMPLATE.delete(BASE_URL + "/rest/book/" + bookId);
     }
 
     ////////////// Category methods ////////////////

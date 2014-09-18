@@ -11,9 +11,6 @@ import java.math.BigDecimal;
 
 import static junit.framework.TestCase.assertEquals;
 
-/**
- * Created by Viktor on 16/09/2014.
- */
 public class DeleteBookTest extends EmbeddedJettyTest {
 
     @Test
