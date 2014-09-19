@@ -30,7 +30,7 @@ public class UpdateBookCommandHandler
         Book book = selectBookEntityFromDB(command, category);
         bookDAO.update(book);
 
-        return new UpdateBookResult(book);         // ZLO
+        return new UpdateBookResult(book);
     }
 
     private Book selectBookEntityFromDB(UpdateBookCommand command, Category category) {

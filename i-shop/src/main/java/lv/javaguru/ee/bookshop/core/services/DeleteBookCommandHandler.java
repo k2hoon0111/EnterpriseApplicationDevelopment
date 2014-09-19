@@ -2,7 +2,6 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.DeleteBookCommand;
 import lv.javaguru.ee.bookshop.core.commands.DeleteBookResult;
-import lv.javaguru.ee.bookshop.core.commands.UpdateBookCommand;
 import lv.javaguru.ee.bookshop.core.database.BookDAO;
 import lv.javaguru.ee.bookshop.core.domain.Book;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +19,7 @@ public class DeleteBookCommandHandler
     @Override
     public DeleteBookResult execute(DeleteBookCommand command) {
         validateCommand(command);
-
-
         Book book = selectBookEntityFromDB(command);
-
         bookDAO.delete(book);
 
         return new DeleteBookResult(book);
@@ -41,7 +37,7 @@ public class DeleteBookCommandHandler
 
     @Override
     public Class getCommandType() {
-        return UpdateBookCommand.class;
+        return DeleteBookCommand.class;
     }
 
 }

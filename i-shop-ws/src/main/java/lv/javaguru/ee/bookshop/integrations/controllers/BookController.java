@@ -68,19 +68,16 @@ public class BookController {
         GetBookResult result = commandExecutor.execute(command);
         Book book = result.getBook();
         BookDTO bookDTO = createBookDTO(book);
+
         return new ResponseEntity<BookDTO>(bookDTO, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/rest/book/{bookId}")
     public ResponseEntity<BookDTO> UpdateBook(@RequestBody BookDTO bookDTO) {
-
         UpdateBookCommand command = updateBookCommand(bookDTO);
         UpdateBookResult result = commandExecutor.execute(command);
 
-//        Book book = result.getBook();
-//        BookDTO resultDTO = createBookDTO(book);
-
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<BookDTO>(HttpStatus.OK);
     }
 
     private UpdateBookCommand updateBookCommand(BookDTO bookDTO) {
@@ -97,12 +94,10 @@ public class BookController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/rest/book/{bookId}")
-    public ResponseEntity<BookDTO> deleteBook(@PathVariable Long bookId) {
-
+    public ResponseEntity deleteBook(@PathVariable Long bookId) {
         DeleteBookCommand command = new DeleteBookCommand(bookId);
         DeleteBookResult result = commandExecutor.execute(command);
-//        Book book = result.getBook();
-//        BookDTO bookDTO = createBookDTO(book);
+
         return new ResponseEntity(HttpStatus.OK);
     }
 }

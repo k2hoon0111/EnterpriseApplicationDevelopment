@@ -24,11 +24,10 @@ public class DeleteBookTest extends EmbeddedJettyTest {
         bookDTO.setIsbn("19384601239756");
 
         ResponseEntity<BookDTO> createBookResponse
-//                = RestFixture.createBook(createDeliveryDTO.getDeliveryId(), bookDTO);
                 = RestFixture.createBook(Long.valueOf(26), bookDTO);
-        BookDTO createBookDTO = createBookResponse.getBody();
+        BookDTO createdBookDTO = createBookResponse.getBody();
 
-        Long bookId = createBookDTO.getBookId();
+        Long bookId = createdBookDTO.getBookId();
 
         RestFixture.deleteBook(bookId);
 
