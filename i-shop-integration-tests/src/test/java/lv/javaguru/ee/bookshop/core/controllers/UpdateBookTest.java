@@ -1,7 +1,10 @@
-package lv.javaguru.ee.bookshop.integrations.controllers;
+package lv.javaguru.ee.bookshop.core.controllers;
 
+import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
-import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 
@@ -9,7 +12,6 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UpdateBookTest extends EmbeddedJettyTest {
 
@@ -28,8 +30,8 @@ public class UpdateBookTest extends EmbeddedJettyTest {
         ResponseEntity<BookDTO> createBookResponse
                 = RestFixture.createBook(Long.valueOf(26), bookDTO);
         BookDTO createdBookDTO = createBookResponse.getBody();
-        assertThat(createdBookDTO.getBookId(), is(notNullValue()));
-        assertThat(createdBookDTO.getTitle(), is("Test title"));
+        MatcherAssert.assertThat(createdBookDTO.getBookId(), is(notNullValue()));
+        MatcherAssert.assertThat(createdBookDTO.getTitle(), is("Test title"));
 
         // Update book
         BookDTO bookDTOForUpdate = new BookDTO();
@@ -49,8 +51,8 @@ public class UpdateBookTest extends EmbeddedJettyTest {
                 = RestFixture.getBook(bookDTOForUpdate.getBookId());
 
         BookDTO getBookDTO = getBookResponse.getBody();
-        assertThat(getBookDTO.getBookId(), is(bookDTOForUpdate.getBookId()));
-        assertThat(getBookDTO.getTitle(), is("Test updated title"));
+        MatcherAssert.assertThat(getBookDTO.getBookId(), CoreMatchers.is(bookDTOForUpdate.getBookId()));
+        MatcherAssert.assertThat(getBookDTO.getTitle(), is("Test updated title"));
 
 
     }

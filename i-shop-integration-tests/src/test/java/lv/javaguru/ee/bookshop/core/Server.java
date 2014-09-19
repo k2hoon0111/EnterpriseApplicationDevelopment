@@ -1,4 +1,4 @@
-package lv.javaguru.ee.bookshop.integrations;
+package lv.javaguru.ee.bookshop.core;
 
 /**
  * Created by Viktor on 16/09/2014.

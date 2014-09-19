@@ -1,6 +1,6 @@
-package lv.javaguru.ee.bookshop.integrations.controllers;
+package lv.javaguru.ee.bookshop.core.controllers.fixtures;
 
-import lv.javaguru.ee.bookshop.integrations.Server;
+import lv.javaguru.ee.bookshop.core.Server;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
 import org.springframework.http.ResponseEntity;

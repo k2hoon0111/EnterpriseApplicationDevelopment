@@ -1,4 +1,4 @@
-package lv.javaguru.ee.bookshop.integrations.jetty;
+package lv.javaguru.ee.bookshop.core.jetty;
 
 import lv.javaguru.ee.bookshop.config.WebMVCConfig;
 import org.eclipse.jetty.server.Server;

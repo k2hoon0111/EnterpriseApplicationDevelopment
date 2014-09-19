@@ -1,7 +1,9 @@
-package lv.javaguru.ee.bookshop.integrations.controllers;
+package lv.javaguru.ee.bookshop.core.controllers;
 
+import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
-import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 
@@ -9,7 +11,6 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CreateBookTest extends EmbeddedJettyTest {
 
@@ -32,7 +33,7 @@ public class CreateBookTest extends EmbeddedJettyTest {
                 = RestFixture.createBook(Long.valueOf(26), bookDTO);
         BookDTO createdBookDTO = createBookResponse.getBody();
 
-        assertThat(createdBookDTO.getBookId(), is(notNullValue()));
+        MatcherAssert.assertThat(createdBookDTO.getBookId(), is(notNullValue()));
     }
 
 }

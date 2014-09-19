@@ -1,15 +1,15 @@
-package lv.javaguru.ee.bookshop.integrations.controllers;
+package lv.javaguru.ee.bookshop.core.controllers;
 
+import junit.framework.TestCase;
+import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
-import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.math.BigDecimal;
-
-import static junit.framework.TestCase.assertEquals;
 
 public class DeleteBookTest extends EmbeddedJettyTest {
 
@@ -35,8 +35,8 @@ public class DeleteBookTest extends EmbeddedJettyTest {
         try {
             RestFixture.getBook(Long.valueOf(bookId));
         } catch (HttpClientErrorException e) {
-            assertEquals("Book id not valid", e.getResponseBodyAsString());
-            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
+            TestCase.assertEquals("Book id not valid", e.getResponseBodyAsString());
+            TestCase.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
         }
 
     }

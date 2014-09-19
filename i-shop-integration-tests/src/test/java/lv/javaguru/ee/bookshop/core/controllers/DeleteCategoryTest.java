@@ -1,15 +1,13 @@
-package lv.javaguru.ee.bookshop.integrations.controllers;
+package lv.javaguru.ee.bookshop.core.controllers;
 
+import junit.framework.TestCase;
+import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
-import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
-
-import java.math.BigDecimal;
-
-import static junit.framework.TestCase.assertEquals;
 
 /**
  * Created by MumboJumbo on 19/09/14.
@@ -35,8 +33,8 @@ public class DeleteCategoryTest extends EmbeddedJettyTest {
         try {
             RestFixture.getCategory(Long.valueOf(categoryId));
         } catch (HttpClientErrorException e) {
-            assertEquals("Category id not valid", e.getResponseBodyAsString());
-            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
+            TestCase.assertEquals("Category id not valid", e.getResponseBodyAsString());
+            TestCase.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
         }
 
     }

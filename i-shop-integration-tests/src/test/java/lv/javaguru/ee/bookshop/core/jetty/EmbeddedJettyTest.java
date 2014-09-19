@@ -1,6 +1,6 @@
-package lv.javaguru.ee.bookshop.integrations.jetty;
+package lv.javaguru.ee.bookshop.core.jetty;
 
-import lv.javaguru.ee.bookshop.integrations.Server;
+import lv.javaguru.ee.bookshop.core.Server;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 

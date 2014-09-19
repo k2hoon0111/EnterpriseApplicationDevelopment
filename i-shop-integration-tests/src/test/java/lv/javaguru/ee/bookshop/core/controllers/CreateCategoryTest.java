@@ -1,13 +1,14 @@
-package lv.javaguru.ee.bookshop.integrations.controllers;
+package lv.javaguru.ee.bookshop.core.controllers;
 
+import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
-import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CreateCategoryTest extends EmbeddedJettyTest {
 
@@ -22,7 +23,7 @@ public class CreateCategoryTest extends EmbeddedJettyTest {
                 = RestFixture.createCategory(categoryDTO);
         CategoryDTO createCategoryDTO = createCategoryResponse.getBody();
 
-        assertThat(createCategoryDTO.getCategoryId(), is(notNullValue()));
+        MatcherAssert.assertThat(createCategoryDTO.getCategoryId(), is(notNullValue()));
     }
 
 }
