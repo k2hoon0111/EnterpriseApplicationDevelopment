@@ -1,10 +1,7 @@
 package lv.javaguru.ee.bookshop.integrations.controllers;
 
 import lv.javaguru.ee.bookshop.core.CommandExecutor;
-import lv.javaguru.ee.bookshop.core.commands.CreateCategoryCommand;
-import lv.javaguru.ee.bookshop.core.commands.CreateCategoryCommandResult;
-import lv.javaguru.ee.bookshop.core.commands.GetCategoryCommand;
-import lv.javaguru.ee.bookshop.core.commands.GetCategoryResult;
+import lv.javaguru.ee.bookshop.core.commands.*;
 import lv.javaguru.ee.bookshop.core.domain.Category;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +22,6 @@ public class CategoryController {
 
     @Autowired
     private CommandExecutor commandExecutor;
-
 
     @RequestMapping(method = RequestMethod.POST, value = "/rest/category/")
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
@@ -58,6 +54,30 @@ public class CategoryController {
         Category category = result.getCategory();
         CategoryDTO categoryDTO = createCategoryDTO(category);
         return new ResponseEntity<CategoryDTO>(categoryDTO, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/rest/category/{categoryId}")
+    public ResponseEntity<CategoryDTO> UpdateCategory(@RequestBody CategoryDTO categoryDTO) {
+        UpdateCategoryCommand command = updateCategoryCommand(categoryDTO);
+        UpdateCategoryResult result = commandExecutor.execute(command);
+
+        return new ResponseEntity<CategoryDTO>(HttpStatus.OK);
+    }
+
+    private UpdateCategoryCommand updateCategoryCommand(CategoryDTO categoryDTO) {
+        return new UpdateCategoryCommand(
+                categoryDTO.getCategoryId(),
+                categoryDTO.getName()
+        );
+    }
+
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/category/{categoryId}")
+    public ResponseEntity deleteCategory(@PathVariable Long categoryId) {
+        DeleteCategoryCommand command = new DeleteCategoryCommand(categoryId);
+        DeleteCategoryResult result = commandExecutor.execute(command);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }
