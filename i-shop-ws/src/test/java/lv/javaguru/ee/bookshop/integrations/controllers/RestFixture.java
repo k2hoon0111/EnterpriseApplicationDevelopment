@@ -51,4 +51,10 @@ public class RestFixture {
         CategoryDTO.class, new HashMap<String, String>());
   }
 
+  public static void updateCategory(CategoryDTO categoryDTO) {
+    REST_TEMPLATE.put(BASE_URL + "/rest/category/" + categoryDTO.getCategoryId(),
+        categoryDTO, CategoryDTO.class, new HashMap<String, String>()
+    );
+  }
+
 }

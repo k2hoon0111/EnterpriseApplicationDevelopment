@@ -29,7 +29,6 @@ public class CreateBookTest extends EmbeddedJettyTest {
 
 
         ResponseEntity<BookDTO> createBookResponse
-//                = RestFixture.createBook(createDeliveryDTO.getDeliveryId(), bookDTO);
                 = RestFixture.createBook(Long.valueOf(26), bookDTO);
         BookDTO createdBookDTO = createBookResponse.getBody();
 
