@@ -33,6 +33,10 @@ public class OrderDetail implements Serializable {
     @JoinColumn(name = "bookId")
     private Book book;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "orderId")
+    private Order order;
+
     private int quantity = 1;
 
     public OrderDetail() {
@@ -60,6 +64,8 @@ public class OrderDetail implements Serializable {
     public void setBook(Book book) {
         this.book = book;
     }
+
+
 
     public BigDecimal getPrice() {
         if (this.book != null) {

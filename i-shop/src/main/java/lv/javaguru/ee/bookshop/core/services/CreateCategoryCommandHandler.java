@@ -1,7 +1,7 @@
 package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.CreateCategoryCommand;
-import lv.javaguru.ee.bookshop.core.commands.CreateCategoryCommandResult;
+import lv.javaguru.ee.bookshop.core.commands.CreateCategoryResult;
 import lv.javaguru.ee.bookshop.core.database.CategoryDAO;
 import lv.javaguru.ee.bookshop.core.domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +15,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 @Component
 public class CreateCategoryCommandHandler
-        implements DomainCommandHandler<CreateCategoryCommand, CreateCategoryCommandResult> {
+        implements DomainCommandHandler<CreateCategoryCommand, CreateCategoryResult> {
 
     @Autowired
     private CategoryDAO categoryDAO;
 
     @Override
-    public CreateCategoryCommandResult execute(CreateCategoryCommand command) {
+    public CreateCategoryResult execute(CreateCategoryCommand command) {
         validateCommand(command);
 
         Category category = createCategoryEntityFromCommand(command);
         categoryDAO.create(category);
 
-        return new CreateCategoryCommandResult(category);
+        return new CreateCategoryResult(category);
     }
 
     private Category createCategoryEntityFromCommand(CreateCategoryCommand command) {

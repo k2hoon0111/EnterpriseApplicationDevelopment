@@ -5,11 +5,11 @@ import lv.javaguru.ee.bookshop.core.domain.Category;
 /**
  * Created by MumboJumbo on 17/09/14.
  */
-public class CreateCategoryCommandResult implements DomainCommandResult {
+public class CreateCategoryResult implements DomainCommandResult {
 
     private Category category;
 
-    public CreateCategoryCommandResult(Category category) {
+    public CreateCategoryResult(Category category) {
         this.category = category;
     }
 

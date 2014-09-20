@@ -3,7 +3,7 @@ package lv.javaguru.ee.bookshop.core.commands;
 /**
  * Created by MumboJumbo on 17/09/14.
  */
-public class CreateCategoryCommand implements DomainCommand<CreateCategoryCommandResult> {
+public class CreateCategoryCommand implements DomainCommand<CreateCategoryResult> {
 
     private String name;
 

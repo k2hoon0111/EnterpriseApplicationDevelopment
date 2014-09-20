@@ -26,7 +26,7 @@ public class CategoryController {
     @RequestMapping(method = RequestMethod.POST, value = "/rest/category/")
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
         CreateCategoryCommand command = createCategoryCommand(categoryDTO);
-        CreateCategoryCommandResult result = commandExecutor.execute(command);
+        CreateCategoryResult result = commandExecutor.execute(command);
 
         Category category = result.getCategory();
         CategoryDTO resultDTO = createCategoryDTO(category);

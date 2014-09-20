@@ -3,6 +3,7 @@ package lv.javaguru.ee.bookshop.core.controllers.fixtures;
 import lv.javaguru.ee.bookshop.core.Server;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
+import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -61,4 +62,10 @@ public class RestFixture {
         REST_TEMPLATE.delete(BASE_URL + "/rest/category/" + categoryId);
     }
 
+    ////////////// Category methods ////////////////
+    public static ResponseEntity<OrderDTO> createOrder(OrderDTO orderDTO) {
+        return REST_TEMPLATE.postForEntity(BASE_URL + "/rest/order/",
+                orderDTO, OrderDTO.class, new HashMap<String, String>()
+        );
+    }
 }
