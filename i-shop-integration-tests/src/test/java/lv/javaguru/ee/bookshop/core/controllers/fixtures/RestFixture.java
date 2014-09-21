@@ -91,4 +91,20 @@ public class RestFixture {
                 orderDetailDTO, OrderDetailDTO.class, new HashMap<String, String>()
         );
     }
+
+    public static ResponseEntity<OrderDetailDTO> getOrderDetail(Long orderDetailId) {
+        return REST_TEMPLATE.getForEntity(BASE_URL + "/rest/orderdetail/" + orderDetailId,
+                OrderDetailDTO.class, new HashMap<String, String>());
+    }
+
+    public static void deleteOrderDetail(Long orderDetailId) {
+        REST_TEMPLATE.delete(BASE_URL + "/rest/orderdetail/" + orderDetailId);
+    }
+
+    public static void updateOrderDetail(OrderDetailDTO orderDetailDTO) {
+        REST_TEMPLATE.put(BASE_URL + "/rest/orderdetail/" + orderDetailDTO.getOrderDetailId(),
+                orderDetailDTO, OrderDetailDTO.class, new HashMap<String, String>()
+        );
+    }
+
 }
