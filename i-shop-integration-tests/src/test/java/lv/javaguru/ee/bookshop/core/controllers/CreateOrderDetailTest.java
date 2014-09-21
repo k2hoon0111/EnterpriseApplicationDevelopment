@@ -21,7 +21,7 @@ public class CreateOrderDetailTest extends EmbeddedJettyTest {
 
         OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
 
-        orderDetailDTO.setBookId(Long.valueOf(45));
+        orderDetailDTO.setBookId(Long.valueOf(48));
         orderDetailDTO.setOrderId(Long.valueOf(13));
         orderDetailDTO.setQuantity(5);
 
