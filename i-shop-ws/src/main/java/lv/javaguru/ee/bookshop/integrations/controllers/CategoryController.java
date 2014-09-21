@@ -48,7 +48,7 @@ public class CategoryController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/rest/category/{categoryId}")
-    public ResponseEntity<CategoryDTO> getClient(@PathVariable Long categoryId) {
+    public ResponseEntity<CategoryDTO> getCategory(@PathVariable Long categoryId) {
         GetCategoryCommand command = new GetCategoryCommand(categoryId);
         GetCategoryResult result = commandExecutor.execute(command);
         Category category = result.getCategory();
