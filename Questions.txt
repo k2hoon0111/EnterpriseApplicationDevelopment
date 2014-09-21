@@ -9,3 +9,11 @@
 
 2.    @Column(name = "orderId")
     private Order order;
+
+3.
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)        lazyVs
+    @JoinColumn(name = "bookId")
+    private Book book;
+4. /rest/orderdetail/{orderDetailId}         vs  orderDetail
+
+
