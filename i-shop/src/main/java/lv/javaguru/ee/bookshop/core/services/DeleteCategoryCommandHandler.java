@@ -35,7 +35,7 @@ public class DeleteCategoryCommandHandler
     }
 
     private void validateCommand(DeleteCategoryCommand command) {
-        checkNotNull(command, "UpdateCategoryCommand must not be null");
+        checkNotNull(command, "DeleteCategoryCommand must not be null");
         checkNotNull(command.getCategoryId(), "Category id  must not be null");
     }
 

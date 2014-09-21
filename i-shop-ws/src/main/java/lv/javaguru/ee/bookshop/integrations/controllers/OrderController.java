@@ -1,14 +1,14 @@
 package lv.javaguru.ee.bookshop.integrations.controllers;
 
 import lv.javaguru.ee.bookshop.core.CommandExecutor;
-import lv.javaguru.ee.bookshop.core.commands.CreateOrderCommand;
-import lv.javaguru.ee.bookshop.core.commands.CreateOrderResult;
+import lv.javaguru.ee.bookshop.core.commands.*;
 import lv.javaguru.ee.bookshop.core.domain.Order;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,6 +36,8 @@ public class OrderController {
     private OrderDTO createOrderDTO(Order order) {
         OrderDTO orderDTO = new OrderDTO();
 
+        orderDTO.setOrderId(order.getOrderId());
+
         orderDTO.setAccountId(order.getAccount().getAccountId());
 
         orderDTO.setShippingStreet(order.getShippingAddress().getStreet());
@@ -59,6 +61,53 @@ public class OrderController {
 
     private CreateOrderCommand createOrderCommand(OrderDTO orderDTO) {
         return new CreateOrderCommand(
+                orderDTO.getAccountId(),
+                orderDTO.getShippingStreet(),
+                orderDTO.getShippingHouseNumber(),
+                orderDTO.getShippingBoxNumber(),
+                orderDTO.getShippingCity(),
+                orderDTO.getShippingPostalCode(),
+                orderDTO.getShippingCountry(),
+                orderDTO.getBillingStreet(),
+                orderDTO.getBillingHouseNumber(),
+                orderDTO.getBillingBoxNumber(),
+                orderDTO.getBillingCity(),
+                orderDTO.getBillingoPostalCode(),
+                orderDTO.getBillingCountry(),
+                orderDTO.isBillingSameAsShipping(),
+                orderDTO.getDeliveryDate(),
+                orderDTO.getOrderDate()
+        );
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/rest/order/{orderId}")
+    public ResponseEntity<OrderDTO> getOrder(@PathVariable Long orderId) {
+        GetOrderCommand command = new GetOrderCommand(orderId);
+        GetOrderResult result = commandExecutor.execute(command);
+        Order order = result.getOrder();
+        OrderDTO orderDTO = createOrderDTO(order);
+        return new ResponseEntity<OrderDTO>(orderDTO, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/order/{orderId}")
+    public ResponseEntity deleteOrder(@PathVariable Long orderId) {
+        DeleteOrderCommand command = new DeleteOrderCommand(orderId);
+        DeleteOrderResult result = commandExecutor.execute(command);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/rest/order/{orderId}")
+    public ResponseEntity<OrderDTO> UpdateOrder(@RequestBody OrderDTO orderDTO) {
+        UpdateOrderCommand command = updateOrderCommand(orderDTO);
+        UpdateOrderResult result = commandExecutor.execute(command);
+
+        return new ResponseEntity<OrderDTO>(HttpStatus.OK);
+    }
+
+    private UpdateOrderCommand updateOrderCommand(OrderDTO orderDTO) {
+        return new UpdateOrderCommand(
+                orderDTO.getOrderId(),
                 orderDTO.getAccountId(),
                 orderDTO.getShippingStreet(),
                 orderDTO.getShippingHouseNumber(),

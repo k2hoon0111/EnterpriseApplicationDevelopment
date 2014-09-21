@@ -4,23 +4,24 @@ import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
 import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
 import org.hamcrest.MatcherAssert;
+import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 
 /**
-* Created by MumboJumbo on 20/09/14.
-*/
+ * Created by MumboJumbo on 20/09/14.
+ */
 
-public class CreateOrderTest extends EmbeddedJettyTest {
+public class GetOrderTest extends EmbeddedJettyTest {
 
     @Test
-    public void testCreateOrder() {
-
+    public void testGetOrder() {
         OrderDTO orderDTO = new OrderDTO();
 
         orderDTO.setAccountId(Long.valueOf(1));
@@ -41,11 +42,29 @@ public class CreateOrderTest extends EmbeddedJettyTest {
         orderDTO.setDeliveryDate(new Date());
         orderDTO.setOrderDate(new Date());
 
-        ResponseEntity<OrderDTO> createOrderResponse
+        ResponseEntity<OrderDTO> createdOrderResponse
                 = RestFixture.createOrder(orderDTO);
-        OrderDTO createdOrderDTO = createOrderResponse.getBody();
+        OrderDTO createdOrderDTO = createdOrderResponse.getBody();
 
-        MatcherAssert.assertThat(createdOrderDTO.getOrderId(), is(notNullValue()));
+        Long orderId = createdOrderDTO.getOrderId();
+
+        ResponseEntity<OrderDTO> getOrderResponse
+                = RestFixture.getOrder(orderId);
+
+        OrderDTO getOrderDTO = getOrderResponse.getBody();
+        MatcherAssert.assertThat(getOrderDTO.getOrderId(), is(orderId));
+        MatcherAssert.assertThat(getOrderDTO.getBillingStreet(), is("Street"));
+
+    }
+
+    @Test
+    public void testGetOrderWithWrongId() {
+        try {
+            RestFixture.getOrder(Long.MAX_VALUE);
+        } catch (HttpClientErrorException e) {
+            Assert.assertEquals("Order id not valid", e.getResponseBodyAsString());
+            Assert.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
+        }
     }
 
 }

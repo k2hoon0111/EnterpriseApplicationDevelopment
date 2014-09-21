@@ -1,28 +1,25 @@
 package lv.javaguru.ee.bookshop.core.controllers;
 
+import junit.framework.TestCase;
 import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
 import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
-import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Date;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-
 /**
-* Created by MumboJumbo on 20/09/14.
-*/
+ * Created by MumboJumbo on 21/09/14.
+ */
 
-public class CreateOrderTest extends EmbeddedJettyTest {
+public class DeleteOrderTest extends EmbeddedJettyTest {
 
     @Test
-    public void testCreateOrder() {
-
+    public void testDeleteOrder() {
         OrderDTO orderDTO = new OrderDTO();
-
         orderDTO.setAccountId(Long.valueOf(1));
 
         orderDTO.setShippingStreet("Street");
@@ -41,11 +38,23 @@ public class CreateOrderTest extends EmbeddedJettyTest {
         orderDTO.setDeliveryDate(new Date());
         orderDTO.setOrderDate(new Date());
 
+
         ResponseEntity<OrderDTO> createOrderResponse
                 = RestFixture.createOrder(orderDTO);
         OrderDTO createdOrderDTO = createOrderResponse.getBody();
 
-        MatcherAssert.assertThat(createdOrderDTO.getOrderId(), is(notNullValue()));
+        Long orderId = createdOrderDTO.getOrderId();
+
+        RestFixture.deleteOrder(orderId);
+
+
+        try {
+            RestFixture.getOrder(Long.valueOf(orderId));
+        } catch (HttpClientErrorException e) {
+            TestCase.assertEquals("Order id not valid", e.getResponseBodyAsString());
+            TestCase.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
+        }
+
     }
 
 }

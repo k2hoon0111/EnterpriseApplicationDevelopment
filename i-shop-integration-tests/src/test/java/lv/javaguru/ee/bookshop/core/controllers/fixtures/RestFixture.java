@@ -4,6 +4,7 @@ import lv.javaguru.ee.bookshop.core.Server;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
+import lv.javaguru.ee.bookshop.integrations.domain.OrderDetailDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -62,10 +63,32 @@ public class RestFixture {
         REST_TEMPLATE.delete(BASE_URL + "/rest/category/" + categoryId);
     }
 
-    ////////////// Category methods ////////////////
+    ////////////// Order methods ////////////////
     public static ResponseEntity<OrderDTO> createOrder(OrderDTO orderDTO) {
         return REST_TEMPLATE.postForEntity(BASE_URL + "/rest/order/",
                 orderDTO, OrderDTO.class, new HashMap<String, String>()
+        );
+    }
+
+    public static ResponseEntity<OrderDTO> getOrder(Long orderId) {
+        return REST_TEMPLATE.getForEntity(BASE_URL + "/rest/order/" + orderId,
+                OrderDTO.class, new HashMap<String, String>());
+    }
+
+    public static void updateOrder(OrderDTO orderDTO) {
+        REST_TEMPLATE.put(BASE_URL + "/rest/order/" + orderDTO.getOrderId(),
+                orderDTO, OrderDTO.class, new HashMap<String, String>()
+        );
+    }
+
+    public static void deleteOrder(Long orderId) {
+        REST_TEMPLATE.delete(BASE_URL + "/rest/order/" + orderId);
+    }
+
+    ////////////// OrderDetail methods ////////////////
+    public static ResponseEntity<OrderDetailDTO> createOrderDetail(OrderDetailDTO orderDetailDTO) {
+        return REST_TEMPLATE.postForEntity(BASE_URL + "/rest/orderdetail/",
+                orderDetailDTO, OrderDetailDTO.class, new HashMap<String, String>()
         );
     }
 }

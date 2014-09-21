@@ -1,6 +1,6 @@
 package lv.javaguru.ee.bookshop.core.controllers;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
 import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
@@ -14,9 +14,6 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.CoreMatchers.is;
 
-/**
- * Created by Viktor on 16/09/2014.
- */
 public class GetBookTest extends EmbeddedJettyTest {
 
     @Test

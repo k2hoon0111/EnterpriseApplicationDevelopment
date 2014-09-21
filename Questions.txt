@@ -6,3 +6,6 @@
 
 1. should commands fields contain only primitive data types
 
+
+2.    @Column(name = "orderId")
+    private Order order;
