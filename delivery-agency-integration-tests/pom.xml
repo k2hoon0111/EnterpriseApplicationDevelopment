@@ -114,7 +114,7 @@
         <!-- Testing lib dependencies -->
         <dependency>
             <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <artifactId>junit</artifactId>           
         </dependency>
 
         <dependency>
@@ -124,8 +124,7 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-test</artifactId>           
         </dependency>
 
     </dependencies>

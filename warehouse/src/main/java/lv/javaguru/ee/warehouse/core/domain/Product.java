@@ -13,12 +13,16 @@ import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 /**
  * Created by Yuri D. on 2014.09.08..
  */
 @Entity
 @Table(name = "PRODUCTS")
+@Audited
 public class Product {
     
     @Id
@@ -28,6 +32,8 @@ public class Product {
     
     @Version
     @Column(name = "VERSION", nullable = false)
+    //@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @NotAudited
     private Long version;
     
     @Column(name = "CODE", nullable = false, unique = true)
@@ -40,11 +46,13 @@ public class Product {
     private String description;
                  
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "product")
+    //@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @NotAudited 
     private List<WarehouseProduct> warehouseProducts;
     
     
     @OneToMany(mappedBy="product", fetch = FetchType.EAGER)
-    @MapKey(name="name")   
+    @MapKey(name="name")       
     private Map<String, ProductProperties> productProperties;
 
     public Product() {

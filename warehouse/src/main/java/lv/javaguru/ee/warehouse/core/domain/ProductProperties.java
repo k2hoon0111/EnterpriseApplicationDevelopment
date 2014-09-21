@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.envers.Audited;
 
 /**
  *
@@ -16,7 +17,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "PRODUCT_PROPERTIES")
-class ProductProperties {
+@Audited
+public class ProductProperties {
            
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

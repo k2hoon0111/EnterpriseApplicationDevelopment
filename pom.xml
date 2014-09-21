@@ -15,6 +15,7 @@
         <module>i-shop</module>
         <module>i-shop-integration-tests</module>
         <module>warehouse</module>
+        <module>warehouse-integration-tests</module>        
     </modules>
 
     <repositories>
