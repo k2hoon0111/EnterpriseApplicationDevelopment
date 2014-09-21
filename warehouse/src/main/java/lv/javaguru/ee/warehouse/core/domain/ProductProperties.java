@@ -27,10 +27,10 @@ class ProductProperties {
     @JoinColumn(name="PRODUCT_ID", nullable = false)    
     private Product product;
             
-    @Column(name = "PROPERTY_NAME") 
+    @Column(name = "PROPERTY_NAME", nullable = false, length = 30) 
     private String name;
         
-    @Column(name = "PROPERTY_VALUE")
+    @Column(name = "PROPERTY_VALUE", nullable = false, length = 150)
     private String value;
 
     public ProductProperties() {

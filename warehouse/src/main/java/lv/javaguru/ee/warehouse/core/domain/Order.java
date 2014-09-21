@@ -29,15 +29,15 @@ public class Order {
     private Long id;
     
     @Version
-    @Column(name = "VERSION")
+    @Column(name = "VERSION", nullable = false)
     private Long version;
     
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CREATED")
+    @Column(name = "CREATED", nullable = false)
     private Date created;
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "DIRECTION")
+    @Column(name = "DIRECTION", length = 10)
     private Direction direction;
     
     @ManyToOne(fetch = FetchType.EAGER)

@@ -6,43 +6,62 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="1" author="viktor" context="main">
-        <createTable tableName="deliveryItems">
-            <column name="deliveryItemId" type="BIGINT" autoIncrement="true">
+    <changeSet id="1" author="ainar" context="main">
+        
+        <createTable tableName="ORDERS">
+            
+            <column name="ID" type="BIGINT(20)" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="deliveryId" type="BIGINT">
+            <column name="VERSION" type="BIGINT(20)">
+                <constraints nullable="false"/>                    
+            </column>
+
+            <column name="CREATED" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="productTitle" type="varchar(100)">
+            <column name="DIRECTION" type="VARCHAR(10)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="productWeightInGram" type="int">
+            <column name="AMOUNT" type="INT(11)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="productPrice" type="NUMERIC(19,2)">
+            <column name="QUANTITY" type="INT(11)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="productDeliveryPrice" type="NUMERIC(19,2)">
+            <column name="PRODUCT_ID" type="BIGINT(20)" >
                 <constraints nullable="false"/>
-            </column>            
+            </column>
+
+            <column name="WAREHOUSE_ID" type="BIGINT(20)" >
+                <constraints nullable="false"/>                    
+            </column>
+                     
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="deliveryItems"
-                                 baseColumnNames="deliveryId"
-                                 constraintName="fk_deliveryItems_delivery"
-                                 deferrable="false"
-                                 initiallyDeferred="false"
-                                 onDelete="CASCADE"
-                                 onUpdate="CASCADE"
-                                 referencedColumnNames="deliveryId"
-                                 referencedTableName="deliveries"/>
+        <addForeignKeyConstraint baseTableName="ORDERS"
+                                 baseColumnNames="PRODUCT_ID"
+                                 constraintName="FK_kq9dhmfiqbyrr5w7kpyncfwv5"                                                                  
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"                                 
+                                 referencedColumnNames="ID"
+                                 referencedTableName="PRODUCTS"/>
 
+        <addForeignKeyConstraint baseTableName="ORDERS"
+                                 baseColumnNames="WAREHOUSE_ID"
+                                 constraintName="FK_pvo9x3ehc5gxgsqh5s68wv2gq"
+                                 deferrable="false"
+                                 initiallyDeferred="false"                                 
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="WAREHOUSES"/>
+        
     </changeSet>
 
 </databaseChangeLog>

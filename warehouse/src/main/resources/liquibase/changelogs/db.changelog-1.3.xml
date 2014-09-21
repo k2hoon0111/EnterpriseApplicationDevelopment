@@ -6,42 +6,35 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="1" author="viktor" context="main">
-        <createTable tableName="deliveryInfos">
-            <column name="deliveryInfoId" type="BIGINT" autoIncrement="true">
+    <changeSet id="1" author="ainar" context="main">
+        
+        <createTable tableName="PRODUCT_PROPERTIES">
+            
+            <column name="ID" type="BIGINT(20)" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="deliveryId" type="BIGINT">
-                <constraints nullable="true"/>
+            <column name="PROPERTY_NAME" type="VARCHAR(30)">
+                <constraints nullable="false"/>                    
             </column>
 
-            <column name="desiredDeliveryDate" type="TIMESTAMP">
-                <constraints nullable="true"/>
+            <column name="PROPERTY_VALUE" type="VARCHAR(30)">
+                <constraints nullable="false"/>                    
             </column>
 
-            <column name="desiredDeliveryTimeFrom" type="varchar(10)">
-                <constraints nullable="true"/>
+            <column name="PRODUCT_ID" type="BIGINT(20)">
+                <constraints nullable="false"/>
             </column>
-
-            <column name="desiredDeliveryTimeTo" type="varchar(10)">
-                <constraints nullable="true"/>
-            </column>
-
-            <column name="deliveryNotes" type="varchar(500)">
-                <constraints nullable="true"/>
-            </column>
+            
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="deliveryInfos"
-                                 baseColumnNames="deliveryId"
-                                 constraintName="fk_deliveryInfos_delivery"
-                                 deferrable="false"
-                                 initiallyDeferred="false"
-                                 onDelete="CASCADE"
-                                 onUpdate="CASCADE"
-                                 referencedColumnNames="deliveryId"
-                                 referencedTableName="deliveries"/>
+        <addForeignKeyConstraint baseTableName="PRODUCT_PROPERTIES"
+                                 baseColumnNames="PRODUCT_ID"
+                                 constraintName="FK_lwvfqveteiji8grrd23rs5apn"                                 
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="PRODUCTS"/>
 
     </changeSet>
 

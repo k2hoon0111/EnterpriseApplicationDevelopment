@@ -1,6 +1,9 @@
 package lv.javaguru.ee.warehouse.core.domain;
 
 import java.util.Objects;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -19,14 +22,20 @@ public class WarehouseProduct {
     
     @Id
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @AttributeOverrides({
+        @AttributeOverride(name = "warehouse", column = @Column(name = "WAREHOUSE_ID")), 
+        @AttributeOverride(name = "product", column = @Column(name = "PRODUCT_ID"))
+    })
     private Warehouse warehouse;
     
     @Id
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     private Product product;
     
+    @Column(name = "COUNT", nullable = false)
     private Integer count;
     
+    @Column(name = "PRICE", nullable = false)
     private Integer price;
 
     public WarehouseProduct() {

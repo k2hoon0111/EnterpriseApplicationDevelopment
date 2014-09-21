@@ -27,7 +27,7 @@ public class Product {
     private Long id;
     
     @Version
-    @Column(name = "VERSION")
+    @Column(name = "VERSION", nullable = false)
     private Long version;
     
     @Column(name = "CODE", nullable = false, unique = true)
@@ -36,7 +36,7 @@ public class Product {
     @Column(name = "TITLE", length = 50)
     private String title;
     
-    @Column(name = "description", length = 100)
+    @Column(name = "DESCRIPTION", length = 100)
     private String description;
                  
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "product")

@@ -34,7 +34,7 @@ public class Warehouse {
     @Column(name = "VERSION")
     private Long version;
     
-    @Column(name = "TITLE", length = 50)
+    @Column(name = "TITLE", nullable = false, length = 50)
     private String title;
     
     @Column(name = "DESCRIPTION", length = 100)
@@ -43,11 +43,11 @@ public class Warehouse {
     //embedded
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "country",    column = @Column(name = "COUNTRY")),
-            @AttributeOverride(name = "city",       column = @Column(name = "CITY")),
-            @AttributeOverride(name = "postIndex",  column = @Column(name = "POSTINDEX")),
-            @AttributeOverride(name = "street",     column = @Column(name = "STREET")),
-            @AttributeOverride(name = "house",      column = @Column(name = "HOUSE"))
+            @AttributeOverride(name = "country",    column = @Column(name = "COUNTRY", length = 30)),
+            @AttributeOverride(name = "city",       column = @Column(name = "CITY", length = 30)),
+            @AttributeOverride(name = "postIndex",  column = @Column(name = "POSTINDEX", length = 10)),
+            @AttributeOverride(name = "street",     column = @Column(name = "STREET", length = 50)),
+            @AttributeOverride(name = "house",      column = @Column(name = "HOUSE", length = 15))
     })
     private WarehouseAddress address;
     
