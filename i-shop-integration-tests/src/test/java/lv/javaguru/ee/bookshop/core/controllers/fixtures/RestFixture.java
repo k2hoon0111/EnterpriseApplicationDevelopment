@@ -1,10 +1,7 @@
 package lv.javaguru.ee.bookshop.core.controllers.fixtures;
 
 import lv.javaguru.ee.bookshop.core.Server;
-import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
-import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
-import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
-import lv.javaguru.ee.bookshop.integrations.domain.OrderDetailDTO;
+import lv.javaguru.ee.bookshop.integrations.domain.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -107,4 +104,25 @@ public class RestFixture {
         );
     }
 
+    ////////////// Account methods ////////////////
+    public static ResponseEntity<AccountDTO> createAccount(AccountDTO accountDTO) {
+        return REST_TEMPLATE.postForEntity(BASE_URL + "/rest/account/",
+                accountDTO, AccountDTO.class, new HashMap<String, String>()
+        );
+    }
+
+    public static ResponseEntity<AccountDTO> getAccount(Long accountId) {
+        return REST_TEMPLATE.getForEntity(BASE_URL + "/rest/account/" + accountId,
+                AccountDTO.class, new HashMap<String, String>());
+    }
+
+    public static void deleteAccount(Long accountId) {
+        REST_TEMPLATE.delete(BASE_URL + "/rest/account/" + accountId);
+    }
+
+    public static void updateAccount(AccountDTO accountDTO) {
+        REST_TEMPLATE.put(BASE_URL + "/rest/account/" + accountDTO.getAccountId(),
+                accountDTO, AccountDTO.class, new HashMap<String, String>()
+        );
+    }
 }
