@@ -23,7 +23,7 @@ import lv.javaguru.ee.deliveryagency.config.CoreConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = CoreConfig.class)
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 @TransactionConfiguration(transactionManager = "jpaTX", defaultRollback = false)
 public abstract class DatabaseJPATest {
 

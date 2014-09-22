@@ -5,7 +5,6 @@ import static com.google.common.base.Preconditions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import lv.javaguru.ee.deliveryagency.core.DomainCommandService;
 import lv.javaguru.ee.deliveryagency.core.commands.CreateClientCommand;
 import lv.javaguru.ee.deliveryagency.core.commands.CreateClientResult;
 import lv.javaguru.ee.deliveryagency.core.database.ClientDAO;
@@ -15,7 +14,7 @@ import lv.javaguru.ee.deliveryagency.core.domain.Delivery;
 
 @Component
 public class CreateClientCommandHandler
-		implements DomainCommandService<CreateClientCommand, CreateClientResult> {
+		implements DomainCommandHandler<CreateClientCommand, CreateClientResult> {
 
 	@Autowired
 	private DeliveryDAO deliveryDAO;

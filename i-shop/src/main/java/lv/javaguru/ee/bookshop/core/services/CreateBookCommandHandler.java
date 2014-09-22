@@ -1,10 +1,8 @@
 package lv.javaguru.ee.bookshop.core.services;
 
-import lv.javaguru.ee.bookshop.core.DomainCommandService;
 import lv.javaguru.ee.bookshop.core.commands.CreateBookCommand;
-import lv.javaguru.ee.bookshop.core.commands.CreateBookCommandResult;
-import lv.javaguru.ee.bookshop.core.database.BookDAO;
-import lv.javaguru.ee.bookshop.core.database.CategoryDAO;
+import lv.javaguru.ee.bookshop.core.commands.CreateBookResult;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Book;
 import lv.javaguru.ee.bookshop.core.domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +12,20 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 @Component
 public class CreateBookCommandHandler
-        implements DomainCommandService<CreateBookCommand, CreateBookCommandResult> {
+        implements DomainCommandHandler<CreateBookCommand, CreateBookResult> {
 
     @Autowired
-    private BookDAO bookDAO;
-
-    @Autowired
-    private CategoryDAO categoryDAO;
-
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
-    public CreateBookCommandResult execute(CreateBookCommand command) {
+    public CreateBookResult execute(CreateBookCommand command) {
         validateCommand(command);
 
-        Category category = categoryDAO.getById(command.getCategoryId());
+        Category category = jpacrudOperationDAO.getById(Category.class, command.getCategoryId());
         Book book = createBookEntityFromCommand(command, category);
-        bookDAO.create(book);
+        jpacrudOperationDAO.create(book);
 
-        return new CreateBookCommandResult(book);
+        return new CreateBookResult(book);
     }
 
     private Book createBookEntityFromCommand(CreateBookCommand command, Category category) {
@@ -47,7 +41,6 @@ public class CreateBookCommandHandler
     }
 
     private void validateCommand(CreateBookCommand command) {
-
         checkNotNull(command, "CreateBookCommand must not be null");
         checkNotNull(command.getTitle(), "Title must not be null");
         checkNotNull(command.getDescription(), "Description must not be null");
@@ -55,7 +48,7 @@ public class CreateBookCommandHandler
         checkNotNull(command.getYear(), "Year must not be null");
         checkNotNull(command.getAuthor(), "Author name must not be null");
         checkNotNull(command.getIsbn(), "Isbn name must not be null");
-
+        checkNotNull(command.getCategoryId(), "Category Id must not be null");
     }
 
     @Override

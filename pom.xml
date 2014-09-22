@@ -12,9 +12,12 @@
     <modules>
         <module>delivery-agency</module>
         <module>delivery-agency-integration-tests</module>
+        <module>delivery-agency-ws</module>
         <module>i-shop</module>
         <module>i-shop-integration-tests</module>
+        <module>i-shop-ws</module>
         <module>warehouse</module>
+        <module>PlanetExpress</module>
     </modules>
 
     <repositories>
@@ -26,6 +29,12 @@
     </repositories>
 
     <properties>
+
+        <!-- Web server dependency -->
+        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+        <jetty-server.version>9.2.2.v20140723</jetty-server.version>
+        <jetty-webapp.version>9.2.2.v20140723</jetty-webapp.version>
+        <jetty-servlet.version>9.2.2.v20140723</jetty-servlet.version>
 
         <!-- HSQLDB dependency - used as embedded database -->
         <hsqldb.version>2.3.1</hsqldb.version>
@@ -40,10 +49,14 @@
         <liquibase-core.version>3.2.2</liquibase-core.version>
 
         <!-- Spring Framework dependencies -->
-        <spring-context.version>4.0.7.RELEASE</spring-context.version>
-        <spring-tx.version>4.0.7.RELEASE</spring-tx.version>
-        <spring-orm.version>4.0.7.RELEASE</spring-orm.version>
+        <spring-context.version>4.1.0.RELEASE</spring-context.version>
+        <spring-tx.version>4.1.0.RELEASE</spring-tx.version>
+        <spring-orm.version>4.1.0.RELEASE</spring-orm.version>
         <spring-data-jpa.version>1.5.2.RELEASE</spring-data-jpa.version>
+        <spring-webmvc.version>4.1.0.RELEASE</spring-webmvc.version>
+
+        <jackson-core.version>2.3.3</jackson-core.version>
+        <jackson-databind.version>2.3.3</jackson-databind.version>
 
         <!-- Hibernate dependencies -->
         <hibernate-core.version>4.3.6.Final</hibernate-core.version>
@@ -82,6 +95,31 @@
     <dependencyManagement>
 
         <dependencies>
+
+            <!-- Web server dependency -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-server</artifactId>
+                <version>${jetty-server.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-webapp</artifactId>
+                <version>${jetty-webapp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-servlet</artifactId>
+                <version>${jetty-servlet.version}</version>
+            </dependency>
 
             <!-- HSQLDB dependency - used as embedded database -->
             <dependency>
@@ -140,6 +178,24 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${spring-data-jpa.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring-webmvc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
             </dependency>
 
             <!-- Hibernate dependencies -->

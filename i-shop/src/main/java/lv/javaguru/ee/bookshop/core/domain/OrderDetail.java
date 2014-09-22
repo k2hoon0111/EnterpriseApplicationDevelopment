@@ -29,9 +29,12 @@ public class OrderDetail implements Serializable {
         this.orderDetailId = orderDetailId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bookId")
     private Book book;
+
+    @Column(name = "orderId")
+    private Long orderId;
 
     private int quantity = 1;
 
@@ -59,6 +62,14 @@ public class OrderDetail implements Serializable {
 
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public BigDecimal getPrice() {

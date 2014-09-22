@@ -16,7 +16,7 @@ public class LiquibaseSchemaUpdate {
 	
 	@Autowired
 	private DatabaseMigrationService databaseMigrationService;
-	
+
 	@Value("${liquibase.update:true}")
 	private boolean enabled;
 

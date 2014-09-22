@@ -39,9 +39,9 @@ public class Category implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public void setId(Long id) {
-        this.categoryId = id;
-    }
+//    public void setId(Long id) {
+//        this.categoryId = id;
+//    }
 
     public void setName(String name) {
         this.name = name;
