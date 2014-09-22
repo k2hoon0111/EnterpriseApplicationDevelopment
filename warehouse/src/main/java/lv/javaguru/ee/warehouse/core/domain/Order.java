@@ -12,25 +12,28 @@ import javax.persistence.*;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "orderId")
-    private Long orderId;
-    private Long productId;         // isbn
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "productId")
+    private String productId;         // isbn
+    @Column(name = "clientId")
     private Long clientId;           // product ordered for user
+    @Column(name = "itemsQuantity")
     private int itemsQuantity;      // how many items to order
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getId() {
+        return id;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 

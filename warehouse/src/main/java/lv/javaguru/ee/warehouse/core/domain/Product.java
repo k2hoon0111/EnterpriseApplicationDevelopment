@@ -12,19 +12,24 @@ import java.math.BigDecimal;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "productId")
-    private Long productId;
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "price")
     private BigDecimal price;
+    @Column(name = "itemsAvailable")
     private int itemsAvailable;
 
 
-    public Long getProductId() {
-        return productId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -49,5 +54,13 @@ public class Product {
 
     public void setItemsAvailable(int itemsAvailable) {
         this.itemsAvailable = itemsAvailable;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
