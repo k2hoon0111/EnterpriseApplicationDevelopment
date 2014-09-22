@@ -2,7 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.GetOrderDetailCommand;
 import lv.javaguru.ee.bookshop.core.commands.GetOrderDetailResult;
-import lv.javaguru.ee.bookshop.core.database.OrderDetailDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,13 +17,13 @@ public class GetOrderDetailCommandHandler
         implements DomainCommandHandler<GetOrderDetailCommand, GetOrderDetailResult> {
 
     @Autowired
-    private OrderDetailDAO orderDetailDAO;
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
 
     @Override
     public GetOrderDetailResult execute(GetOrderDetailCommand command) {
         validateCommand(command);
-        OrderDetail orderDetail = orderDetailDAO.getById(command.getOrderDetailId());
+        OrderDetail orderDetail = jpacrudOperationDAO.getById(OrderDetail.class, command.getOrderDetailId());
 
         if (orderDetail == null || !orderDetail.getOrderDetailId().equals(command.getOrderDetailId())) {
             throw new RuntimeException("OrderDetail id not valid");

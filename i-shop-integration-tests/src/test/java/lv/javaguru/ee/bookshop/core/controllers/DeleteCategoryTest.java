@@ -2,6 +2,7 @@ package lv.javaguru.ee.bookshop.core.controllers;
 
 import junit.framework.TestCase;
 import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.domain.Category;
 import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class DeleteCategoryTest extends EmbeddedJettyTest {
         try {
             RestFixture.getCategory(Long.valueOf(categoryId));
         } catch (HttpClientErrorException e) {
-            TestCase.assertEquals("Category id not valid", e.getResponseBodyAsString());
+            TestCase.assertEquals("Entity " + Category.class.getName() + " not found by id " + categoryId, e.getResponseBodyAsString());
             TestCase.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
         }
 

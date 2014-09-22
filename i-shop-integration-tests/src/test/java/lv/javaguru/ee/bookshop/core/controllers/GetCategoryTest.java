@@ -1,10 +1,12 @@
 package lv.javaguru.ee.bookshop.core.controllers;
 
-import org.junit.Assert;
+import junit.framework.TestCase;
 import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.domain.Category;
 import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
 import org.hamcrest.MatcherAssert;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,11 +37,12 @@ public class GetCategoryTest extends EmbeddedJettyTest {
     }
 
     @Test
-    public void testGetCategoryWithWrongId() {
+    public void testGetOrderWithWrongId() {
+        Long max = Long.MAX_VALUE;
         try {
-            RestFixture.getCategory(Long.MAX_VALUE);
+            RestFixture.getCategory(max);
         } catch (HttpClientErrorException e) {
-            Assert.assertEquals("Category id not valid", e.getResponseBodyAsString());
+            TestCase.assertEquals("Entity " + Category.class.getName() + " not found by id " + max, e.getResponseBodyAsString());
             Assert.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
         }
     }

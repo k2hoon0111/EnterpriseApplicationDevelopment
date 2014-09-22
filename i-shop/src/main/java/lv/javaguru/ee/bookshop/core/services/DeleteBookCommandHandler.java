@@ -2,7 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.DeleteBookCommand;
 import lv.javaguru.ee.bookshop.core.commands.DeleteBookResult;
-import lv.javaguru.ee.bookshop.core.database.BookDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,19 +14,19 @@ public class DeleteBookCommandHandler
         implements DomainCommandHandler<DeleteBookCommand, DeleteBookResult> {
 
     @Autowired
-    private BookDAO bookDAO;
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public DeleteBookResult execute(DeleteBookCommand command) {
         validateCommand(command);
         Book book = selectBookEntityFromDB(command);
-        bookDAO.delete(book);
+        jpacrudOperationDAO.delete(book);
 
         return new DeleteBookResult(book);
     }
 
     private Book selectBookEntityFromDB(DeleteBookCommand command) {
-        Book book = bookDAO.getById(command.getBookId());
+        Book book = jpacrudOperationDAO.getById(Book.class, command.getBookId());
         return book;
     }
 

@@ -29,7 +29,7 @@ public class OrderDetail implements Serializable {
         this.orderDetailId = orderDetailId;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bookId")
     private Book book;
 

@@ -2,8 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.CreateBookCommand;
 import lv.javaguru.ee.bookshop.core.commands.CreateBookResult;
-import lv.javaguru.ee.bookshop.core.database.BookDAO;
-import lv.javaguru.ee.bookshop.core.database.CategoryDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Book;
 import lv.javaguru.ee.bookshop.core.domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +15,15 @@ public class CreateBookCommandHandler
         implements DomainCommandHandler<CreateBookCommand, CreateBookResult> {
 
     @Autowired
-    private BookDAO bookDAO;
-
-    @Autowired
-    private CategoryDAO categoryDAO;
-
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public CreateBookResult execute(CreateBookCommand command) {
         validateCommand(command);
 
-        Category category = categoryDAO.getById(command.getCategoryId());
+        Category category = jpacrudOperationDAO.getById(Category.class, command.getCategoryId());
         Book book = createBookEntityFromCommand(command, category);
-        bookDAO.create(book);
+        jpacrudOperationDAO.create(book);
 
         return new CreateBookResult(book);
     }

@@ -2,7 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.DeleteCategoryCommand;
 import lv.javaguru.ee.bookshop.core.commands.DeleteCategoryResult;
-import lv.javaguru.ee.bookshop.core.database.CategoryDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,19 +18,19 @@ public class DeleteCategoryCommandHandler
         implements DomainCommandHandler<DeleteCategoryCommand, DeleteCategoryResult> {
 
     @Autowired
-    private CategoryDAO categoryDAO;
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public DeleteCategoryResult execute(DeleteCategoryCommand command) {
         validateCommand(command);
         Category category = selectCategoryEntityFromDB(command);
-        categoryDAO.delete(category);
+        jpacrudOperationDAO.delete(category);
 
         return new DeleteCategoryResult(category);
     }
 
     private Category selectCategoryEntityFromDB(DeleteCategoryCommand command) {
-        Category category = categoryDAO.getById(command.getCategoryId());
+        Category category = jpacrudOperationDAO.getById(Category.class, command.getCategoryId());
         return category;
     }
 

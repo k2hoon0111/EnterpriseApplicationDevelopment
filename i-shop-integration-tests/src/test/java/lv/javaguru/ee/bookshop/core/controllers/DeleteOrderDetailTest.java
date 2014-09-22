@@ -2,6 +2,7 @@ package lv.javaguru.ee.bookshop.core.controllers;
 
 import junit.framework.TestCase;
 import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.domain.OrderDetail;
 import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDetailDTO;
 import org.junit.Test;
@@ -18,22 +19,23 @@ public class DeleteOrderDetailTest extends EmbeddedJettyTest {
     @Test
     public void testDeleteOrderDetail() {
         OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
-        orderDetailDTO.setBookId(Long.valueOf(45));
+
+        orderDetailDTO.setBookId(Long.valueOf(53));
         orderDetailDTO.setOrderId(Long.valueOf(13));
         orderDetailDTO.setQuantity(5);
 
         ResponseEntity<OrderDetailDTO> createOrderDetailResponse
                 = RestFixture.createOrderDetail(orderDetailDTO);
-        OrderDetailDTO createdOrderDetailDTO = createOrderDetailResponse.getBody();
+        OrderDetailDTO createOrderDetailDTO = createOrderDetailResponse.getBody();
 
-        Long orderDetailId = createdOrderDetailDTO.getOrderDetailId();
+        Long orderDetailId = createOrderDetailDTO.getOrderDetailId();
 
         RestFixture.deleteOrderDetail(orderDetailId);
 
         try {
             RestFixture.getOrderDetail(Long.valueOf(orderDetailId));
         } catch (HttpClientErrorException e) {
-            TestCase.assertEquals("OrderDetail id not valid", e.getResponseBodyAsString());
+            TestCase.assertEquals("Entity " + OrderDetail.class.getName() + " not found by id " + orderDetailId, e.getResponseBodyAsString());
             TestCase.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
         }
 

@@ -1,6 +1,8 @@
 package lv.javaguru.ee.bookshop.core.controllers;
 
+import junit.framework.TestCase;
 import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.domain.Order;
 import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
 import org.hamcrest.MatcherAssert;
@@ -59,10 +61,11 @@ public class GetOrderTest extends EmbeddedJettyTest {
 
     @Test
     public void testGetOrderWithWrongId() {
+        Long max = Long.MAX_VALUE;
         try {
-            RestFixture.getOrder(Long.MAX_VALUE);
+            RestFixture.getOrder(max);
         } catch (HttpClientErrorException e) {
-            Assert.assertEquals("Order id not valid", e.getResponseBodyAsString());
+            TestCase.assertEquals("Entity " + Order.class.getName() + " not found by id " + max, e.getResponseBodyAsString());
             Assert.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
         }
     }

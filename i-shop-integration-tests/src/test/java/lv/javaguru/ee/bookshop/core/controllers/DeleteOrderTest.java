@@ -2,6 +2,7 @@ package lv.javaguru.ee.bookshop.core.controllers;
 
 import junit.framework.TestCase;
 import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.domain.Order;
 import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
 import org.junit.Test;
@@ -51,7 +52,7 @@ public class DeleteOrderTest extends EmbeddedJettyTest {
         try {
             RestFixture.getOrder(Long.valueOf(orderId));
         } catch (HttpClientErrorException e) {
-            TestCase.assertEquals("Order id not valid", e.getResponseBodyAsString());
+            TestCase.assertEquals("Entity " + Order.class.getName() + " not found by id " + orderId, e.getResponseBodyAsString());
             TestCase.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
         }
 

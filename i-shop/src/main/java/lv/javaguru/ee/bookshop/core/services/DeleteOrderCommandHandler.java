@@ -2,7 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.DeleteOrderCommand;
 import lv.javaguru.ee.bookshop.core.commands.DeleteOrderResult;
-import lv.javaguru.ee.bookshop.core.database.OrderDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,19 +18,19 @@ public class DeleteOrderCommandHandler
         implements DomainCommandHandler<DeleteOrderCommand, DeleteOrderResult> {
 
     @Autowired
-    private OrderDAO orderDAO;
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public DeleteOrderResult execute(DeleteOrderCommand command) {
         validateCommand(command);
         Order order = selectOrderEntityFromDB(command);
-        orderDAO.delete(order);
+        jpacrudOperationDAO.delete(order);
 
         return new DeleteOrderResult(order);
     }
 
     private Order selectOrderEntityFromDB(DeleteOrderCommand command) {
-        Order order = orderDAO.getById(command.getOrderId());
+        Order order = jpacrudOperationDAO.getById(Order.class, command.getOrderId());
         return order;
     }
 

@@ -2,8 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.UpdateOrderCommand;
 import lv.javaguru.ee.bookshop.core.commands.UpdateOrderResult;
-import lv.javaguru.ee.bookshop.core.database.AccountDAO;
-import lv.javaguru.ee.bookshop.core.database.OrderDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Account;
 import lv.javaguru.ee.bookshop.core.domain.Address;
 import lv.javaguru.ee.bookshop.core.domain.Order;
@@ -21,19 +20,16 @@ public class UpdateOrderCommandHandler
         implements DomainCommandHandler<UpdateOrderCommand, UpdateOrderResult> {
 
     @Autowired
-    private OrderDAO orderDAO;
-
-    @Autowired
-    private AccountDAO accountDAO;
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public UpdateOrderResult execute(UpdateOrderCommand command) {
         validateCommand(command);
 
 
-        Account account = accountDAO.getById(command.getAccountId());
+        Account account = jpacrudOperationDAO.getById(Account.class, command.getAccountId());
         Order order = selectOrderEntityFromDB(command, account);
-        orderDAO.update(order);
+        jpacrudOperationDAO.update(order);
 
         return new UpdateOrderResult(order);
     }
@@ -56,7 +52,7 @@ public class UpdateOrderCommandHandler
         shippingAddress.setPostalCode(command.getShippingPostalCode());
         shippingAddress.setStreet(command.getShippingStreet());
 
-        Order order = orderDAO.getById(command.getOrderId());
+        Order order = jpacrudOperationDAO.getById(Order.class, command.getOrderId());
         order.setAccount(account);
         order.setBillingAddress(billingAddress);
         order.setShippingAddress(shippingAddress);

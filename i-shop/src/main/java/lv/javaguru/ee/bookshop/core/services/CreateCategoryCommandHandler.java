@@ -2,7 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.CreateCategoryCommand;
 import lv.javaguru.ee.bookshop.core.commands.CreateCategoryResult;
-import lv.javaguru.ee.bookshop.core.database.CategoryDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,14 +18,14 @@ public class CreateCategoryCommandHandler
         implements DomainCommandHandler<CreateCategoryCommand, CreateCategoryResult> {
 
     @Autowired
-    private CategoryDAO categoryDAO;
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public CreateCategoryResult execute(CreateCategoryCommand command) {
         validateCommand(command);
 
         Category category = createCategoryEntityFromCommand(command);
-        categoryDAO.create(category);
+        jpacrudOperationDAO.create(category);
 
         return new CreateCategoryResult(category);
     }

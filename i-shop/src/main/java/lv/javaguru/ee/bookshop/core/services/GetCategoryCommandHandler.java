@@ -2,7 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.GetCategoryCommand;
 import lv.javaguru.ee.bookshop.core.commands.GetCategoryResult;
-import lv.javaguru.ee.bookshop.core.database.CategoryDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,13 +15,13 @@ public class GetCategoryCommandHandler
         implements DomainCommandHandler<GetCategoryCommand, GetCategoryResult> {
 
     @Autowired
-    private CategoryDAO categoryDAO;
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
 
     @Override
     public GetCategoryResult execute(GetCategoryCommand command) {
         validateCommand(command);
-        Category category = categoryDAO.getById(command.getCategoryId());
+        Category category = jpacrudOperationDAO.getById(Category.class, command.getCategoryId());
 
         if (category == null || !category.getCategoryId().equals(command.getCategoryId())) {
             throw new RuntimeException("Category id not valid");

@@ -2,8 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.UpdateBookCommand;
 import lv.javaguru.ee.bookshop.core.commands.UpdateBookResult;
-import lv.javaguru.ee.bookshop.core.database.BookDAO;
-import lv.javaguru.ee.bookshop.core.database.CategoryDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Book;
 import lv.javaguru.ee.bookshop.core.domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,25 +15,21 @@ public class UpdateBookCommandHandler
         implements DomainCommandHandler<UpdateBookCommand, UpdateBookResult> {
 
     @Autowired
-    private BookDAO bookDAO;
-
-    @Autowired
-    private CategoryDAO categoryDAO;
-
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public UpdateBookResult execute(UpdateBookCommand command) {
         validateCommand(command);
 
-        Category category = categoryDAO.getById(command.getCategoryId());
+        Category category = jpacrudOperationDAO.getById(Category.class, command.getCategoryId());
         Book book = selectBookEntityFromDB(command, category);
-        bookDAO.update(book);
+        jpacrudOperationDAO.update(book);
 
         return new UpdateBookResult(book);
     }
 
     private Book selectBookEntityFromDB(UpdateBookCommand command, Category category) {
-        Book book = bookDAO.getById(command.getBookId());
+        Book book = jpacrudOperationDAO.getById(Book.class, command.getBookId());
         book.setTitle(command.getTitle());
         book.setDescription(command.getDescription());
         book.setPrice(command.getPrice());

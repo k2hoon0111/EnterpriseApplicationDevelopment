@@ -1,10 +1,12 @@
 package lv.javaguru.ee.bookshop.core.controllers;
 
-import org.junit.Assert;
+import junit.framework.TestCase;
 import lv.javaguru.ee.bookshop.core.controllers.fixtures.RestFixture;
+import lv.javaguru.ee.bookshop.core.domain.Book;
 import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
 import org.hamcrest.MatcherAssert;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,11 +45,12 @@ public class GetBookTest extends EmbeddedJettyTest {
     }
 
     @Test
-    public void testGetBookWithWrongId() {
+    public void testGetOrderWithWrongId() {
+        Long max = Long.MAX_VALUE;
         try {
-            RestFixture.getBook(Long.MAX_VALUE);
+            RestFixture.getBook(max);
         } catch (HttpClientErrorException e) {
-            Assert.assertEquals("Book id not valid", e.getResponseBodyAsString());
+            TestCase.assertEquals("Entity " + Book.class.getName() + " not found by id " + max, e.getResponseBodyAsString());
             Assert.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
         }
     }

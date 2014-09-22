@@ -2,8 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.CreateOrderDetailCommand;
 import lv.javaguru.ee.bookshop.core.commands.CreateOrderDetailResult;
-import lv.javaguru.ee.bookshop.core.database.BookDAO;
-import lv.javaguru.ee.bookshop.core.database.OrderDetailDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Book;
 import lv.javaguru.ee.bookshop.core.domain.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +19,16 @@ public class CreateOrderDetailCommandHandler
         implements DomainCommandHandler<CreateOrderDetailCommand, CreateOrderDetailResult> {
 
     @Autowired
-    private OrderDetailDAO orderDetailDAO;
-
-    @Autowired
-    private BookDAO bookDAO;
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public CreateOrderDetailResult execute(CreateOrderDetailCommand command) {
         validateCommand(command);
 
-        Book book = bookDAO.getById(command.getBookId());
+        Book book = jpacrudOperationDAO.getById(Book.class, command.getBookId());
 
         OrderDetail orderDetail = createOrderDetailEntityFromCommand(command, book);
-        orderDetailDAO.create(orderDetail);
+        jpacrudOperationDAO.create(orderDetail);
 
         return new CreateOrderDetailResult(orderDetail);
     }

@@ -2,8 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.CreateOrderCommand;
 import lv.javaguru.ee.bookshop.core.commands.CreateOrderResult;
-import lv.javaguru.ee.bookshop.core.database.AccountDAO;
-import lv.javaguru.ee.bookshop.core.database.OrderDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Account;
 import lv.javaguru.ee.bookshop.core.domain.Address;
 import lv.javaguru.ee.bookshop.core.domain.Order;
@@ -17,19 +16,15 @@ public class CreateOrderCommandHandler
         implements DomainCommandHandler<CreateOrderCommand, CreateOrderResult> {
 
     @Autowired
-    private AccountDAO accountDAO;
-
-    @Autowired
-    private OrderDAO orderDAO;
-
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public CreateOrderResult execute(CreateOrderCommand command) {
         validateCommand(command);
 
-        Account account = accountDAO.getById(command.getAccountId());
+        Account account = jpacrudOperationDAO.getById(Account.class, command.getAccountId());
         Order order = createOrderEntityFromCommand(command, account);
-        orderDAO.create(order);
+        jpacrudOperationDAO.create(order);
 
         return new CreateOrderResult(order);
     }

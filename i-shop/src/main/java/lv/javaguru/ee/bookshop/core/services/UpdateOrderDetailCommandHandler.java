@@ -2,8 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.UpdateOrderDetailCommand;
 import lv.javaguru.ee.bookshop.core.commands.UpdateOrderDetailResult;
-import lv.javaguru.ee.bookshop.core.database.BookDAO;
-import lv.javaguru.ee.bookshop.core.database.OrderDetailDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Book;
 import lv.javaguru.ee.bookshop.core.domain.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,25 +18,22 @@ public class UpdateOrderDetailCommandHandler
         implements DomainCommandHandler<UpdateOrderDetailCommand, UpdateOrderDetailResult> {
 
     @Autowired
-    private OrderDetailDAO orderDetailDAO;
-
-    @Autowired
-    private BookDAO bookDAO;
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public UpdateOrderDetailResult execute(UpdateOrderDetailCommand command) {
         validateCommand(command);
 
-        Book book = bookDAO.getById(command.getBookId());
+        Book book = jpacrudOperationDAO.getById(Book.class, command.getBookId());
 
         OrderDetail orderDetail = selectOrderDetailEntityFromDB(command, book);
-        orderDetailDAO.update(orderDetail);
+        jpacrudOperationDAO.update(orderDetail);
 
         return new UpdateOrderDetailResult(orderDetail);
     }
 
     private OrderDetail selectOrderDetailEntityFromDB(UpdateOrderDetailCommand command, Book book) {
-        OrderDetail orderDetail = orderDetailDAO.getById(command.getOrderDetailId());
+        OrderDetail orderDetail = jpacrudOperationDAO.getById(OrderDetail.class, command.getOrderDetailId());
         orderDetail.setOrderId(command.getOrderId());
         orderDetail.setBook(book);
         orderDetail.setQuantity(command.getQuantity());

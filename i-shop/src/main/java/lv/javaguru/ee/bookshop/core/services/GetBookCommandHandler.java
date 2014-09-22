@@ -2,7 +2,7 @@ package lv.javaguru.ee.bookshop.core.services;
 
 import lv.javaguru.ee.bookshop.core.commands.GetBookCommand;
 import lv.javaguru.ee.bookshop.core.commands.GetBookResult;
-import lv.javaguru.ee.bookshop.core.database.BookDAO;
+import lv.javaguru.ee.bookshop.core.database.jpa.JPACRUDOperationDAO;
 import lv.javaguru.ee.bookshop.core.domain.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,12 +14,12 @@ public class GetBookCommandHandler
         implements DomainCommandHandler<GetBookCommand, GetBookResult> {
 
     @Autowired
-    private BookDAO bookDAO;
+    private JPACRUDOperationDAO jpacrudOperationDAO;
 
     @Override
     public GetBookResult execute(GetBookCommand command) {
         validateCommand(command);
-        Book book = bookDAO.getById(command.getBookId());
+        Book book = jpacrudOperationDAO.getById(Book.class, command.getBookId());
 
         if (book == null || !book.getBookId().equals(command.getBookId())) {
             throw new RuntimeException("Book id not valid");
