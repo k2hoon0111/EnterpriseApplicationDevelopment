@@ -11,6 +11,8 @@ public interface CRUDOperationDAO<E, K> {
 
     E getById(K key);
 
+    E getRequired(K key);
+
     void update(E entity);
 
     void delete(E entity);

@@ -1,6 +1,6 @@
 package lv.javaguru.ee.deliveryagency.integrations.jetty;
 
-import lv.javaguru.ee.deliveryagency.integrations.Server;
+import lv.javaguru.ee.deliveryagency.integrations.PropertiesReader;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -14,7 +14,9 @@ public class EmbeddedJettyTest {
 
     @BeforeClass
     public static void init() throws Exception {
-        jettyServer = new EmbeddedJetty("/", Server.PORT);
+        PropertiesReader propertiesReader = new PropertiesReader();
+        int port = Integer.parseInt(propertiesReader.getPort());
+        jettyServer = new EmbeddedJetty("/", port);
         jettyServer.start();
     }
 

@@ -23,7 +23,7 @@ public class GetDeliveryCommandHandler
     @Override
     public GetDeliveryResult execute(GetDeliveryCommand command) {
         validateCommand(command);
-        Delivery delivery = deliveryDAO.getById(command.getDeliveryId());
+        Delivery delivery = deliveryDAO.getRequired(command.getDeliveryId());
         return new GetDeliveryResult(delivery);
     }
 

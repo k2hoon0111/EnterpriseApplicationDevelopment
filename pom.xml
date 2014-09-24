@@ -11,11 +11,15 @@
 
     <modules>
         <module>delivery-agency</module>
-        <module>delivery-agency-integration-tests</module>
+        <module>delivery-agency-ws-api</module>
         <module>delivery-agency-ws</module>
+        <module>delivery-agency-integration-tests</module>
+        <module>delivery-agency-acceptance-tests</module>
         <module>i-shop</module>
-        <module>i-shop-integration-tests</module>
+        <module>i-shop-ws-api</module>
         <module>i-shop-ws</module>
+        <module>i-shop-integration-tests</module>
+        <module>i-shop-acceptance-tests</module>
         <module>warehouse</module>
         <module>PlanetExpress</module>
     </modules>
@@ -35,6 +39,7 @@
         <jetty-server.version>9.2.2.v20140723</jetty-server.version>
         <jetty-webapp.version>9.2.2.v20140723</jetty-webapp.version>
         <jetty-servlet.version>9.2.2.v20140723</jetty-servlet.version>
+        <jetty-jmx.version>9.2.1.v20140609</jetty-jmx.version>
 
         <!-- HSQLDB dependency - used as embedded database -->
         <hsqldb.version>2.3.1</hsqldb.version>
@@ -58,6 +63,8 @@
         <jackson-core.version>2.3.3</jackson-core.version>
         <jackson-databind.version>2.3.3</jackson-databind.version>
 
+        <swagger-springmvc.version>0.8.8</swagger-springmvc.version>
+
         <!-- Hibernate dependencies -->
         <hibernate-core.version>4.3.6.Final</hibernate-core.version>
         <hibernate-entitymanager.version>4.3.6.Final</hibernate-entitymanager.version>
@@ -77,6 +84,10 @@
         <junit.version>4.11</junit.version>
         <mockito-all.version>1.9.5</mockito-all.version>
         <spring-test.version>4.0.3.RELEASE</spring-test.version>
+
+        <cucumber-java.version>1.1.8</cucumber-java.version>
+        <cucumber-junit.version>1.1.8</cucumber-junit.version>
+
 
         <!-- commons-lang3 dependencies -->
         <commons-lang3.version>3.3.2</commons-lang3.version>
@@ -121,6 +132,12 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-servlet</artifactId>
                 <version>${jetty-servlet.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-jmx</artifactId>
+                <version>${jetty-jmx.version}</version>
             </dependency>
 
             <!-- HSQLDB dependency - used as embedded database -->
@@ -198,6 +215,12 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson-databind.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mangofactory</groupId>
+                <artifactId>swagger-springmvc</artifactId>
+                <version>${swagger-springmvc.version}</version>
             </dependency>
 
             <!-- Hibernate dependencies -->
@@ -306,6 +329,20 @@
                 <version>${commons-codec.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-java</artifactId>
+                <version>${cucumber-java.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-junit</artifactId>
+                <version>${cucumber-junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -363,5 +400,12 @@
         </pluginManagement>
 
     </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://localhost:8080/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

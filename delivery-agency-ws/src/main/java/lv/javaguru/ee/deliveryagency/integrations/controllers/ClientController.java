@@ -1,12 +1,5 @@
 package lv.javaguru.ee.deliveryagency.integrations.controllers;
 
-import lv.javaguru.ee.deliveryagency.core.CommandExecutor;
-import lv.javaguru.ee.deliveryagency.core.commands.CreateClientCommand;
-import lv.javaguru.ee.deliveryagency.core.commands.CreateClientResult;
-import lv.javaguru.ee.deliveryagency.core.commands.GetClientCommand;
-import lv.javaguru.ee.deliveryagency.core.commands.GetClientResult;
-import lv.javaguru.ee.deliveryagency.core.domain.Client;
-import lv.javaguru.ee.deliveryagency.integrations.domain.ClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +8,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import lv.javaguru.ee.deliveryagency.core.CommandExecutor;
+import lv.javaguru.ee.deliveryagency.core.commands.CreateClientCommand;
+import lv.javaguru.ee.deliveryagency.core.commands.CreateClientResult;
+import lv.javaguru.ee.deliveryagency.core.commands.GetClientCommand;
+import lv.javaguru.ee.deliveryagency.core.commands.GetClientResult;
+import lv.javaguru.ee.deliveryagency.core.domain.Client;
+import lv.javaguru.ee.deliveryagency.integrations.domain.ClientDTO;
+import lv.javaguru.ee.deliveryagency.integrations.domain.builders.ClientDTOBuilder;
 
 /**
  * Created by Viktor on 16/09/2014.
@@ -39,14 +41,13 @@ public class ClientController {
     }
 
     private ClientDTO createClientDTO(Client client) {
-        ClientDTO clientDTO = new ClientDTO();
-        clientDTO.setClientId(client.getClientId());
-        clientDTO.setFirstName(client.getFirstName());
-        clientDTO.setLastName(client.getLastName());
-        clientDTO.setEmail(client.getEmail());
-        clientDTO.setPhone(client.getPhone());
-        clientDTO.setSpecialNotes(client.getSpecialNotes());
-        return clientDTO;
+        return ClientDTOBuilder.createClientDTO()
+		        .withClientId(client.getClientId())
+		        .withFirstName(client.getFirstName())
+		        .withLastName(client.getLastName())
+		        .withEmail(client.getEmail())
+		        .withPhone(client.getPhone())
+		        .withSpecialNotes(client.getSpecialNotes()).build();
     }
 
     private CreateClientCommand createClientCommand(Long deliveryId, ClientDTO clientDTO) {

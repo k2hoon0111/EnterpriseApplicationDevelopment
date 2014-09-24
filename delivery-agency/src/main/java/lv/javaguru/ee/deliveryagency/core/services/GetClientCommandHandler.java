@@ -24,7 +24,7 @@ public class GetClientCommandHandler
     @Override
     public GetClientResult execute(GetClientCommand command) {
         validateCommand(command);
-        Delivery delivery = deliveryDAO.getById(command.getDeliveryId());
+        Delivery delivery = deliveryDAO.getRequired(command.getDeliveryId());
         Client client = delivery.getClient();
 
         if(client == null || !client.getClientId().equals(command.getClientId())) {
