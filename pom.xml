@@ -90,6 +90,8 @@
         <liquibase-maven-plugin.version>3.2.1</liquibase-maven-plugin.version>
         <maven-surefire-plugin.version>2.11</maven-surefire-plugin.version>
         <surefire-junit47.version>2.12</surefire-junit47.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
 
     <dependencyManagement>
@@ -321,6 +323,7 @@
                         <source>1.7</source>
                         <target>1.7</target>
                         <compilerVersion>1.7</compilerVersion>
+                        <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
 
