@@ -34,7 +34,7 @@ public class DataSourceConfig {
         dataSource.setPassword(password);
         dataSource.setDefaultAutoCommit(false);
 
-//        liquibaseSchemaUpdate.execute(dataSource);
+        liquibaseSchemaUpdate.execute(dataSource);
 
         return dataSource;
     }
