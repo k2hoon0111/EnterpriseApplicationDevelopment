@@ -30,10 +30,10 @@
         </dependency>
 
         <!-- MySQL database driver -->
-        <dependency>
+<!--        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Database connection pool -->
         <dependency>

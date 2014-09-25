@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,7 +35,7 @@ public class Order {
     
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED", nullable = false)
-    private Date created;
+    private Date created = new Date();
     
     @Enumerated(EnumType.STRING)
     @Column(name = "DIRECTION", length = 10)
@@ -76,7 +77,7 @@ public class Order {
     public Date getCreated() {
         return created;
     }
-
+    
     public void setCreated(Date created) {
         this.created = created;
     }

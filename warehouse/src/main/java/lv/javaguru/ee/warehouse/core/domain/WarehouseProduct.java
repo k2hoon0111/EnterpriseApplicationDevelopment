@@ -1,8 +1,8 @@
 package lv.javaguru.ee.warehouse.core.domain;
 
-import java.util.Objects;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,15 +21,21 @@ import javax.persistence.Table;
 public class WarehouseProduct {
     
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, 
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, 
+            optional = true)
     @AttributeOverrides({
-        @AttributeOverride(name = "warehouse", column = @Column(name = "WAREHOUSE_ID")), 
-        @AttributeOverride(name = "product", column = @Column(name = "PRODUCT_ID"))
+        @AttributeOverride(name = "warehouse", column = @Column(name = "WAREHOUSE_ID"))
     })
     private Warehouse warehouse;
     
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, 
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, 
+            optional = true)
+    @AttributeOverrides({         
+        @AttributeOverride(name = "product", column = @Column(name = "PRODUCT_ID"))
+    })
     private Product product;
     
     @Column(name = "COUNT", nullable = false)
@@ -41,6 +47,11 @@ public class WarehouseProduct {
     public WarehouseProduct() {
     }
 
+    public WarehouseProduct(Warehouse warehouse, Product product) {
+        this.warehouse = warehouse;
+        this.product = product;       
+    }
+    
     public Warehouse getWarehouse() {
         return warehouse;
     }

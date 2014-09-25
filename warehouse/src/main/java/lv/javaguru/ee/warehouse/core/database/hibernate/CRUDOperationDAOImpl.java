@@ -55,4 +55,13 @@ abstract class CRUDOperationDAOImpl<E, K extends Serializable> implements CRUDOp
         return getCurrentSession().createCriteria(daoType).list();
     }
 
+    @Override
+    public E merge(E entity) {
+        return (E) getCurrentSession().merge(entity);
+        
+        
+    }
+
+    
+    
 }

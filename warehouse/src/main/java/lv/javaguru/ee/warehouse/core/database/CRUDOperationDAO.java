@@ -15,6 +15,8 @@ public interface CRUDOperationDAO<E, K> {
 
     void delete(E entity);
 
+    E merge(E entity);
+    
     List<E> getAll();
 
 }

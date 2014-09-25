@@ -1,7 +1,8 @@
 package lv.javaguru.ee.warehouse.core.domain;
 
+import java.util.ArrayList;
+import static java.util.Arrays.asList;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
@@ -51,12 +52,9 @@ public class Warehouse {
     })
     private WarehouseAddress address;
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = {
-        CascadeType.DETACH, 
-        CascadeType.MERGE, 
-        CascadeType.PERSIST, 
-        CascadeType.REFRESH}, mappedBy = "warehouse") 
-    private List<WarehouseProduct> warehouseProducts;
+    @OneToMany(fetch = FetchType.LAZY, 
+            cascade = {CascadeType.ALL}, mappedBy = "warehouse") 
+    private List<WarehouseProduct> warehouseProducts = new ArrayList<>();
 
     public Warehouse() {
     }
@@ -101,12 +99,27 @@ public class Warehouse {
         this.address = address;
     }
 
-    public List<WarehouseProduct> getProducts() {
+    public List<WarehouseProduct> getWarehouseProducts() {
         return warehouseProducts;
     }
 
-    public void setProducts(List<WarehouseProduct> warehouseProducts) {
+    public void setWarehouseProducts(List<WarehouseProduct> warehouseProducts) {
         this.warehouseProducts = warehouseProducts;
     }
-              
+        
+    public void addWarehouseProduct(WarehouseProduct... warehouseProducts) {    
+        if (warehouseProducts != null) {             
+            this.warehouseProducts.addAll(asList(warehouseProducts));            
+        }        
+    }
+    
+    public void addProduct(Product product, Integer count, Integer price) {    
+        WarehouseProduct wp = new WarehouseProduct(this, product);
+        wp.setCount(count);
+        wp.setPrice(price);
+        
+        this.addWarehouseProduct(wp);
+        product.addWarehouseProduct(wp);        
+    }
+    
 }

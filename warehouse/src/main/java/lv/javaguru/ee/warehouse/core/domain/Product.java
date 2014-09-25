@@ -1,5 +1,7 @@
 package lv.javaguru.ee.warehouse.core.domain;
 
+import java.util.ArrayList;
+import static java.util.Arrays.asList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.CascadeType;
@@ -15,7 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
-import org.hibernate.envers.RelationTargetAuditMode;
+
 
 /**
  * Created by Yuri D. on 2014.09.08..
@@ -26,7 +28,7 @@ import org.hibernate.envers.RelationTargetAuditMode;
 public class Product {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)    
     @Column(name = "ID", unique = true, nullable = false)
     private Long id;
     
@@ -37,7 +39,7 @@ public class Product {
     private Long version;
     
     @Column(name = "CODE", nullable = false, unique = true)
-    private Integer code;
+    private Long code;
     
     @Column(name = "TITLE", length = 50)
     private String title;
@@ -45,13 +47,12 @@ public class Product {
     @Column(name = "DESCRIPTION", length = 100)
     private String description;
                  
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "product")
-    //@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "product")    
     @NotAudited 
-    private List<WarehouseProduct> warehouseProducts;
+    private List<WarehouseProduct> warehouseProducts = new ArrayList<>();
     
     
-    @OneToMany(mappedBy="product", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="product",cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @MapKey(name="name")       
     private Map<String, ProductProperties> productProperties;
 
@@ -74,11 +75,11 @@ public class Product {
         this.version = version;
     }
 
-    public Integer getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 
@@ -113,5 +114,20 @@ public class Product {
     public void setProductProperties(Map<String, ProductProperties> productProperties) {
         this.productProperties = productProperties;
     }
-                    
+
+    public void addWarehouseProduct(WarehouseProduct... warehouseProducts) {        
+        if (warehouseProducts != null) {        
+            this.warehouseProducts.addAll(asList(warehouseProducts));            
+        } 
+    }
+       
+    public void addToWarehouse(Warehouse warehouse, Integer count, Integer price) {    
+        WarehouseProduct wp = new WarehouseProduct(warehouse, this);
+        wp.setCount(count);
+        wp.setPrice(price);
+        
+        this.addWarehouseProduct(wp);
+        warehouse.addWarehouseProduct(wp);        
+    }
+    
 }
