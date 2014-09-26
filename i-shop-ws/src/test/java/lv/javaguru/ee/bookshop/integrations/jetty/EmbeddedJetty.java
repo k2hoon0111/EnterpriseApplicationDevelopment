@@ -1,11 +1,16 @@
 package lv.javaguru.ee.bookshop.integrations.jetty;
 
-import lv.javaguru.ee.bookshop.config.WebMVCConfig;
+import org.eclipse.jetty.jmx.MBeanContainer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+
+import lv.javaguru.ee.bookshop.config.CoreConfig;
+import lv.javaguru.ee.bookshop.config.WebMVCConfig;
+
+import java.lang.management.ManagementFactory;
 
 public class EmbeddedJetty {
 
@@ -30,8 +35,13 @@ public class EmbeddedJetty {
         if (getServer() == null) {
             setServer(new Server(httpPort));
 
+            // Setup JMX
+            MBeanContainer mbContainer = new MBeanContainer(ManagementFactory.getPlatformMBeanServer());
+            server.addEventListener(mbContainer);
+            server.addBean(mbContainer);
+
             final AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-            applicationContext.register(WebMVCConfig.class);
+            applicationContext.register(CoreConfig.class, WebMVCConfig.class);
 
             final ServletHolder servletHolder = new ServletHolder(new DispatcherServlet(applicationContext));
             final ServletContextHandler context = new ServletContextHandler();

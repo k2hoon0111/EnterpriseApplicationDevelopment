@@ -12,6 +12,8 @@ import java.util.HashMap;
  */
 public class RestFixture {
 
+
+
     private static final String BASE_URL = "http://localhost:" + Server.PORT;
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 

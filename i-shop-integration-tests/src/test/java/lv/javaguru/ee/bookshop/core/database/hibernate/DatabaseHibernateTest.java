@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -29,7 +28,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(classes = CoreConfig.class)
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 @TransactionConfiguration(transactionManager = "hibernateTX", defaultRollback = false)
 public abstract class DatabaseHibernateTest {
 

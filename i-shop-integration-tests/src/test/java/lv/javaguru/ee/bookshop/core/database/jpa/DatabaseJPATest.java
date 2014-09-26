@@ -28,7 +28,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(classes = CoreConfig.class)
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 @TransactionConfiguration(transactionManager = "jpaTX", defaultRollback = false)
 public abstract class DatabaseJPATest {
 
