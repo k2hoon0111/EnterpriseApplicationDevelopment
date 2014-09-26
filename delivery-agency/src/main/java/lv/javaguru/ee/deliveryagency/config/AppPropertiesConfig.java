@@ -13,15 +13,16 @@ import org.springframework.core.io.Resource;
 @Configuration
 public class AppPropertiesConfig {
 
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer prodPropertiesPlaceholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer p = new PropertySourcesPlaceholderConfigurer();
-        Resource[] resourceLocations = new Resource[] {
-                new ClassPathResource("database.properties")
-        };
-        p.setLocations(resourceLocations);
-        return p;
-    }
+  @Bean
+  @Profile("test")
+  public static PropertySourcesPlaceholderConfigurer prodPropertiesPlaceholderConfigurer() {
+    PropertySourcesPlaceholderConfigurer p = new PropertySourcesPlaceholderConfigurer();
+    Resource[] resourceLocations = new Resource[]{
+        new ClassPathResource("database.properties")
+    };
+    p.setLocations(resourceLocations);
+    return p;
+  }
 
 /*
     @Bean

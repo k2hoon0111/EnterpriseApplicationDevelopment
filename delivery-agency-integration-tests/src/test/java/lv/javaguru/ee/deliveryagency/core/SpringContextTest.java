@@ -15,15 +15,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = CoreConfig.class)
+@ActiveProfiles("test")
 public class SpringContextTest {
 
-	@Autowired
-	private ApplicationContext applicationContext;
-	
-	
-	@Test
-	public void appContextShouldBeNotNull() {
-		assertThat(applicationContext, is(notNullValue()));
-	}	
-	
+  @Autowired
+  private ApplicationContext applicationContext;
+
+
+  @Test
+  public void appContextShouldBeNotNull() {
+    assertThat(applicationContext, is(notNullValue()));
+  }
+
 }
