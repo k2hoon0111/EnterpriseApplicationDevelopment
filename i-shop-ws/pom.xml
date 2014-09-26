@@ -65,6 +65,23 @@
             <artifactId>swagger-springmvc</artifactId>
         </dependency>
 
+        <!-- Testing lib dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -90,7 +107,7 @@
                 <version>9.0.2.v20130417</version>
                 <configuration>
                     <webApp>
-                        <contextPath>/delivery-agency-ws</contextPath>
+                        <contextPath>/i-shop-ws</contextPath>
                     </webApp>
                 </configuration>
             </plugin>

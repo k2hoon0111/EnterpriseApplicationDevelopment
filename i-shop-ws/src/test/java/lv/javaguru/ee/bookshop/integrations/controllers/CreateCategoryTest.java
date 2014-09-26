@@ -1,7 +1,7 @@
 package lv.javaguru.ee.bookshop.integrations.controllers;
 
 import lv.javaguru.ee.bookshop.integrations.controllers.fixtures.RestFixture;
-import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
+import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package lv.javaguru.ee.bookshop.integrations.controllers.fixtures;
 
-import lv.javaguru.ee.bookshop.core.Server;
+import lv.javaguru.ee.bookshop.integrations.Server;
 import lv.javaguru.ee.bookshop.integrations.domain.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;

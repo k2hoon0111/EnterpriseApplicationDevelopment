@@ -3,8 +3,7 @@ package lv.javaguru.ee.bookshop.integrations.controllers;
 /**
  * Created by MumboJumbo on 21/09/14.
  */
-
-import lv.javaguru.ee.bookshop.core.jetty.EmbeddedJettyTest;
+import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
 import lv.javaguru.ee.bookshop.integrations.controllers.fixtures.RestFixture;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
 import org.hamcrest.CoreMatchers;

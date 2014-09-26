@@ -12,5 +12,4 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Import(SpringSwaggerConfig.class)
 public class WebMVCConfig {
 
-
 }
