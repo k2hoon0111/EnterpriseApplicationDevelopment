@@ -222,7 +222,7 @@ public abstract class DatabaseHibernateTest {
         categoryDAO.create(category);
     }
 
-    // Category
+    // Order
     protected Order createDefaultOrder() {
         Order order = getDefaultOrder();
         return order;

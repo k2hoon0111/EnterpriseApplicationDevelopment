@@ -1,6 +1,7 @@
 package lv.javaguru.ee.bookshop.core.database.jpa;
 
 import lv.javaguru.ee.bookshop.core.domain.Book;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionStatus;
@@ -20,10 +21,11 @@ public class JPACRUDOperationDAOImplTest extends DatabaseJPATest {
 		doInTransaction(new TransactionCallbackWithoutResult() {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
-				Book book = new Book();
-				assertThat(book.getBookId(), is(nullValue()));
-				jpaCrudOperationDAO.create(book);
-				assertThat(book.getBookId(), is(notNullValue()));
+        Book book = createDefaultBook();
+        Assert.assertNotNull(book);
+        assertThat(book.getBookId(), is(nullValue()));
+        saveBoook(book);
+        assertThat(book.getBookId(), is(notNullValue()));
 			}
 		});
 	}
