@@ -5,8 +5,8 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
 
 /**
-* Created by Viktor on 15/09/2014.
-*/
+ * Created by Viktor on 15/09/2014.
+ */
 public class SpringWebMvcInitializer extends AbstractDispatcherServletInitializer {
 
     @Override
@@ -14,6 +14,7 @@ public class SpringWebMvcInitializer extends AbstractDispatcherServletInitialize
         AnnotationConfigWebApplicationContext applicationContext =
                 new AnnotationConfigWebApplicationContext();
         applicationContext.register(CoreConfig.class);
+        //applicationContext.register(JMXConfig.class);
         return applicationContext;
     }
 

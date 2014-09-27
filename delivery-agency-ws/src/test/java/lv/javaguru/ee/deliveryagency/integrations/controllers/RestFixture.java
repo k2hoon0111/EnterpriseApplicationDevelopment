@@ -1,51 +1,55 @@
-//package lv.javaguru.ee.deliveryagency.integrations.controllers;
-//
-//import lv.javaguru.ee.deliveryagency.integrations.Server;
-//import lv.javaguru.ee.deliveryagency.integrations.domain.ClientDTO;
-//import lv.javaguru.ee.deliveryagency.integrations.domain.DeliveryDTO;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.client.RestTemplate;
-//
-//import java.util.HashMap;
-//
-///**
-//* Created by Viktor on 16/09/2014.
-//*/
-//public class RestFixture {
-//
-//    private static final String BASE_URL = "http://localhost:" + Server.PORT;
-//    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
-//
-///////////// Delivery methods /////////////
-//    public static ResponseEntity<DeliveryDTO> createDelivery(DeliveryDTO deliveryDTO) {
-//        return REST_TEMPLATE.postForEntity(BASE_URL + "/rest/delivery",
-//                deliveryDTO, DeliveryDTO.class, new HashMap<String, String>()
-//        );
-//    }
-//
-//    public static ResponseEntity<DeliveryDTO> getDelivery(Long deliveryId) {
-//        return REST_TEMPLATE.getForEntity(BASE_URL + "/rest/delivery/" + deliveryId,
-//                DeliveryDTO.class, new HashMap<String, String>());
-//    }
-//
-//    public static DeliveryDTO createDelivery() {
-//        DeliveryDTO deliveryDTO = new DeliveryDTO();
-//        ResponseEntity<DeliveryDTO> createDeliveryResponse
-//                = RestFixture.createDelivery(deliveryDTO);
-//        return createDeliveryResponse.getBody();
-//    }
-//
-//////////////// Client methods ////////////////
-//    public static ResponseEntity<ClientDTO> createClient(Long deliveryId,
-//                                                         ClientDTO clientDTO) {
-//        return REST_TEMPLATE.postForEntity(BASE_URL + "/rest/delivery/" + deliveryId + "/client",
-//                clientDTO, ClientDTO.class, new HashMap<String, String>()
-//        );
-//    }
-//
-//    public static ResponseEntity<ClientDTO> getClient(Long deliveryId, Long clientId) {
-//        return REST_TEMPLATE.getForEntity(BASE_URL + "/rest/delivery/" + deliveryId + "/client/" + clientId,
-//                ClientDTO.class, new HashMap<String, String>());
-//    }
-//
-//}
+package lv.javaguru.ee.deliveryagency.integrations.controllers;
+
+import lv.javaguru.ee.deliveryagency.integrations.PropertiesReader;
+import lv.javaguru.ee.deliveryagency.integrations.domain.ClientDTO;
+import lv.javaguru.ee.deliveryagency.integrations.domain.DeliveryDTO;
+import lv.javaguru.ee.deliveryagency.integrations.resourses.ClientResource;
+import lv.javaguru.ee.deliveryagency.integrations.resourses.ClientResourceImpl;
+import lv.javaguru.ee.deliveryagency.integrations.resourses.DeliveryResource;
+import lv.javaguru.ee.deliveryagency.integrations.resourses.DeliveryResourceImpl;
+
+/**
+ * Created by Viktor on 16/09/2014.
+ */
+public class RestFixture {
+
+    private static DeliveryResource deliveryResource = createDeliveryResource();
+    private static ClientResource clientResource = createClientResource();
+
+    private static DeliveryResource createDeliveryResource() {
+        PropertiesReader propertiesReader = new PropertiesReader();
+        String baseUrl = propertiesReader.getBaseUrl();
+        return new DeliveryResourceImpl(baseUrl);
+    }
+
+	private static ClientResource createClientResource() {
+		PropertiesReader propertiesReader = new PropertiesReader();
+		String baseUrl = propertiesReader.getBaseUrl();
+		return new ClientResourceImpl(baseUrl);
+	}
+
+
+	/////////// Delivery methods /////////////
+    public static DeliveryDTO createDelivery(DeliveryDTO deliveryDTO) {
+        return deliveryResource.createDelivery(deliveryDTO);
+    }
+
+    public static DeliveryDTO getDelivery(Long deliveryId) {
+        return deliveryResource.getDelivery(deliveryId);
+    }
+
+    public static DeliveryDTO createDelivery() {
+        DeliveryDTO deliveryDTO = new DeliveryDTO();
+        return RestFixture.createDelivery(deliveryDTO);
+    }
+
+////////////// Client methods ////////////////
+    public static ClientDTO createClient(Long deliveryId, ClientDTO clientDTO) {
+	    return clientResource.createClient(deliveryId, clientDTO); 
+    }
+
+    public static ClientDTO getClient(Long deliveryId, Long clientId) {
+	    return clientResource.getClient(deliveryId, clientId);
+    }
+
+}

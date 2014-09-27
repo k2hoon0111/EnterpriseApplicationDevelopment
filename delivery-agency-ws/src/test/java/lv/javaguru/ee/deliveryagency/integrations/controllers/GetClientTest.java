@@ -1,18 +1,18 @@
 //package lv.javaguru.ee.deliveryagency.integrations.controllers;
 //
-//import lv.javaguru.ee.deliveryagency.integrations.domain.ClientDTO;
-//import lv.javaguru.ee.deliveryagency.integrations.domain.DeliveryDTO;
-//import lv.javaguru.ee.deliveryagency.integrations.jetty.EmbeddedJettyTest;
+//import static junit.framework.Assert.*;
+//import static lv.javaguru.ee.deliveryagency.integrations.domain.builders.ClientDTOBuilder.*;
+//import static org.hamcrest.CoreMatchers.*;
+//import static org.hamcrest.MatcherAssert.*;
+//
 //import org.junit.Before;
 //import org.junit.Test;
 //import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.client.HttpClientErrorException;
 //
-//import static org.hamcrest.CoreMatchers.is;
-//import static org.hamcrest.CoreMatchers.notNullValue;
-//import static org.hamcrest.MatcherAssert.assertThat;
-//import static org.junit.Assert.assertEquals;
+//import lv.javaguru.ee.deliveryagency.integrations.RestException;
+//import lv.javaguru.ee.deliveryagency.integrations.domain.ClientDTO;
+//import lv.javaguru.ee.deliveryagency.integrations.domain.DeliveryDTO;
+//import lv.javaguru.ee.deliveryagency.integrations.jetty.EmbeddedJettyTest;
 //
 ///**
 // * Created by Viktor on 16/09/2014.
@@ -31,22 +31,17 @@
 //
 //    @Test
 //    public void testGetClient() {
-//        ClientDTO clientDTO = new ClientDTO();
-//        clientDTO.setFirstName("A");
-//        clientDTO.setLastName("B");
-//        clientDTO.setEmail("email");
-//        clientDTO.setPhone("1111");
-//        clientDTO.setSpecialNotes("notes");
+//	    ClientDTO clientDTO = createClientDTO()
+//			    .withFirstName("A")
+//			    .withLastName("B")
+//			    .withEmail("email")
+//			    .withPhone("1111")
+//			    .withSpecialNotes("notes").build();
 //
-//        ResponseEntity<ClientDTO> createClientResponse
-//                = RestFixture.createClient(deliveryId, clientDTO);
-//        ClientDTO createClientDTO = createClientResponse.getBody();
-//
+//	    ClientDTO createClientDTO = RestFixture.createClient(deliveryId, clientDTO);
 //        Long clientId = createClientDTO.getClientId();
 //
-//        ResponseEntity<ClientDTO> getClientResponse
-//                = RestFixture.getClient(deliveryId, clientId);
-//        ClientDTO getClientDTO = getClientResponse.getBody();
+//        ClientDTO getClientDTO = RestFixture.getClient(deliveryId, clientId);
 //        assertThat(getClientDTO.getClientId(), is(clientId));
 //        assertThat(getClientDTO.getFirstName(), is("A"));
 //        assertThat(getClientDTO.getLastName(), is("B"));
@@ -56,9 +51,8 @@
 //    public void testGetClientWithWrongId() {
 //        try {
 //            RestFixture.getClient(deliveryId, Long.MAX_VALUE);
-//        } catch (HttpClientErrorException e) {
-//            assertEquals("Client id not valid", e.getResponseBodyAsString());
-//            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
+//        } catch (RestException e) {
+//            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getHttpStatus());
 //        }
 //    }
 //

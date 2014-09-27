@@ -14,6 +14,7 @@ public class SpringWebMvcInitializer extends AbstractDispatcherServletInitialize
         AnnotationConfigWebApplicationContext applicationContext =
                 new AnnotationConfigWebApplicationContext();
         applicationContext.register(CoreConfig.class);
+        //applicationContext.register(JMXConfig.class);
         return applicationContext;
     }
 

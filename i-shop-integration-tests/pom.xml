@@ -22,31 +22,31 @@
             <artifactId>i-shop</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--
+               <dependency>
+                   <groupId>lv.javaguru.ee</groupId>
+                   <artifactId>i-shop-ws</artifactId>
+                   <version>1.0-SNAPSHOT</version>
+               </dependency>
 
-        <dependency>
-            <groupId>lv.javaguru.ee</groupId>
-            <artifactId>i-shop-ws</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+               <dependency>
+                   <groupId>javax.servlet</groupId>
+                   <artifactId>javax.servlet-api</artifactId>
+                   <scope>provided</scope>
+               </dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
+               <dependency>
+                   <groupId>org.eclipse.jetty</groupId>
+                   <artifactId>jetty-server</artifactId>
+                   <scope>test</scope>
+               </dependency>
 
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-webapp</artifactId>
-            <scope>test</scope>
-        </dependency>
-
+               <dependency>
+                   <groupId>org.eclipse.jetty</groupId>
+                   <artifactId>jetty-webapp</artifactId>
+                   <scope>test</scope>
+               </dependency>
+       -->
         <!-- HSQLDB dependency - used as embedded database -->
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -168,17 +168,29 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
 
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.2.2.v20140723</version>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <webApp>
-                        <contextPath>/i-shop-ws</contextPath>
-                    </webApp>
+                    <serverId>nexus</serverId>
+                    <nexusUrl>http://localhost:8080/nexus/</nexusUrl>
+                    <skipStaging>true</skipStaging>
                 </configuration>
             </plugin>
 
