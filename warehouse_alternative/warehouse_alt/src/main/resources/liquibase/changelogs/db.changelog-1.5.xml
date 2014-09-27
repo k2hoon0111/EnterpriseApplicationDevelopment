@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="ainar" context="main">
+        
+        <dropAllForeignKeyConstraints baseTableName="WAREHOUSE_PRODUCTS" />
+
+        <dropAllForeignKeyConstraints baseTableName="PRODUCT_PROPERTIES" />    
+            
+        <dropAllForeignKeyConstraints baseTableName="ORDERS" />   
+              
+    </changeSet>
+
+    <changeSet id="2" author="ainar" context="main">
+        
+        <addForeignKeyConstraint baseTableName="WAREHOUSE_PRODUCTS"
+                                 baseColumnNames="PRODUCT_ID"                                 
+                                 constraintName="FK_WAREHOUSE_PRODUCTS_PRODUCTS"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"                                 
+                                 referencedColumnNames="ID"
+                                 referencedTableName="PRODUCTS"/>
+
+        <addForeignKeyConstraint baseTableName="WAREHOUSE_PRODUCTS"
+                                 baseColumnNames="WAREHOUSE_ID"
+                                 constraintName="FK_WAREHOUSE_PRODUCTS_WAREHOUSES"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"                                 
+                                 referencedColumnNames="ID"
+                                 referencedTableName="WAREHOUSES"/>
+        
+        <addForeignKeyConstraint baseTableName="PRODUCT_PROPERTIES"
+                                 baseColumnNames="PRODUCT_ID"
+                                 constraintName="FK_PRODUCT_PROPERTIES_PRODUCTS"                                 
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="PRODUCTS"/>
+        
+        <addForeignKeyConstraint baseTableName="ORDERS"
+                                 baseColumnNames="PRODUCT_ID"
+                                 constraintName="FK_ORDERS_PRODUCTS"                                                                  
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"                                 
+                                 referencedColumnNames="ID"
+                                 referencedTableName="PRODUCTS"/>
+
+        <addForeignKeyConstraint baseTableName="ORDERS"
+                                 baseColumnNames="WAREHOUSE_ID"
+                                 constraintName="FK_ORDERS_WAREHOUSES"
+                                 deferrable="false"
+                                 initiallyDeferred="false"                                 
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="WAREHOUSES"/>
+    </changeSet>
+
+</databaseChangeLog>

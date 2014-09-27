@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="ainar" context="main">        
+        <createTable tableName="REVINFO" >   
+                     
+            <column name="REV" type="INT(11)" autoIncrement="true"> 
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            
+            <column name="REVTSTMP" type="BIGINT(20)"/>
+                            
+        </createTable>                      
+    </changeSet>
+
+    <changeSet id="2" author="ainar" context="main">
+        <createTable tableName="PRODUCTS_AUD">
+            
+            <column name="ID" type="BIGINT(20)"> 
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="REV" type="INT(11)"> 
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="REVTYPE" type="TINYINT"/>
+                            
+            <column name="CODE" type="INT(11)" />
+                            
+            <column name="DESCRIPTION" type="VARCHAR(100)"/>
+            
+            <column name="TITLE" type="VARCHAR(50)"/>
+            
+        </createTable>    
+        
+        <addPrimaryKey  columnNames="ID, REV"                            
+                            tableName="PRODUCTS_AUD"/>    
+                   
+        <addForeignKeyConstraint baseTableName="PRODUCTS_AUD"
+                                 baseColumnNames="REV"                                 
+                                 constraintName="FK_PRODUCTS_AUD_REVINFO"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"                                 
+                                 referencedColumnNames="REV"
+                                 referencedTableName="REVINFO"/>
+         
+    </changeSet>
+
+    <changeSet id="3" author="ainar" context="main">        
+        <createTable tableName="PRODUCT_PROPERTIES_AUD">
+            
+            <column name="ID" type="BIGINT(20)"> 
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="REV" type="INT(11)"> 
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="REVTYPE" type="TINYINT"/>
+            
+            <column name="PROPERTY_NAME" type="VARCHAR(30)" />
+
+            <column name="PROPERTY_VALUE" type="VARCHAR(30)" />
+            
+            <column name="PRODUCT_ID" type="BIGINT(20)"/>
+            
+        </createTable>   
+        
+        <addPrimaryKey  columnNames="ID, REV"                            
+                            tableName="PRODUCT_PROPERTIES_AUD"/>        
+                       
+        <addForeignKeyConstraint baseTableName="PRODUCT_PROPERTIES_AUD"
+                                 baseColumnNames="REV"                                 
+                                 constraintName="FK_PRODUCT_PROPERTIES_AUD_REVINFO"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"                                 
+                                 referencedColumnNames="REV"
+                                 referencedTableName="REVINFO"/>
+    </changeSet>
+
+</databaseChangeLog>

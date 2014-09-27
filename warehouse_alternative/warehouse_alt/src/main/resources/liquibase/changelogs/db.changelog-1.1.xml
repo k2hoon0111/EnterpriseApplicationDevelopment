@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="ainar" context="main">        
+        <createTable tableName="WAREHOUSES">
+            
+            <column name="ID" type="BIGINT(20)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            
+            <column name="VERSION" type="BIGINT(20)">
+                <constraints nullable="false"/>                    
+            </column>
+
+            <column name="TITLE" type="VARCHAR(50)">
+                <constraints nullable="false"/>                    
+            </column>
+            
+            <column name="DESCRIPTION" type="VARCHAR(100)"/>
+
+            <column name="STREET" type="VARCHAR(50)"/>
+            
+            <column name="HOUSE" type="VARCHAR(15)"/>
+                                    
+            <column name="POSTINDEX" type="VARCHAR(10)"/>
+            
+            <column name="CITY" type="VARCHAR(30)"/>
+            
+            <column name="COUNTRY" type="VARCHAR(30)"/>
+                 
+        </createTable>            
+    </changeSet>
+        
+</databaseChangeLog>
