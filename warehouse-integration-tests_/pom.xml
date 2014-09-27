@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>lv.javaguru.ee</groupId>
-    <artifactId>warehouse</artifactId>
-    <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
-
+   
     <parent>
         <groupId>lv.javaguru.ee</groupId>
         <artifactId>all-projects</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
+    
+    <groupId>lv.javaguru.ee.warehouse</groupId>
+    <artifactId>warehouse-integration-tests-alt</artifactId>
+    <packaging>jar</packaging>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
     <dependencies>
+        
+        <dependency>
+            <groupId>lv.javaguru.ee</groupId>
+            <artifactId>warehouse</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        
+        <!-- HSQLDB dependency - used as embedded database -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+        </dependency>
 
         <!-- MySQL database driver -->
-        <dependency>
+<!--        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Database connection pool -->
         <dependency>
@@ -32,7 +45,7 @@
         <!-- Liquibase -->
         <dependency>
             <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>                
+            <artifactId>liquibase-core</artifactId>
         </dependency>
 
         <!-- Spring Framework dependencies -->
@@ -56,7 +69,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
-
+        
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -88,15 +101,16 @@
             <artifactId>log4j</artifactId>
         </dependency>
 
-         <dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
 
+
         <!-- Testing lib dependencies -->
         <dependency>
             <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <artifactId>junit</artifactId>            
         </dependency>
 
         <dependency>
@@ -104,46 +118,31 @@
             <artifactId>mockito-all</artifactId>
         </dependency>
 
-         <dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+                
     </dependencies>
-
+    
     <build>
-
         <plugins>
-
-            <plugin>
+            
+<!--            <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <configuration>
                     <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
                 </configuration>
-            </plugin>
-            
+            </plugin>-->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.11</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit47</artifactId>
-                        <version>2.12</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <includes>
-                        <include>**/*.class</include>
-                    </includes>
-                </configuration>
             </plugin>
             
-        </plugins>
-
+        </plugins>        
     </build>
-
+    <name>warehouse-integration-tests_</name>
 </project>

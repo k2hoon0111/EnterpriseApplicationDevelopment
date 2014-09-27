@@ -14,8 +14,8 @@
         <module>delivery-agency-integration-tests</module>
         <module>i-shop</module>
         <module>i-shop-integration-tests</module>
-        <module>warehouse</module>
-        <module>warehouse-integration-tests</module>        
+        <module>warehouse-integration-tests_</module>
+        <module>warehouse_</module>
     </modules>
 
     <repositories>
