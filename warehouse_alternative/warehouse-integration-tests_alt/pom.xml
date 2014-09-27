@@ -20,7 +20,7 @@
         
         <dependency>
             <groupId>lv.javaguru.ee</groupId>
-            <artifactId>warehouse</artifactId>
+            <artifactId>warehouse-alt</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         
