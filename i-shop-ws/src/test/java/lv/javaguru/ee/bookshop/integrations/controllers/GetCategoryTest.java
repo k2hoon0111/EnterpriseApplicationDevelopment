@@ -1,11 +1,14 @@
 package lv.javaguru.ee.bookshop.integrations.controllers;
 
+import lv.javaguru.ee.bookshop.integrations.RestException;
 import lv.javaguru.ee.bookshop.integrations.controllers.fixtures.RestFixture;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
 import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
@@ -28,19 +31,11 @@ public class GetCategoryTest extends EmbeddedJettyTest {
 
     @Test
     public void testGetOrderWithWrongId() {
-//        Long max = Long.MAX_VALUE;
-//        try {
-//            RestFixture.getCategory(max);
-//        } catch (HttpClientErrorException e) {
-//            TestCase.assertEquals("Entity " + Category.class.getName() + " not found by id " + max, e.getResponseBodyAsString());
-//            Assert.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getStatusCode());
-//        }
-
-//        try {
-//            RestFixture.getCategory(Long.MAX_VALUE);
-//        } catch (RestException e) {
-//            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getHttpStatus());
-//        }
+        try {
+            RestFixture.getCategory(Long.MAX_VALUE);
+        } catch (RestException e) {
+            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getHttpStatus());
+        }
     }
 
 }

@@ -62,14 +62,16 @@ public class BookController {
         );
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/rest/book/{bookId}")
-    public ResponseEntity<BookDTO> getBook(@PathVariable Long bookId) {
-        GetBookCommand command = new GetBookCommand(bookId);
+    @RequestMapping(method = RequestMethod.GET, value = "/rest/category/{categoryId}/book/{bookId}")
+    public ResponseEntity<BookDTO> getBook(@PathVariable Long categoryId,
+                                           @PathVariable Long bookId) {
+        GetBookCommand command = new GetBookCommand(categoryId, bookId);
         GetBookResult result = commandExecutor.execute(command);
         Book book = result.getBook();
         BookDTO bookDTO = createBookDTO(book);
 
         return new ResponseEntity<BookDTO>(bookDTO, HttpStatus.OK);
+
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/rest/book/{bookId}")

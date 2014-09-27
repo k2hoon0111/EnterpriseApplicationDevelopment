@@ -1,23 +1,26 @@
 package lv.javaguru.ee.bookshop.integrations.controllers.fixtures;
 
 import lv.javaguru.ee.bookshop.integrations.PropertiesReader;
+import lv.javaguru.ee.bookshop.integrations.domain.AccountDTO;
+import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
-import lv.javaguru.ee.bookshop.integrations.resourses.CategoryResource;
-import lv.javaguru.ee.bookshop.integrations.resourses.CategoryResourceImpl;
+import lv.javaguru.ee.bookshop.integrations.resourses.*;
 
 /**
  * Created by Viktor on 16/09/2014.
  */
 public class RestFixture {
     private static CategoryResource categoryResource = createCategoryResource();
+    private static AccountResource accountResource = createAccountResource();
+    private static BookResource bookResource = createBookResource();
 
+    /////////// Category methods /////////////
     private static CategoryResource createCategoryResource() {
         PropertiesReader propertiesReader = new PropertiesReader();
         String baseUrl = propertiesReader.getBaseUrl();
         return new CategoryResourceImpl(baseUrl);
     }
 
-    /////////// Category methods /////////////
     public static CategoryDTO createCategory(CategoryDTO categoryDTO) {
         return categoryResource.createCategory(categoryDTO);
     }
@@ -25,6 +28,37 @@ public class RestFixture {
     public static CategoryDTO getCategory(Long categoryId) {
         return categoryResource.getCategory(categoryId);
     }
+
+    /////////// Account methods /////////////
+    private static AccountResource createAccountResource() {
+        PropertiesReader propertiesReader = new PropertiesReader();
+        String baseUrl = propertiesReader.getBaseUrl();
+        return new AccountResourceImpl(baseUrl);
+    }
+
+    public static AccountDTO createAccount(AccountDTO accountDTO) {
+        return accountResource.createAccount(accountDTO);
+    }
+
+    public static AccountDTO getAccount(Long accountId) {
+        return accountResource.getAccount(accountId);
+    }
+
+    /////////// Book methods /////////////
+    private static BookResource createBookResource() {
+        PropertiesReader propertiesReader = new PropertiesReader();
+        String baseUrl = propertiesReader.getBaseUrl();
+        return new BookResourceImpl(baseUrl);
+    }
+
+    public static BookDTO createBook(Long categoryId, BookDTO bookDTO) {
+        return bookResource.createBook(categoryId, bookDTO);
+    }
+
+    public static BookDTO getBook(Long categoryId, Long bookId) {
+        return bookResource.getBook(categoryId, bookId);
+    }
+
      /*
 
     private static final String BASE_URL = "http://localhost:" + Server.PORT;
