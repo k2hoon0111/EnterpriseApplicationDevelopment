@@ -34,7 +34,7 @@ public class DeliveryResourceImpl implements DeliveryResource {
 
     public DeliveryDTO getDelivery(Long deliveryId) throws RestException {
         try {
-            String getDeliveryUrl = GET_DELIVERY_URL.replace("{id}", deliveryId.toString());
+            String getDeliveryUrl = GET_DELIVERY_URL.replace("{deliveryId}", deliveryId.toString());
             ResponseEntity<DeliveryDTO> responseEntity = REST_TEMPLATE.getForEntity(baseWebServiceUrl + getDeliveryUrl,
                     DeliveryDTO.class, new HashMap<String, String>()
             );

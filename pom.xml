@@ -30,6 +30,12 @@
             <name>MVNRepository</name>
             <url>http://mvnrepository.com</url>
         </repository>
+
+        <repository>
+            <id>nexus-local</id>
+            <name>NexusLocalRepository</name>
+            <url>http://localhost:8080/nexus/content/repositories/snapshots</url>
+        </repository>
     </repositories>
 
     <properties>
@@ -39,7 +45,7 @@
         <jetty-server.version>9.2.2.v20140723</jetty-server.version>
         <jetty-webapp.version>9.2.2.v20140723</jetty-webapp.version>
         <jetty-servlet.version>9.2.2.v20140723</jetty-servlet.version>
-        <jetty-jmx.version>9.2.1.v20140609</jetty-jmx.version>
+        <jetty-jmx.version>9.2.2.v20140723</jetty-jmx.version>
 
         <!-- HSQLDB dependency - used as embedded database -->
         <hsqldb.version>2.3.1</hsqldb.version>

@@ -23,6 +23,12 @@
         </dependency>
 
         <dependency>
+            <groupId>lv.javaguru.ee</groupId>
+            <artifactId>i-shop-ws-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>

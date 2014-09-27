@@ -1,18 +1,31 @@
 package lv.javaguru.ee.bookshop.integrations.controllers.fixtures;
 
-import lv.javaguru.ee.bookshop.integrations.Server;
-import lv.javaguru.ee.bookshop.integrations.domain.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.HashMap;
+import lv.javaguru.ee.bookshop.integrations.PropertiesReader;
+import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
+import lv.javaguru.ee.bookshop.integrations.resourses.CategoryResource;
+import lv.javaguru.ee.bookshop.integrations.resourses.CategoryResourceImpl;
 
 /**
  * Created by Viktor on 16/09/2014.
  */
 public class RestFixture {
+    private static CategoryResource categoryResource = createCategoryResource();
 
+    private static CategoryResource createCategoryResource() {
+        PropertiesReader propertiesReader = new PropertiesReader();
+        String baseUrl = propertiesReader.getBaseUrl();
+        return new CategoryResourceImpl(baseUrl);
+    }
 
+    /////////// Category methods /////////////
+    public static CategoryDTO createCategory(CategoryDTO categoryDTO) {
+        return categoryResource.createCategory(categoryDTO);
+    }
+
+    public static CategoryDTO getCategory(Long categoryId) {
+        return categoryResource.getCategory(categoryId);
+    }
+     /*
 
     private static final String BASE_URL = "http://localhost:" + Server.PORT;
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
@@ -127,4 +140,5 @@ public class RestFixture {
                 accountDTO, AccountDTO.class, new HashMap<String, String>()
         );
     }
+    */
 }

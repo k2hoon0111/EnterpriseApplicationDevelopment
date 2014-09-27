@@ -1,4 +1,4 @@
-package lv.javaguru.ee.deliveryagency.integrations;
+package lv.javaguru.ee.bookshop.integrations;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
