@@ -11,12 +11,14 @@ import lv.javaguru.ee.warehouse.core.domain.Order;
 import lv.javaguru.ee.warehouse.core.domain.Product;
 import lv.javaguru.ee.warehouse.core.domain.Warehouse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 /**
  *
  * @author dell
  */
+@Component
 public class CreateIncomingOrderCommandHandler implements 
         DomainCommandHandler<CreateIncomingOrderCommand, CreateIncomingOrderCommandResult>{
 

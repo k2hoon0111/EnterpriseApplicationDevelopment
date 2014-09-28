@@ -49,10 +49,10 @@ public class Order {
     @JoinColumn(name="WAREHOUSE_ID", nullable = false)
     private Warehouse warehouse;
     
-    @Column(name = "QUANTITY")
+    @Column(name = "QUANTITY", nullable = false)
     private Integer quantity;
     
-    @Column(name = "AMOUNT")    
+    @Column(name = "AMOUNT", nullable = false)    
     private Integer amount;
 
     public Order() {

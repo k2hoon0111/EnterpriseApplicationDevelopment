@@ -24,6 +24,7 @@ import lv.javaguru.ee.warehouse.core.database.ProductDAO;
 import lv.javaguru.ee.warehouse.core.database.ProductPropertiesDAO;
 import lv.javaguru.ee.warehouse.core.database.WarehouseDAO;
 import lv.javaguru.ee.warehouse.core.domain.Order;
+import static lv.javaguru.ee.warehouse.core.domain.Order.Direction.INCOMING;
 import lv.javaguru.ee.warehouse.core.domain.Product;
 import lv.javaguru.ee.warehouse.core.domain.ProductProperties;
 import lv.javaguru.ee.warehouse.core.domain.Warehouse;
@@ -114,9 +115,12 @@ public abstract class DatabaseHibernateTest {
     }
     
      protected Order getDefaultOrder(Warehouse warehouse, Product product) {
-        Order order = new Order();        
+        Order order = new Order();    
+        order.setDirection(INCOMING);
         order.setWarehouse(warehouse);
         order.setProduct(product);
+        order.setAmount(10);
+        order.setQuantity(1);
         return order;
     }
     

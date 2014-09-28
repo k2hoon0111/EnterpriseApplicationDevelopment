@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import org.hibernate.LockMode;
+import org.hibernate.LockOptions;
 
 /**
  * Created by Viktor on 23/05/2014.
@@ -40,6 +42,14 @@ abstract class CRUDOperationDAOImpl<E, K extends Serializable> implements CRUDOp
         return (E) getCurrentSession().get(daoType, key);
     }
 
+    @Override
+    public E getById(K key, LockOptions lockOptions) {
+        return (E) getCurrentSession().get(daoType, key, lockOptions);
+    }
+
+    
+    
+    
     @Override
     public void update(E entity) {
         getCurrentSession().saveOrUpdate(entity);
