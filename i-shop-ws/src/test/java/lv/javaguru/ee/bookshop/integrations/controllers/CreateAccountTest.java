@@ -1,12 +1,11 @@
 package lv.javaguru.ee.bookshop.integrations.controllers;
 
+import lv.javaguru.ee.bookshop.integrations.controllers.fixtures.DefaultObjectsFixture;
 import lv.javaguru.ee.bookshop.integrations.controllers.fixtures.RestFixture;
 import lv.javaguru.ee.bookshop.integrations.domain.AccountDTO;
 import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-
-import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -20,22 +19,9 @@ public class CreateAccountTest extends EmbeddedJettyTest {
     @Test
     public void testCreateAccount() {
 
-        AccountDTO accountDTO = new AccountDTO();
+        AccountDTO defaultAccountDTO = DefaultObjectsFixture.createDefaultAccount();
 
-        accountDTO.setFirstName("First");
-        accountDTO.setLastName("Last");
-        accountDTO.setDateOfBirth(new Date());
-        accountDTO.setEmailAddress("me@gmail.com");
-        accountDTO.setUsername("user");
-        accountDTO.setPassword("pass");
-        accountDTO.setStreet("street");
-        accountDTO.setHouseNumber("House");
-        accountDTO.setBoxNumber("box");
-        accountDTO.setCity("City");
-        accountDTO.setPostalCode("postal");
-        accountDTO.setCountry("country");
-
-        AccountDTO createdAccountDTO = RestFixture.createAccount(accountDTO);
+        AccountDTO createdAccountDTO = RestFixture.createAccount(defaultAccountDTO);
 
         MatcherAssert.assertThat(createdAccountDTO.getAccountId(), is(notNullValue()));
     }

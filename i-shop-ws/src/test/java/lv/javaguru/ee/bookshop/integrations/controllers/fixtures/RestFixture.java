@@ -1,9 +1,7 @@
 package lv.javaguru.ee.bookshop.integrations.controllers.fixtures;
 
 import lv.javaguru.ee.bookshop.integrations.PropertiesReader;
-import lv.javaguru.ee.bookshop.integrations.domain.AccountDTO;
-import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
-import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
+import lv.javaguru.ee.bookshop.integrations.domain.*;
 import lv.javaguru.ee.bookshop.integrations.resourses.*;
 
 /**
@@ -13,6 +11,8 @@ public class RestFixture {
     private static CategoryResource categoryResource = createCategoryResource();
     private static AccountResource accountResource = createAccountResource();
     private static BookResource bookResource = createBookResource();
+    private static OrderResource orderResource = createOrderResource();
+    private static OrderDetailResource orderDetailResource = createOrderDetailResource();
 
     /////////// Category methods /////////////
     private static CategoryResource createCategoryResource() {
@@ -57,6 +57,36 @@ public class RestFixture {
 
     public static BookDTO getBook(Long categoryId, Long bookId) {
         return bookResource.getBook(categoryId, bookId);
+    }
+
+    /////////// Order methods /////////////
+    private static OrderResource createOrderResource() {
+        PropertiesReader propertiesReader = new PropertiesReader();
+        String baseUrl = propertiesReader.getBaseUrl();
+        return new OrderResourceImpl(baseUrl);
+    }
+
+    public static OrderDTO createOrder(Long accountId, OrderDTO orderDTO) {
+        return orderResource.createOrder(accountId, orderDTO);
+    }
+
+    public static OrderDTO getOrder(Long accountId, Long orderId) {
+        return orderResource.getOrder(accountId, orderId);
+    }
+
+    /////////// OrderDetail methods /////////////
+    private static OrderDetailResource createOrderDetailResource() {
+        PropertiesReader propertiesReader = new PropertiesReader();
+        String baseUrl = propertiesReader.getBaseUrl();
+        return new OrderDetailResourceImpl(baseUrl);
+    }
+
+    public static OrderDetailDTO createOrderDetail(Long bookId, Long orderId, OrderDetailDTO orderDetailDTO) {
+        return orderDetailResource.createOrderDetail(bookId, orderId, orderDetailDTO);
+    }
+
+    public static OrderDetailDTO getOrderDetail(Long bookId, Long orderId, Long orderDetailId) {
+        return orderDetailResource.getOrderDetail(bookId, orderId, orderDetailId);
     }
 
      /*
