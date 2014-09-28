@@ -6,11 +6,11 @@ import lv.javaguru.ee.warehouse.core.domain.Order;
  *
  * @author dell
  */
-public class IncomingOrderCommandResult implements DomainCommandResult {
+public class CreateOutgoingOrderCommandResult implements DomainCommandResult {
     
     private final Order order;
 
-    public IncomingOrderCommandResult(Order order) {
+    public CreateOutgoingOrderCommandResult(Order order) {
         this.order = order;
     }
             

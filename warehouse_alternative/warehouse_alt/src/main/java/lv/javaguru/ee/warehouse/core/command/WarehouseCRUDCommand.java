@@ -22,6 +22,9 @@ public class WarehouseCRUDCommand implements DomainCRUDCommand<WarehouseCommandR
         this.address = address;
     }
 
+    public WarehouseCRUDCommand() {        
+    }
+
     public String getTitle() {
         return title;
     }

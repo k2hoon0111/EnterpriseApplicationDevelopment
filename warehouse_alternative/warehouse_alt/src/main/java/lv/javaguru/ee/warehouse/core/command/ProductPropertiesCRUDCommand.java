@@ -16,6 +16,9 @@ public class ProductPropertiesCRUDCommand implements DomainCRUDCommand<ProductPr
     
     private String value;
 
+    public ProductPropertiesCRUDCommand() {
+    }
+        
     public ProductPropertiesCRUDCommand(Action action, Product product, String name, String value) {
         this.action = action;
         this.product = product;

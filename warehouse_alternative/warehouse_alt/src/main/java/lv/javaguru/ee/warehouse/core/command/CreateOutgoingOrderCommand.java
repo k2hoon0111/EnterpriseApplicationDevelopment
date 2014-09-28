@@ -7,7 +7,7 @@ import lv.javaguru.ee.warehouse.core.domain.Warehouse;
  *
  * @author dell
  */
-public class OutgoingOrderCommand implements DomainCommand<OutgoingOrderCommandResult> {
+public class CreateOutgoingOrderCommand implements DomainCommand<CreateOutgoingOrderCommandResult> {
     
     private Product product;
 
@@ -17,10 +17,10 @@ public class OutgoingOrderCommand implements DomainCommand<OutgoingOrderCommandR
 
     private Integer amount;
 
-    public OutgoingOrderCommand() {
+    public CreateOutgoingOrderCommand() {
     }
 
-    public OutgoingOrderCommand(Product product, Warehouse warehouse, Integer quantity, Integer amount) {
+    public CreateOutgoingOrderCommand(Product product, Warehouse warehouse, Integer quantity, Integer amount) {
         this.product = product;
         this.warehouse = warehouse;
         this.quantity = quantity;
