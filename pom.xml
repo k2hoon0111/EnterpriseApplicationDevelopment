@@ -411,8 +411,8 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>http://localhost:8080/nexus/content/repositories/snapshots</url>
+            <id>nexus-repo</id>
+            <url>http://localhost:8081/nexus/content/repositories/nexus-repo</url>
         </snapshotRepository>
     </distributionManagement>
 
