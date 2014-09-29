@@ -3,7 +3,7 @@ package lv.javaguru.ee.warehouse.core.services;
 import static java.lang.String.format;
 import static java.util.Objects.requireNonNull;
 import lv.javaguru.ee.warehouse.core.command.ProductPropertiesCRUDCommand;
-import lv.javaguru.ee.warehouse.core.command.ProductPropertiesCRUDCommandResult;
+import lv.javaguru.ee.warehouse.core.command.ProductPropertiesCommandResult;
 import lv.javaguru.ee.warehouse.core.database.ProductDAO;
 import lv.javaguru.ee.warehouse.core.database.ProductPropertiesDAO;
 import lv.javaguru.ee.warehouse.core.domain.Product;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ProductPropertiesCommandHandler implements
-        DomainCommandHandler<ProductPropertiesCRUDCommand, ProductPropertiesCRUDCommandResult> {
+        DomainCommandHandler<ProductPropertiesCRUDCommand, ProductPropertiesCommandResult> {
 
     @Autowired
     private ProductPropertiesDAO prodPropDao;
@@ -26,7 +26,7 @@ public class ProductPropertiesCommandHandler implements
     private ProductDAO productDao;
 
     @Override
-    public ProductPropertiesCRUDCommandResult execute(ProductPropertiesCRUDCommand command) {
+    public ProductPropertiesCommandResult execute(ProductPropertiesCRUDCommand command) {
 
         validate(command);
 
@@ -47,11 +47,12 @@ public class ProductPropertiesCommandHandler implements
                 break;
             case DELETE:                
                 prodProp = getByProductCodeAndName(command.getProduct(), command.getName());
+                prodProp.getProduct().getProductProperties().remove(command.getName());
                 prodPropDao.delete(prodProp);
                 break;
         }
 
-        return new ProductPropertiesCRUDCommandResult(prodProp);
+        return new ProductPropertiesCommandResult(prodProp);
     }
 
     @Override

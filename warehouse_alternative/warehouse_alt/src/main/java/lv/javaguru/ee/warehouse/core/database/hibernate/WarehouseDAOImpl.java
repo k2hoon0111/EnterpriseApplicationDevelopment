@@ -3,7 +3,6 @@ package lv.javaguru.ee.warehouse.core.database.hibernate;
 import java.util.List;
 import lv.javaguru.ee.warehouse.core.database.WarehouseDAO;
 import lv.javaguru.ee.warehouse.core.domain.Warehouse;
-import org.hibernate.criterion.Restrictions;
 import static org.hibernate.criterion.Restrictions.eq;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +23,7 @@ public class WarehouseDAOImpl extends CRUDOperationDAOImpl<Warehouse, Long> impl
         if (products.isEmpty()) {
             return null;
         }  
-        return null;
+        return products.get(0);
     }
     
 }

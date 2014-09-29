@@ -11,4 +11,9 @@ public class VoidResult implements DomainCommandResult {
 
     }
 
+    @Override
+    public Object getResult() {
+        throw new UnsupportedOperationException("Void type can not return result.");
+    }
+    
 }

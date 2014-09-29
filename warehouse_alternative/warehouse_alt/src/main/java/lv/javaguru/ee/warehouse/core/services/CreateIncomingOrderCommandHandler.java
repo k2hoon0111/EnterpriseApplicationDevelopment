@@ -65,9 +65,9 @@ public class CreateIncomingOrderCommandHandler implements
         requireNonNull(command.getWarehouse(), "IncomingOrder warehouse can not be empty");
         requireNonNull(command.getWarehouse().getTitle(), "IncomingOrder warehouse title can not be empty");
         requireNonNull(command.getAmount(), "IncomingOrder amount can not be empty");
-        checkArgument(command.getAmount() == 0, "IncomingOrder amount can not be 0");        
+        checkArgument(command.getAmount() != 0, "IncomingOrder amount can not be 0");        
         requireNonNull(command.getQuantity(), "IncomingOrder quantity can not be empty");
-        checkArgument(command.getAmount() == 0, "IncomingOrder quantity can not be 0");
+        checkArgument(command.getAmount() != 0, "IncomingOrder quantity can not be 0");
     }
 
     private Order createIncomingOrderFromCommand(CreateIncomingOrderCommand command, Product product, Warehouse warehouse) {        

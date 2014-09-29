@@ -6,7 +6,7 @@ import lv.javaguru.ee.warehouse.core.domain.Product;
  *
  * @author dell
  */
-public class ProductCommandResult implements DomainCommandResult {
+public class ProductCommandResult implements DomainCommandResult<Product> {
  
     private Product product;
   
@@ -14,7 +14,8 @@ public class ProductCommandResult implements DomainCommandResult {
         this.product = product;
     }
 
-    public Product getProduct() {
+    @Override
+    public Product getResult() {
         return product;
     }
             

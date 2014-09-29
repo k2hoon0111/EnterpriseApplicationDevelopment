@@ -6,16 +6,17 @@ import lv.javaguru.ee.warehouse.core.domain.Warehouse;
  *
  * @author dell
  */
-public class WarehouseCommandResult implements DomainCommandResult {
+public class WarehouseCommandResult implements DomainCommandResult<Warehouse> {
     
-    private Warehouse warehouse;
+    private final Warehouse warehouse;
 
     public WarehouseCommandResult(Warehouse warehouse) {
         this.warehouse = warehouse;
     }
 
-    public Warehouse getWarehouse() {
+    @Override
+    public Warehouse getResult() {
         return warehouse;
     }
-            
+   
 }

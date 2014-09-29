@@ -17,7 +17,6 @@ C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\wareho
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\CommandExecutorImpl.java
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\command\ProductCommandResult.java
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\command\WarehouseCRUDCommand.java
-C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\command\ProductPropertiesCRUDCommandResult.java
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\domain\WarehouseAddress.java
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\command\DomainCRUDCommand.java
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\domain\WarehouseProductPK.java
@@ -35,6 +34,7 @@ C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\wareho
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\database\hibernate\OrderDAOImpl.java
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\command\VoidResult.java
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\database\CRUDOperationDAO.java
+C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\command\ProductPropertiesCommandResult.java
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\config\CoreConfig.java
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\config\DataSourceConfig.java
 C:\Users\dell\Documents\NetBeansProjects\EnterpriseApplicationDevelopment\warehouse_alternative\warehouse_alt\src\main\java\lv\javaguru\ee\warehouse\core\command\DomainCommand.java

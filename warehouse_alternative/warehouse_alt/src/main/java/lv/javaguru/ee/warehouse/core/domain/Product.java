@@ -52,7 +52,7 @@ public class Product {
     private List<WarehouseProduct> warehouseProducts = new ArrayList<>();
     
     
-    @OneToMany(mappedBy="product",cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="product", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
     @MapKey(name="name")       
     private Map<String, ProductProperties> productProperties;
 

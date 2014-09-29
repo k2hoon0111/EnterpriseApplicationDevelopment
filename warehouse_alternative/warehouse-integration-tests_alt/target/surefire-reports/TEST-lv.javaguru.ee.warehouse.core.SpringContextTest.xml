@@ -63,5 +63,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.014" classname="lv.javaguru.ee.warehouse.core.SpringContextTest" name="appContextShouldBeNotNull"/>
+  <testcase time="0.01" classname="lv.javaguru.ee.warehouse.core.SpringContextTest" name="appContextShouldBeNotNull"/>
 </testsuite>

@@ -18,15 +18,15 @@ public class ProductPropertiesDAOImpl extends CRUDOperationDAOImpl<ProductProper
     @Override
     public ProductProperties getByProductCodeAndName(Product product, String name) {
         
-        List<ProductProperties> products = getCurrentSession().createCriteria(daoType) 
+        List<ProductProperties> prodProp = getCurrentSession().createCriteria(daoType) 
                                     .add(and(eq("product", product), eq("name", name)))                                    
                                     .setFirstResult(0)
                                     .setMaxResults(1)
                                     .list();        
-        if (products.isEmpty()) {
+        if (prodProp.isEmpty()) {
             return null;
         }  
-        return null;
+        return prodProp.get(0);
         
     }
     

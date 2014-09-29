@@ -6,7 +6,7 @@ import lv.javaguru.ee.warehouse.core.domain.Product;
  *
  * @author dell
  */
-public class ProductPropertiesCRUDCommand implements DomainCRUDCommand<ProductPropertiesCRUDCommandResult>{
+public class ProductPropertiesCRUDCommand implements DomainCRUDCommand<ProductPropertiesCommandResult>{
 
     private Action action;
     

@@ -60,13 +60,13 @@ public class CreateOutgoingOrderCommandHandler implements
     public void validate(CreateOutgoingOrderCommand command) {
         requireNonNull(command, "OutgoingOrder can not be empty");
         requireNonNull(command.getProduct(), "OutgoingOrder product can not be empty");
-        requireNonNull(command.getProduct().getId(), "OutgoingOrder product id can not be empty");
+        requireNonNull(command.getProduct().getCode(), "OutgoingOrder product code can not be empty");
         requireNonNull(command.getWarehouse(), "OutgoingOrder warehouse can not be empty");
-        requireNonNull(command.getWarehouse().getId(), "OutgoingOrder warehouse id can not be empty");
+        requireNonNull(command.getWarehouse().getTitle(), "OutgoingOrder warehouse title can not be empty");
         requireNonNull(command.getAmount(), "OutgoingOrder amount can not be empty");
-        checkArgument(command.getAmount() == 0, "OutgoingOrder amount can not be 0");        
+        checkArgument(command.getAmount() != 0, "OutgoingOrder amount can not be 0");        
         requireNonNull(command.getQuantity(), "OutgoingOrder quantity can not be empty");
-        checkArgument(command.getAmount() == 0, "OutgoingOrder quantity can not be 0");
+        checkArgument(command.getAmount() != 0, "OutgoingOrder quantity can not be 0");
     }
 
     private Order createOutgoingOrderFromCommand(CreateOutgoingOrderCommand command, Product product, Warehouse warehouse) {

@@ -28,6 +28,7 @@ lv\javaguru\ee\warehouse\core\command\ProductCommandResult.class
 lv\javaguru\ee\warehouse\core\command\CreateIncomingOrderCommandResult.class
 lv\javaguru\ee\warehouse\config\AppPropertiesConfig.class
 lv\javaguru\ee\warehouse\config\CoreConfig.class
+lv\javaguru\ee\warehouse\core\command\ProductPropertiesCommandResult.class
 lv\javaguru\ee\warehouse\core\database\hibernate\OrderDAOImpl.class
 lv\javaguru\ee\warehouse\core\command\DomainCommand.class
 lv\javaguru\ee\warehouse\core\database\WarehouseDAO.class
@@ -39,7 +40,6 @@ lv\javaguru\ee\warehouse\core\command\ProductCRUDCommand.class
 lv\javaguru\ee\warehouse\core\database\hibernate\WarehouseDAOImpl.class
 lv\javaguru\ee\warehouse\core\command\Action.class
 lv\javaguru\ee\warehouse\config\HibernateConfig.class
-lv\javaguru\ee\warehouse\core\command\ProductPropertiesCRUDCommandResult.class
 lv\javaguru\ee\warehouse\core\command\WarehouseCommandResult.class
 lv\javaguru\ee\warehouse\core\services\WarehouseCRUDCommandHandler.class
 lv\javaguru\ee\warehouse\config\liquibase\DatabaseMigrationService.class

@@ -63,5 +63,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.076" classname="lv.javaguru.ee.warehouse.core.database.hibernate.OrderDAOImplTest" name="testCreateOrder"/>
+  <testcase time="0.062" classname="lv.javaguru.ee.warehouse.core.database.hibernate.OrderDAOImplTest" name="testCreateOrder"/>
 </testsuite>

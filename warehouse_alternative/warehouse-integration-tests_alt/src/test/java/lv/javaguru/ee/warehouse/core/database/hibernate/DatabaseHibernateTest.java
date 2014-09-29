@@ -104,7 +104,7 @@ public abstract class DatabaseHibernateTest {
     
     protected Warehouse getDefaultWarehouse() {
         Warehouse warehouse = new Warehouse();
-        warehouse.setTitle("default warehouse name");
+        warehouse.setTitle("warehouseTitle");
         return warehouse;
     }
     
