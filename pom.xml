@@ -411,13 +411,8 @@
 
     <distributionManagement>
         <snapshotRepository>
-<<<<<<< HEAD
             <id>nexus-snapshots</id>
             <url>http://localhost:8081/nexus/content/repositories/nexus-snapshots</url>
-=======
-            <id>nexus-repo</id>
-            <url>http://localhost:8081/nexus/content/repositories/nexus-repo</url>
->>>>>>> master
         </snapshotRepository>
     </distributionManagement>
 
