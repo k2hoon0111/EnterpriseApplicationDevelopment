@@ -14,7 +14,6 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 /**
  * Created by MumboJumbo on 20/09/14.
  */
-
 public class CreateOrderTest extends EmbeddedJettyTest {
 
     @Test

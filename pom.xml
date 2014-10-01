@@ -34,9 +34,9 @@
         </repository>
 
         <repository>
-            <id>nexus-local</id>
+            <id>nexus-snapshots</id>
             <name>NexusLocalRepository</name>
-            <url>http://localhost:8080/nexus/content/repositories/snapshots</url>
+            <url>http://localhost:8081/nexus/content/repositories/nexus-snapshots</url>
         </repository>
     </repositories>
 
@@ -412,7 +412,7 @@
     <distributionManagement>
         <snapshotRepository>
             <id>nexus-snapshots</id>
-            <url>http://localhost:8080/nexus/content/repositories/snapshots</url>
+            <url>http://localhost:8081/nexus/content/repositories/nexus-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 

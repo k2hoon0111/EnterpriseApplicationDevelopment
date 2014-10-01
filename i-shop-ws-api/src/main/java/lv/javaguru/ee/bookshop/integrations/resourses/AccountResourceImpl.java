@@ -29,6 +29,7 @@ public class AccountResourceImpl implements AccountResource {
             );
             return responseEntity.getBody();
         } catch (Throwable e) {
+            e.printStackTrace();
             throw new RestException(e);
         }
     }

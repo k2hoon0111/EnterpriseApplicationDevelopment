@@ -1,15 +1,12 @@
 package lv.javaguru.ee.bookshop.integrations.controllers;
 
-import lv.javaguru.ee.bookshop.integrations.RestException;
 import lv.javaguru.ee.bookshop.integrations.controllers.fixtures.DefaultObjectsFixture;
 import lv.javaguru.ee.bookshop.integrations.controllers.fixtures.RestFixture;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
 import lv.javaguru.ee.bookshop.integrations.jetty.EmbeddedJettyTest;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 
 public class GetCategoryTest extends EmbeddedJettyTest {
@@ -26,12 +23,12 @@ public class GetCategoryTest extends EmbeddedJettyTest {
         MatcherAssert.assertThat(getCategoryDTO.getName(), is(defaultCategoryDTO.getName()));
     }
 
-    @Test
-    public void testGetOrderWithWrongId() {
-        try {
-            RestFixture.getCategory(Long.MAX_VALUE);
-        } catch (RestException e) {
-            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getHttpStatus());
-        }
-    }
+//    @Test
+//    public void testGetOrderWithWrongId() {
+////        try {
+////            RestFixture.getCategory(Long.MAX_VALUE);
+////        } catch (RestException e) {
+////            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getHttpStatus());
+////        }
+//    }
 }

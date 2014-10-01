@@ -21,7 +21,7 @@ public class Category implements Serializable {
     @Column(name = "categoryId")
     private Long categoryId;
 
-    @Basic(optional = false)
+    @Column(name = "name")
     private String name;
 
     public Category() {
@@ -38,10 +38,6 @@ public class Category implements Serializable {
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
-
-//    public void setId(Long id) {
-//        this.categoryId = id;
-//    }
 
     public void setName(String name) {
         this.name = name;

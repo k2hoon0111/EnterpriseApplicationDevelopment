@@ -12,6 +12,8 @@ import lv.javaguru.ee.bookshop.config.WebMVCConfig;
 
 import java.lang.management.ManagementFactory;
 
+import static java.lang.Thread.sleep;
+
 public class EmbeddedJetty {
 
     private final String rootContext;
@@ -59,6 +61,7 @@ public class EmbeddedJetty {
         if (getServer() != null) {
             getServer().stop();
             setServer(null);
+            sleep(3000);
         }
     }
 
