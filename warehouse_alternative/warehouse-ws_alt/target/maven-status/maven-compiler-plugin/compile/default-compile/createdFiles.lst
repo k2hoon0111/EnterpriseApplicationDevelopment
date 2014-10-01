@@ -1,0 +1,6 @@
+lv\javaguru\ee\warehouse\jmx\JMXTestMBean.class
+lv\javaguru\ee\warehouse\config\JMXConfig.class
+lv\javaguru\ee\warehouse\config\SpringWebMvcInitializer.class
+lv\javaguru\ee\warehouse\integrations\controllers\TestController.class
+lv\javaguru\ee\warehouse\integrations\controllers\AppRestExceptionHandler.class
+lv\javaguru\ee\warehouse\config\WebMVCConfig.class
