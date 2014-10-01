@@ -7,13 +7,18 @@ package lv.javaguru.ee.bookshop.core.commands;
 public class GetOrderCommand implements DomainCommand<GetOrderResult> {
 
     private Long orderId;
+    private Long accountId;
 
-    public GetOrderCommand(Long orderId) {
+    public GetOrderCommand(Long accountId, Long orderId) {
         this.orderId = orderId;
+        this.accountId = accountId;
     }
 
     public Long getOrderId() {
         return orderId;
     }
 
+    public Long getAccountId() {
+        return accountId;
+    }
 }

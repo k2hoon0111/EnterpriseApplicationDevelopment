@@ -22,7 +22,7 @@ public class OrderDetailController {
     @Autowired
     private CommandExecutor commandExecutor;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/rest/orderdetail/")
+    @RequestMapping(method = RequestMethod.POST, value = "/rest/book/{bookId}/order/{orderId}/orderdetail")
     public ResponseEntity<OrderDetailDTO> createOrderDetail(@RequestBody OrderDetailDTO orderDetailDTO) {
         CreateOrderDetailCommand command = createOrderDetailCommand(orderDetailDTO);
         CreateOrderDetailResult result = commandExecutor.execute(command);
@@ -51,7 +51,7 @@ public class OrderDetailController {
         );
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/rest/orderdetail/{orderDetailId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/rest/book/{bookId}/order/{orderId}/orderdetail{orderDetailId}")
     public ResponseEntity<OrderDetailDTO> getOrderDetail(@PathVariable Long orderDetailId) {
         GetOrderDetailCommand command = new GetOrderDetailCommand(orderDetailId);
         GetOrderDetailResult result = commandExecutor.execute(command);

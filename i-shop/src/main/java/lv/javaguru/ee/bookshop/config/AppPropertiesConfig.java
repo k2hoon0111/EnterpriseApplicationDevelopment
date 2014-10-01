@@ -22,16 +22,4 @@ public class AppPropertiesConfig {
     p.setLocations(resourceLocations);
     return p;
   }
-/*
-    @Bean
-    @Profile("test")
-    public static PropertySourcesPlaceholderConfigurer testPropertiesPlaceholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer p = new PropertySourcesPlaceholderConfigurer();
-        Resource[] resourceLocations = new Resource[] {
-                new ClassPathResource("database-test.properties")
-        };
-        p.setLocations(resourceLocations);
-        return p;
-    }
-*/
 }

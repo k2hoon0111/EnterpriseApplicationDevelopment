@@ -22,9 +22,10 @@ public class OrderController {
     @Autowired
     private CommandExecutor commandExecutor;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/rest/order/")
-    public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO) {
-        CreateOrderCommand command = createOrderCommand(orderDTO);
+    @RequestMapping(method = RequestMethod.POST, value = "/rest/account/{accountId}/order")
+    public ResponseEntity<OrderDTO> createOrder(@PathVariable Long accountId,
+                                                @RequestBody OrderDTO orderDTO) {
+        CreateOrderCommand command = createOrderCommand(accountId, orderDTO);
         CreateOrderResult result = commandExecutor.execute(command);
 
         Order order = result.getOrder();
@@ -59,9 +60,9 @@ public class OrderController {
         return orderDTO;
     }
 
-    private CreateOrderCommand createOrderCommand(OrderDTO orderDTO) {
+    private CreateOrderCommand createOrderCommand(Long accountId, OrderDTO orderDTO) {
         return new CreateOrderCommand(
-                orderDTO.getAccountId(),
+                accountId,
                 orderDTO.getShippingStreet(),
                 orderDTO.getShippingHouseNumber(),
                 orderDTO.getShippingBoxNumber(),
@@ -80,9 +81,10 @@ public class OrderController {
         );
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/rest/order/{orderId}")
-    public ResponseEntity<OrderDTO> getOrder(@PathVariable Long orderId) {
-        GetOrderCommand command = new GetOrderCommand(orderId);
+    @RequestMapping(method = RequestMethod.GET, value = "/rest/account/{accountId}/order/{orderId}")
+    public ResponseEntity<OrderDTO> getOrder(@PathVariable Long accountId,
+                                             @PathVariable Long orderId) {
+        GetOrderCommand command = new GetOrderCommand(accountId, orderId);
         GetOrderResult result = commandExecutor.execute(command);
         Order order = result.getOrder();
         OrderDTO orderDTO = createOrderDTO(order);
