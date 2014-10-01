@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.038" errors="0" skipped="0" tests="3" name="lv.javaguru.ee.warehouse.core.database.hibernate.ProductDAOImplTest">
+<testsuite failures="0" time="0.003" errors="0" skipped="0" tests="3" name="lv.javaguru.ee.warehouse.core.database.hibernate.ProductDAOImplTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_25\jre\bin"/>
@@ -63,7 +63,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.099" classname="lv.javaguru.ee.warehouse.core.database.hibernate.ProductDAOImplTest" name="testCreateProduct"/>
+  <testcase time="0.05" classname="lv.javaguru.ee.warehouse.core.database.hibernate.ProductDAOImplTest" name="testCreateProduct"/>
   <testcase time="0.024" classname="lv.javaguru.ee.warehouse.core.database.hibernate.ProductDAOImplTest" name="testAddToWarehouse"/>
-  <testcase time="0.032" classname="lv.javaguru.ee.warehouse.core.database.hibernate.ProductDAOImplTest" name="testCreateWarehouseProduct"/>
+  <testcase time="0.023" classname="lv.javaguru.ee.warehouse.core.database.hibernate.ProductDAOImplTest" name="testCreateWarehouseProduct"/>
 </testsuite>

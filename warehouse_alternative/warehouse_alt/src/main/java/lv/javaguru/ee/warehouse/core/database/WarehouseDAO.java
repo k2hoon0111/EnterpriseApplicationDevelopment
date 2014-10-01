@@ -8,4 +8,6 @@ import lv.javaguru.ee.warehouse.core.domain.Warehouse;
  */
 public interface WarehouseDAO extends CRUDOperationDAO<Warehouse, Long> {
     
+    Warehouse getByTitle(String title);
+    
 }

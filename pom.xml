@@ -22,8 +22,8 @@
         <module>i-shop-acceptance-tests</module>
         <module>warehouse</module>
         <module>PlanetExpress</module>
-        <!--<module>warehouse_alternative/warehouse_</module>-->
-        <!--<module>warehouse_alternative/warehouse-integration-tests_</module>-->
+        <module>warehouse_alternative/warehouse_alt</module>
+        <module>warehouse_alternative/warehouse-integration-tests_alt</module>
     </modules>
 
     <repositories>
@@ -411,8 +411,13 @@
 
     <distributionManagement>
         <snapshotRepository>
+<<<<<<< HEAD
             <id>nexus-snapshots</id>
             <url>http://localhost:8081/nexus/content/repositories/nexus-snapshots</url>
+=======
+            <id>nexus-repo</id>
+            <url>http://localhost:8081/nexus/content/repositories/nexus-repo</url>
+>>>>>>> master
         </snapshotRepository>
     </distributionManagement>
 
