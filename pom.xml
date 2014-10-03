@@ -72,6 +72,7 @@
         <jackson-databind.version>2.3.3</jackson-databind.version>
 
         <swagger-springmvc.version>0.8.8</swagger-springmvc.version>
+        <spring-hateoas.version>0.16.0.RELEASE</spring-hateoas.version>
 
         <!-- Hibernate dependencies -->
         <hibernate-core.version>4.3.6.Final</hibernate-core.version>
@@ -211,6 +212,12 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
                 <version>${spring-webmvc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.hateoas</groupId>
+                <artifactId>spring-hateoas</artifactId>
+                <version>${spring-hateoas.version}</version>
             </dependency>
 
             <dependency>
