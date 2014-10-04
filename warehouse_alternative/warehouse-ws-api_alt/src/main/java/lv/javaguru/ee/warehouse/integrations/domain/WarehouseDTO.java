@@ -1,14 +1,15 @@
-package lv.javaguru.ee.warehouse.core.domain;
-
-import javax.persistence.Embeddable;
+package lv.javaguru.ee.warehouse.integrations.domain;
 
 /**
  *
  * @author dell
  */
-@Embeddable
-public class WarehouseAddress {
+public class WarehouseDTO {
     
+    private String title;
+        
+    private String description;
+          
     private String country;
     
     private String city;
@@ -19,7 +20,35 @@ public class WarehouseAddress {
         
     private String house;
 
-    public WarehouseAddress() {
+    public WarehouseDTO() {
+    }
+
+    public WarehouseDTO(String title, String description, String country, String city, String postIndex, String street, String house) {
+        this.title = title;
+        this.description = description;
+        this.country = country;
+        this.city = city;
+        this.postIndex = postIndex;
+        this.street = street;
+        this.house = house;
+    }
+
+    
+    
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCountry() {
@@ -61,5 +90,7 @@ public class WarehouseAddress {
     public void setHouse(String house) {
         this.house = house;
     }
-            
+    
+    
+    
 }

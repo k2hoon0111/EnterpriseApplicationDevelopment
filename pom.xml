@@ -24,6 +24,8 @@
         <module>PlanetExpress</module>
         <module>warehouse_alternative/warehouse_alt</module>
         <module>warehouse_alternative/warehouse-integration-tests_alt</module>
+        <module>warehouse_alternative/warehouse-ws_alt</module>
+        <module>warehouse_alternative/warehouse-ws-api_alt</module>        
     </modules>
 
     <repositories>
