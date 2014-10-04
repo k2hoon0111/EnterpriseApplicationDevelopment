@@ -7,16 +7,12 @@ import lv.javaguru.ee.bookshop.integrations.domain.AccountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by MumboJumbo on 22/09/14.
  */
-@Controller
+@RestController
 public class AccountController {
 
     @Autowired
