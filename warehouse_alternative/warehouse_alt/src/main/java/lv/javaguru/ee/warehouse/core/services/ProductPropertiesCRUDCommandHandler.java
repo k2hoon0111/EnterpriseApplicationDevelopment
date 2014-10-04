@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author dell
  */
 @Component
-public class ProductPropertiesCommandHandler implements
+public class ProductPropertiesCRUDCommandHandler implements
         DomainCommandHandler<ProductPropertiesCRUDCommand, ProductPropertiesCommandResult> {
 
     @Autowired
