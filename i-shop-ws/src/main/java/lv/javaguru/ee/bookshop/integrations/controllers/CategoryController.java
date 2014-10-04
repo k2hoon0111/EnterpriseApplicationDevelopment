@@ -1,12 +1,15 @@
 package lv.javaguru.ee.bookshop.integrations.controllers;
 
 import lv.javaguru.ee.bookshop.core.CommandExecutor;
-import lv.javaguru.ee.bookshop.core.commands.*;
+import lv.javaguru.ee.bookshop.core.commands.CreateCategoryCommand;
+import lv.javaguru.ee.bookshop.core.commands.CreateCategoryResult;
+import lv.javaguru.ee.bookshop.core.commands.GetCategoryCommand;
+import lv.javaguru.ee.bookshop.core.commands.GetCategoryResult;
 import lv.javaguru.ee.bookshop.core.domain.Category;
+import lv.javaguru.ee.bookshop.integrations.RestException;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
+import lv.javaguru.ee.bookshop.integrations.resourses.CategoryResource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -14,20 +17,21 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-public class CategoryController {
+public class CategoryController implements CategoryResource {
 
     @Autowired
     private CommandExecutor commandExecutor;
 
+    @Override
     @RequestMapping(method = RequestMethod.POST, value = "/rest/category/")
-    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
+    public CategoryDTO createCategory(@RequestBody CategoryDTO categoryDTO) {
         CreateCategoryCommand command = createCategoryCommand(categoryDTO);
         CreateCategoryResult result = commandExecutor.execute(command);
 
         Category category = result.getCategory();
         CategoryDTO resultDTO = createCategoryDTO(category);
 
-        return new ResponseEntity<CategoryDTO>(resultDTO, HttpStatus.CREATED);
+        return resultDTO;
     }
 
     private CategoryDTO createCategoryDTO(Category category) {
@@ -43,37 +47,48 @@ public class CategoryController {
         );
     }
 
+    @Override
     @RequestMapping(method = RequestMethod.GET, value = "/rest/category/{categoryId}")
-    public ResponseEntity<CategoryDTO> getCategory(@PathVariable Long categoryId) {
+    public CategoryDTO getCategory(@PathVariable Long categoryId) {
         GetCategoryCommand command = new GetCategoryCommand(categoryId);
         GetCategoryResult result = commandExecutor.execute(command);
         Category category = result.getCategory();
         CategoryDTO categoryDTO = createCategoryDTO(category);
-        return new ResponseEntity<CategoryDTO>(categoryDTO, HttpStatus.OK);
+        return categoryDTO;
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/rest/category/{categoryId}")
-    public ResponseEntity<CategoryDTO> UpdateCategory(@RequestBody CategoryDTO categoryDTO) {
-        UpdateCategoryCommand command = updateCategoryCommand(categoryDTO);
-        UpdateCategoryResult result = commandExecutor.execute(command);
-
-        return new ResponseEntity<CategoryDTO>(HttpStatus.OK);
+    @Override
+    public CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO) throws RestException {
+        return null;
     }
 
-    private UpdateCategoryCommand updateCategoryCommand(CategoryDTO categoryDTO) {
-        return new UpdateCategoryCommand(
-                categoryDTO.getCategoryId(),
-                categoryDTO.getName()
-        );
+    @Override
+    public void deleteCategory(Long categoryId) throws RestException {
+
     }
 
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/category/{categoryId}")
-    public ResponseEntity deleteCategory(@PathVariable Long categoryId) {
-        DeleteCategoryCommand command = new DeleteCategoryCommand(categoryId);
-        DeleteCategoryResult result = commandExecutor.execute(command);
-
-        return new ResponseEntity(HttpStatus.OK);
-    }
+//    @RequestMapping(method = RequestMethod.PUT, value = "/rest/category/{categoryId}")
+//    public ResponseEntity<CategoryDTO> UpdateCategory(@RequestBody CategoryDTO categoryDTO) {
+//        UpdateCategoryCommand command = updateCategoryCommand(categoryDTO);
+//        UpdateCategoryResult result = commandExecutor.execute(command);
+//
+//        return new ResponseEntity<CategoryDTO>(HttpStatus.OK);
+//    }
+//
+//    private UpdateCategoryCommand updateCategoryCommand(CategoryDTO categoryDTO) {
+//        return new UpdateCategoryCommand(
+//                categoryDTO.getCategoryId(),
+//                categoryDTO.getName()
+//        );
+//    }
+//
+//
+//    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/category/{categoryId}")
+//    public ResponseEntity deleteCategory(@PathVariable Long categoryId) {
+//        DeleteCategoryCommand command = new DeleteCategoryCommand(categoryId);
+//        DeleteCategoryResult result = commandExecutor.execute(command);
+//
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
 
 }
