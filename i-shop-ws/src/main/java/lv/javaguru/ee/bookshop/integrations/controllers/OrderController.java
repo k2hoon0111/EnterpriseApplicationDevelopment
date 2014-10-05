@@ -4,34 +4,32 @@ import lv.javaguru.ee.bookshop.core.CommandExecutor;
 import lv.javaguru.ee.bookshop.core.commands.*;
 import lv.javaguru.ee.bookshop.core.domain.Order;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
+import lv.javaguru.ee.bookshop.integrations.resourses.OrderResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by MumboJumbo on 20/09/14.
  */
-@Controller
-public class OrderController {
+@RestController
+public class OrderController implements OrderResource {
 
     @Autowired
     private CommandExecutor commandExecutor;
 
+    @Override
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST, value = "/rest/account/{accountId}/order")
-    public ResponseEntity<OrderDTO> createOrder(@PathVariable Long accountId,
-                                                @RequestBody OrderDTO orderDTO) {
+    public OrderDTO createOrder(@PathVariable Long accountId,
+                                @RequestBody OrderDTO orderDTO) {
         CreateOrderCommand command = createOrderCommand(accountId, orderDTO);
         CreateOrderResult result = commandExecutor.execute(command);
 
         Order order = result.getOrder();
         OrderDTO resultDTO = createOrderDTO(order);
 
-        return new ResponseEntity<OrderDTO>(resultDTO, HttpStatus.CREATED);
+        return resultDTO;
     }
 
     private OrderDTO createOrderDTO(Order order) {
@@ -81,30 +79,35 @@ public class OrderController {
         );
     }
 
+    @Override
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, value = "/rest/account/{accountId}/order/{orderId}")
-    public ResponseEntity<OrderDTO> getOrder(@PathVariable Long accountId,
-                                             @PathVariable Long orderId) {
+    public OrderDTO getOrder(@PathVariable Long accountId,
+                             @PathVariable Long orderId) {
         GetOrderCommand command = new GetOrderCommand(accountId, orderId);
         GetOrderResult result = commandExecutor.execute(command);
         Order order = result.getOrder();
         OrderDTO orderDTO = createOrderDTO(order);
-        return new ResponseEntity<OrderDTO>(orderDTO, HttpStatus.OK);
+        return orderDTO;
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/order/{orderId}")
-    public ResponseEntity deleteOrder(@PathVariable Long orderId) {
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/account/{accountId}/order/{orderId}")
+    public void deleteOrder(@PathVariable Long accountId,
+                            @PathVariable Long orderId) {
         DeleteOrderCommand command = new DeleteOrderCommand(orderId);
         DeleteOrderResult result = commandExecutor.execute(command);
-
-        return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/rest/order/{orderId}")
-    public ResponseEntity<OrderDTO> UpdateOrder(@RequestBody OrderDTO orderDTO) {
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.PUT, value = "/rest/account/{accountId}/order/{orderId}")
+    public void updateOrder(@PathVariable Long accountId,
+                            @PathVariable Long orderId,
+                            @RequestBody OrderDTO orderDTO) {
         UpdateOrderCommand command = updateOrderCommand(orderDTO);
         UpdateOrderResult result = commandExecutor.execute(command);
-
-        return new ResponseEntity<OrderDTO>(HttpStatus.OK);
     }
 
     private UpdateOrderCommand updateOrderCommand(OrderDTO orderDTO) {
@@ -128,4 +131,5 @@ public class OrderController {
                 orderDTO.getOrderDate()
         );
     }
+
 }

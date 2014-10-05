@@ -47,12 +47,26 @@ public class CategoryResourceImpl implements CategoryResource {
     }
 
     @Override
-    public CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO) throws RestException {
-        return null;
+    public void updateCategory(Long categoryId, CategoryDTO categoryDTO) throws RestException {
+        try {
+            String updateCategoryUrl = UPDATE_CATEGORY_URL.replace("{categoryId}", categoryId.toString());
+            REST_TEMPLATE.put(baseWebServiceUrl + updateCategoryUrl,
+                    categoryDTO, CategoryDTO.class, new HashMap<String, String>()
+            );
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RestException(e);
+        }
     }
 
     @Override
     public void deleteCategory(Long categoryId) throws RestException {
-
+        try {
+            String deleteCategoryUrl = DELETE_CATEGORY_URL.replace("{categoryId}", categoryId.toString());
+            REST_TEMPLATE.delete(baseWebServiceUrl + deleteCategoryUrl);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RestException(e);
+        }
     }
 }

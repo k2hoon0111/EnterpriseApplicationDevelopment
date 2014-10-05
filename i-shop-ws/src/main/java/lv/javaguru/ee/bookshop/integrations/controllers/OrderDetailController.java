@@ -4,33 +4,33 @@ import lv.javaguru.ee.bookshop.core.CommandExecutor;
 import lv.javaguru.ee.bookshop.core.commands.*;
 import lv.javaguru.ee.bookshop.core.domain.OrderDetail;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDetailDTO;
+import lv.javaguru.ee.bookshop.integrations.resourses.OrderDetailResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by MumboJumbo on 20/09/14.
  */
-@Controller
-public class OrderDetailController {
+@RestController
+public class OrderDetailController implements OrderDetailResource {
 
     @Autowired
     private CommandExecutor commandExecutor;
 
+    @Override
     @RequestMapping(method = RequestMethod.POST, value = "/rest/book/{bookId}/order/{orderId}/orderdetail")
-    public ResponseEntity<OrderDetailDTO> createOrderDetail(@RequestBody OrderDetailDTO orderDetailDTO) {
+    public OrderDetailDTO createOrderDetail(
+            @PathVariable Long bookId,
+            @PathVariable Long orderId,
+            @RequestBody OrderDetailDTO orderDetailDTO) {
         CreateOrderDetailCommand command = createOrderDetailCommand(orderDetailDTO);
         CreateOrderDetailResult result = commandExecutor.execute(command);
 
         OrderDetail orderDetail = result.getOrderDetail();
         OrderDetailDTO resultDTO = createOrderDetailDTO(orderDetail);
 
-        return new ResponseEntity<OrderDetailDTO>(resultDTO, HttpStatus.CREATED);
+        return resultDTO;
     }
 
     private OrderDetailDTO createOrderDetailDTO(OrderDetail orderDetail) {
@@ -51,30 +51,42 @@ public class OrderDetailController {
         );
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/rest/book/{bookId}/order/{orderId}/orderdetail{orderDetailId}")
-    public ResponseEntity<OrderDetailDTO> getOrderDetail(@PathVariable Long orderDetailId) {
+    @Override
+    @RequestMapping(method = RequestMethod.GET, value = "/rest/book/{bookId}/order/{orderId}/orderdetail/{orderDetailId}")
+    public OrderDetailDTO getOrderDetail(
+            @PathVariable Long bookId,
+            @PathVariable Long orderId,
+            @PathVariable Long orderDetailId) {
         GetOrderDetailCommand command = new GetOrderDetailCommand(orderDetailId);
         GetOrderDetailResult result = commandExecutor.execute(command);
 
         OrderDetail orderDetail = result.getOrderDetail();
         OrderDetailDTO orderDetailDTO = createOrderDetailDTO(orderDetail);
-        return new ResponseEntity<OrderDetailDTO>(orderDetailDTO, HttpStatus.OK);
+        return orderDetailDTO;
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/orderdetail/{orderDetailId}")
-    public ResponseEntity deleteOrderDetail(@PathVariable Long orderDetailId) {
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/book/{bookId}/order/{orderId}/orderdetail/{orderDetailId}")
+    public void deleteOrderDetail(
+            @PathVariable Long bookId,
+            @PathVariable Long orderId,
+            @PathVariable Long orderDetailId) {
         DeleteOrderDetailCommand command = new DeleteOrderDetailCommand(orderDetailId);
         DeleteOrderDetailResult result = commandExecutor.execute(command);
 
-        return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/rest/orderdetail/{orderDetailId}")
-    public ResponseEntity<OrderDetailDTO> UpdateOrderDetail(@RequestBody OrderDetailDTO orderDetailDTO) {
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.PUT, value = "/rest/book/{bookId}/order/{orderId}/orderdetail/{orderDetailId}")
+    public void updateOrderDetail(
+            @PathVariable Long bookId,
+            @PathVariable Long orderId,
+            @PathVariable Long orderDetailId,
+            @RequestBody OrderDetailDTO orderDetailDTO) {
         UpdateOrderDetailCommand command = updateOrderDetailCommand(orderDetailDTO);
         UpdateOrderDetailResult result = commandExecutor.execute(command);
-
-        return new ResponseEntity<OrderDetailDTO>(HttpStatus.OK);
     }
 
     private UpdateOrderDetailCommand updateOrderDetailCommand(OrderDetailDTO orderDetailDTO) {
@@ -85,4 +97,5 @@ public class OrderDetailController {
                 orderDetailDTO.getQuantity()
         );
     }
+
 }

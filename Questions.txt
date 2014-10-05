@@ -17,3 +17,6 @@
 4. /rest/orderdetail/{orderDetailId}         vs  orderDetail
 
 
+5. zachem v UPDATE nuzenn id
+6. IDEA tupit
+

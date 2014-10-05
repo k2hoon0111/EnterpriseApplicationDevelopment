@@ -15,7 +15,7 @@ public interface AccountResource {
 
 	AccountDTO getAccount(Long accountId) throws RestException;
 
-    AccountDTO updateAccount(Long accountId, AccountDTO accountDTO) throws RestException;
+    void updateAccount(Long accountId, AccountDTO accountDTO) throws RestException;
 
     void deleteAccount(Long accountId) throws RestException;
 

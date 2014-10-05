@@ -49,12 +49,30 @@ public class OrderDetailResourceImpl implements OrderDetailResource {
     }
 
     @Override
-    public OrderDetailDTO updateOrderDetail(Long orderDetailId, OrderDetailDTO orderDetailDTO) throws RestException {
-        return null;
+    public void updateOrderDetail(Long bookId, Long orderId, Long orderDetailId, OrderDetailDTO orderDetailDTO) throws RestException {
+        try {
+            String updateOrderDetailUrl = UPDATE_ORDERDETAIL_URL.replace("{bookId}", bookId.toString()).
+                    replace("{orderId}", orderId.toString()).
+                    replace("{orderDetailId}", orderDetailId.toString());
+            REST_TEMPLATE.put(baseWebServiceUrl + updateOrderDetailUrl, orderDetailDTO,
+                    OrderDetailDTO.class, new HashMap<String, String>()
+            );
+        } catch (Throwable e) {
+            throw new RestException(e);
+        }
     }
 
     @Override
-    public void deleteOrderDetail(Long orderDetailId) throws RestException {
-
+    public void deleteOrderDetail(Long bookId, Long orderId, Long orderDetailId) throws RestException {
+        try {
+            String deleteOrderDetailUrl = DELETE_ORDERDETAIL_URL.replace("{bookId}", bookId.toString()).
+                    replace("{orderId}", orderId.toString()).
+                    replace("{orderDetailId}", orderDetailId.toString());
+            REST_TEMPLATE.getForEntity(baseWebServiceUrl + deleteOrderDetailUrl,
+                    OrderDetailDTO.class, new HashMap<String, String>()
+            );
+        } catch (Throwable e) {
+            throw new RestException(e);
+        }
     }
 }

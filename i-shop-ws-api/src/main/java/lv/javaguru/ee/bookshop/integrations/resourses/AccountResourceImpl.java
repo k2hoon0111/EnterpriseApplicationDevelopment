@@ -48,12 +48,26 @@ public class AccountResourceImpl implements AccountResource {
     }
 
     @Override
-    public AccountDTO updateAccount(Long accountId, AccountDTO accountDTO) throws RestException {
-        return null;
+    public void updateAccount(Long accountId, AccountDTO accountDTO) throws RestException {
+        try {
+            String updateAccountUrl = UPDATE_ACCOUNT_URL.replace("{accountId}", accountId.toString());
+            REST_TEMPLATE.put(baseWebServiceUrl + updateAccountUrl,
+                    accountDTO, AccountDTO.class, new HashMap<String, String>()
+            );
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RestException(e);
+        }
     }
 
     @Override
     public void deleteAccount(Long accountId) throws RestException {
-
+        try {
+            String deleteAccountUrl = DELETE_ACCOUNT_URL.replace("{accountId}", accountId.toString());
+            REST_TEMPLATE.delete(baseWebServiceUrl + deleteAccountUrl);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RestException(e);
+        }
     }
 }

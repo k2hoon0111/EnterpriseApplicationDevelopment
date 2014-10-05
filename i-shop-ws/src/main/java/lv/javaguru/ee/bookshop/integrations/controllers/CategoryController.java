@@ -4,34 +4,32 @@ import lv.javaguru.ee.bookshop.core.CommandExecutor;
 import lv.javaguru.ee.bookshop.core.commands.*;
 import lv.javaguru.ee.bookshop.core.domain.Category;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
+import lv.javaguru.ee.bookshop.integrations.resourses.CategoryResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by MumboJumbo on 17/09/14.
  */
 
-@Controller
-public class CategoryController {
+@RestController
+public class CategoryController implements CategoryResource {
 
     @Autowired
     private CommandExecutor commandExecutor;
 
+    @Override
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST, value = "/rest/category/")
-    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
+    public CategoryDTO createCategory(@RequestBody CategoryDTO categoryDTO) {
         CreateCategoryCommand command = createCategoryCommand(categoryDTO);
         CreateCategoryResult result = commandExecutor.execute(command);
 
         Category category = result.getCategory();
         CategoryDTO resultDTO = createCategoryDTO(category);
 
-        return new ResponseEntity<CategoryDTO>(resultDTO, HttpStatus.CREATED);
+        return resultDTO;
     }
 
     private CategoryDTO createCategoryDTO(Category category) {
@@ -47,21 +45,24 @@ public class CategoryController {
         );
     }
 
+    @Override
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, value = "/rest/category/{categoryId}")
-    public ResponseEntity<CategoryDTO> getCategory(@PathVariable Long categoryId) {
+    public CategoryDTO getCategory(@PathVariable Long categoryId) {
         GetCategoryCommand command = new GetCategoryCommand(categoryId);
         GetCategoryResult result = commandExecutor.execute(command);
         Category category = result.getCategory();
         CategoryDTO categoryDTO = createCategoryDTO(category);
-        return new ResponseEntity<CategoryDTO>(categoryDTO, HttpStatus.OK);
+        return categoryDTO;
     }
 
+    @Override
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT, value = "/rest/category/{categoryId}")
-    public ResponseEntity<CategoryDTO> UpdateCategory(@RequestBody CategoryDTO categoryDTO) {
+    public void updateCategory(@PathVariable Long categoryId,
+                               @RequestBody CategoryDTO categoryDTO) {
         UpdateCategoryCommand command = updateCategoryCommand(categoryDTO);
         UpdateCategoryResult result = commandExecutor.execute(command);
-
-        return new ResponseEntity<CategoryDTO>(HttpStatus.OK);
     }
 
     private UpdateCategoryCommand updateCategoryCommand(CategoryDTO categoryDTO) {
@@ -71,13 +72,12 @@ public class CategoryController {
         );
     }
 
-
+    @Override
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.DELETE, value = "/rest/category/{categoryId}")
-    public ResponseEntity deleteCategory(@PathVariable Long categoryId) {
+    public void deleteCategory(@PathVariable Long categoryId) {
         DeleteCategoryCommand command = new DeleteCategoryCommand(categoryId);
         DeleteCategoryResult result = commandExecutor.execute(command);
-
-        return new ResponseEntity(HttpStatus.OK);
     }
 
 }
