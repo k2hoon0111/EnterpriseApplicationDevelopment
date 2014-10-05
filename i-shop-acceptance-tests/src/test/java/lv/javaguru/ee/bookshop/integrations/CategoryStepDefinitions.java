@@ -5,7 +5,6 @@ import cucumber.api.java.en.When;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
 import lv.javaguru.ee.bookshop.integrations.resourses.CategoryResource;
 import lv.javaguru.ee.bookshop.integrations.resourses.CategoryResourceImpl;
-import lv.javaguru.ee.deliveryagency.integrations.PropertiesReader;
 import org.springframework.http.HttpStatus;
 
 import static org.hamcrest.CoreMatchers.is;

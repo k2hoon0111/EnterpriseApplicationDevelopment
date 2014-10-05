@@ -1,4 +1,4 @@
-package lv.javaguru.ee.deliveryagency.integrations;
+package lv.javaguru.ee.bookshop.integrations;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -10,19 +10,24 @@ public class PropertiesReader {
 
     private static final String PROPERTY_FILE = "ws.properties";
 
+    private String port;
     private String baseUrl;
-
 
     public PropertiesReader() {
         Properties properties = new Properties();
         try {
             properties.load(PropertiesReader.class.getClassLoader().getResourceAsStream(PROPERTY_FILE));
 
-            baseUrl = properties.getProperty("baseUrl");
-        } catch (IOException e){
+            this.port = properties.getProperty("port");
+            this.baseUrl = properties.getProperty("baseUrl");
+        } catch (IOException e) {
             System.out.println("Exciption while reading properties from file = " + PROPERTY_FILE);
             e.printStackTrace();
         }
+    }
+
+    public String getPort() {
+        return port;
     }
 
     public String getBaseUrl() {
