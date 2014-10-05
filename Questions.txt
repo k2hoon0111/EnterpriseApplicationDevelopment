@@ -18,4 +18,5 @@
 
 
 5. zachem v UPDATE nuzenn id
+6. IDEA tupit
 
