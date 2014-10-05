@@ -23,7 +23,7 @@ public class ProductPropertiesCommandHandlerTest {
     private ProductDAO productDao;
     
     @InjectMocks
-    private ProductPropertiesCommandHandler handler = new ProductPropertiesCommandHandler();
+    private ProductPropertiesCRUDCommandHandler handler = new ProductPropertiesCRUDCommandHandler();
 
     @Test
     public void testExecuteShouldThrowExceptionWhenCommandIsNull() {

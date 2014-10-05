@@ -57,8 +57,4 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 
 #Netbeans 
-*/target/
-/warehouse_alternative/warehouse_/target/
-/warehouse_alternative/warehouse-integration-tests_/target/
-/warehouse_alternative/warehouse_alt/target/
-/warehouse_alternative/warehouse-integration-tests_alt/target/
+**/target/
