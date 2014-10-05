@@ -30,6 +30,11 @@ public class RestFixture {
         categoryResource.deleteCategory(categoryId);
     }
 
+    public static void updateCategory(Long categoryId, CategoryDTO categoryDTO) {
+
+        categoryResource.updateCategory(categoryId, categoryDTO);
+    }
+
     /////////// Account methods /////////////
     private static AccountResource createAccountResource() {
         PropertiesReader propertiesReader = new PropertiesReader();
@@ -49,6 +54,11 @@ public class RestFixture {
         accountResource.deleteAccount(accountId);
     }
 
+    public static void updateAccount(Long accountId, AccountDTO accountDTO) {
+
+        accountResource.updateAccount(accountId, accountDTO);
+    }
+
     /////////// Book methods /////////////
     private static BookResource createBookResource() {
         PropertiesReader propertiesReader = new PropertiesReader();
@@ -64,8 +74,13 @@ public class RestFixture {
         return bookResource.getBook(categoryId, bookId);
     }
 
-    public static void deleteBook(Long bookId) {
-        bookResource.deleteBook(bookId);
+    public static void deleteBook(Long categoryId, Long bookId) {
+        bookResource.deleteBook(categoryId, bookId);
+    }
+
+    public static void updateBook(Long categoryId, Long bookId, BookDTO bookDTO) {
+
+        bookResource.updateBook(categoryId, bookId, bookDTO);
     }
 
     /////////// Order methods /////////////
@@ -83,8 +98,13 @@ public class RestFixture {
         return orderResource.getOrder(accountId, orderId);
     }
 
-    public static void deleteOrder(Long orderId) {
-        orderResource.deleteOrder(orderId);
+    public static void deleteOrder(Long accountId, Long orderId) {
+        orderResource.deleteOrder(accountId, orderId);
+    }
+
+    public static void updateOrder(Long accountId, Long orderId, OrderDTO orderDTO) {
+
+        orderResource.updateOrder(accountId, orderId, orderDTO);
     }
 
     /////////// OrderDetail methods /////////////
@@ -102,8 +122,13 @@ public class RestFixture {
         return orderDetailResource.getOrderDetail(bookId, orderId, orderDetailId);
     }
 
-    public static void deleteOrderDetail(Long orderDetailId) {
-        orderDetailResource.deleteOrderDetail(orderDetailId);
+    public static void deleteOrderDetail(Long bookId, Long orderId, Long orderDetailId) {
+        orderDetailResource.deleteOrderDetail(bookId, orderId, orderDetailId);
+    }
+
+    public static void updateOrderDetail(Long bookId, Long orderId, Long orderDetailId, OrderDetailDTO orderDetailDTO) {
+
+        orderDetailResource.updateOrderDetail(bookId, orderId, orderDetailId, orderDetailDTO);
     }
 
 }

@@ -1,15 +1,12 @@
 package lv.javaguru.ee.bookshop.integrations.controllers;
 
 import lv.javaguru.ee.bookshop.core.CommandExecutor;
-import lv.javaguru.ee.bookshop.core.commands.CreateOrderCommand;
-import lv.javaguru.ee.bookshop.core.commands.CreateOrderResult;
-import lv.javaguru.ee.bookshop.core.commands.GetOrderCommand;
-import lv.javaguru.ee.bookshop.core.commands.GetOrderResult;
+import lv.javaguru.ee.bookshop.core.commands.*;
 import lv.javaguru.ee.bookshop.core.domain.Order;
-import lv.javaguru.ee.bookshop.integrations.RestException;
 import lv.javaguru.ee.bookshop.integrations.domain.OrderDTO;
 import lv.javaguru.ee.bookshop.integrations.resourses.OrderResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -22,6 +19,7 @@ public class OrderController implements OrderResource {
     private CommandExecutor commandExecutor;
 
     @Override
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST, value = "/rest/account/{accountId}/order")
     public OrderDTO createOrder(@PathVariable Long accountId,
                                 @RequestBody OrderDTO orderDTO) {
@@ -82,6 +80,7 @@ public class OrderController implements OrderResource {
     }
 
     @Override
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, value = "/rest/account/{accountId}/order/{orderId}")
     public OrderDTO getOrder(@PathVariable Long accountId,
                              @PathVariable Long orderId) {
@@ -91,52 +90,46 @@ public class OrderController implements OrderResource {
         OrderDTO orderDTO = createOrderDTO(order);
         return orderDTO;
     }
-//
-//    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/order/{orderId}")
-//    public ResponseEntity deleteOrder(@PathVariable Long orderId) {
-//        DeleteOrderCommand command = new DeleteOrderCommand(orderId);
-//        DeleteOrderResult result = commandExecutor.execute(command);
-//
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
-//
-//    @RequestMapping(method = RequestMethod.PUT, value = "/rest/order/{orderId}")
-//    public ResponseEntity<OrderDTO> UpdateOrder(@RequestBody OrderDTO orderDTO) {
-//        UpdateOrderCommand command = updateOrderCommand(orderDTO);
-//        UpdateOrderResult result = commandExecutor.execute(command);
-//
-//        return new ResponseEntity<OrderDTO>(HttpStatus.OK);
-//    }
-//
-//    private UpdateOrderCommand updateOrderCommand(OrderDTO orderDTO) {
-//        return new UpdateOrderCommand(
-//                orderDTO.getOrderId(),
-//                orderDTO.getAccountId(),
-//                orderDTO.getShippingStreet(),
-//                orderDTO.getShippingHouseNumber(),
-//                orderDTO.getShippingBoxNumber(),
-//                orderDTO.getShippingCity(),
-//                orderDTO.getShippingPostalCode(),
-//                orderDTO.getShippingCountry(),
-//                orderDTO.getBillingStreet(),
-//                orderDTO.getBillingHouseNumber(),
-//                orderDTO.getBillingBoxNumber(),
-//                orderDTO.getBillingCity(),
-//                orderDTO.getBillingoPostalCode(),
-//                orderDTO.getBillingCountry(),
-//                orderDTO.isBillingSameAsShipping(),
-//                orderDTO.getDeliveryDate(),
-//                orderDTO.getOrderDate()
-//        );
-//    }
 
     @Override
-    public OrderDTO updateOrder(Long orderId, OrderDTO orderDTO) throws RestException {
-        return null;
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/account/{accountId}/order/{orderId}")
+    public void deleteOrder(@PathVariable Long accountId,
+                            @PathVariable Long orderId) {
+        DeleteOrderCommand command = new DeleteOrderCommand(orderId);
+        DeleteOrderResult result = commandExecutor.execute(command);
     }
 
     @Override
-    public void deleteOrder(Long orderId) throws RestException {
-
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.PUT, value = "/rest/account/{accountId}/order/{orderId}")
+    public void updateOrder(@PathVariable Long accountId,
+                            @PathVariable Long orderId,
+                            @RequestBody OrderDTO orderDTO) {
+        UpdateOrderCommand command = updateOrderCommand(orderDTO);
+        UpdateOrderResult result = commandExecutor.execute(command);
     }
+
+    private UpdateOrderCommand updateOrderCommand(OrderDTO orderDTO) {
+        return new UpdateOrderCommand(
+                orderDTO.getOrderId(),
+                orderDTO.getAccountId(),
+                orderDTO.getShippingStreet(),
+                orderDTO.getShippingHouseNumber(),
+                orderDTO.getShippingBoxNumber(),
+                orderDTO.getShippingCity(),
+                orderDTO.getShippingPostalCode(),
+                orderDTO.getShippingCountry(),
+                orderDTO.getBillingStreet(),
+                orderDTO.getBillingHouseNumber(),
+                orderDTO.getBillingBoxNumber(),
+                orderDTO.getBillingCity(),
+                orderDTO.getBillingoPostalCode(),
+                orderDTO.getBillingCountry(),
+                orderDTO.isBillingSameAsShipping(),
+                orderDTO.getDeliveryDate(),
+                orderDTO.getOrderDate()
+        );
+    }
+
 }

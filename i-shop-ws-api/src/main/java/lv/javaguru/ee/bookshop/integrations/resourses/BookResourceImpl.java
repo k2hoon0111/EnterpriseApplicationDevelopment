@@ -44,12 +44,28 @@ public class BookResourceImpl implements BookResource {
     }
 
     @Override
-    public BookDTO updateBook(Long bookId, BookDTO bookDTO) throws RestException {
-        return null;
+    public void updateBook(Long categoryId, Long bookId, BookDTO bookDTO) throws RestException {
+        try {
+            String updateBookUrl = UPDATE_BOOK_URL.replace("{categoryId}", categoryId.toString()).
+                    replace("{bookId}", bookId.toString());
+            REST_TEMPLATE.put(baseWebServiceUrl + updateBookUrl,
+                    bookDTO, BookDTO.class, new HashMap<String, String>()
+            );
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RestException(e);
+        }
     }
 
     @Override
-    public void deleteBook(Long bookId) throws RestException {
-
+    public void deleteBook(Long categoryId, Long bookId) throws RestException {
+        try {
+            String deleteBookUrl = DELETE_BOOK_URL.replace("{categoryId}", categoryId.toString()).
+                    replace("{bookId}", bookId.toString());
+            REST_TEMPLATE.delete(baseWebServiceUrl + deleteBookUrl);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RestException(e);
+        }
     }
 }

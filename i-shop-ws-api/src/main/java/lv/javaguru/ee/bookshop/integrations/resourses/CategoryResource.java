@@ -15,7 +15,7 @@ public interface CategoryResource {
 
 	CategoryDTO getCategory(Long categoryId) throws RestException;
 
-    CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO) throws RestException;
+    void updateCategory(Long categoryId, CategoryDTO categoryDTO) throws RestException;
 
     void deleteCategory(Long categoryId) throws RestException;
 

@@ -1,15 +1,12 @@
 package lv.javaguru.ee.bookshop.integrations.controllers;
 
 import lv.javaguru.ee.bookshop.core.CommandExecutor;
-import lv.javaguru.ee.bookshop.core.commands.CreateBookCommand;
-import lv.javaguru.ee.bookshop.core.commands.CreateBookResult;
-import lv.javaguru.ee.bookshop.core.commands.GetBookCommand;
-import lv.javaguru.ee.bookshop.core.commands.GetBookResult;
+import lv.javaguru.ee.bookshop.core.commands.*;
 import lv.javaguru.ee.bookshop.core.domain.Book;
-import lv.javaguru.ee.bookshop.integrations.RestException;
 import lv.javaguru.ee.bookshop.integrations.domain.BookDTO;
 import lv.javaguru.ee.bookshop.integrations.resourses.BookResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,6 +20,7 @@ public class BookController implements BookResource {
     private CommandExecutor commandExecutor;
 
     @Override
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST, value = "/rest/category/{categoryId}/book")
     public BookDTO createBook(@PathVariable Long categoryId,
                               @RequestBody BookDTO bookDTO) {
@@ -62,6 +60,7 @@ public class BookController implements BookResource {
     }
 
     @Override
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, value = "/rest/category/{categoryId}/book/{bookId}")
     public BookDTO getBook(@PathVariable Long categoryId,
                            @PathVariable Long bookId) {
@@ -74,42 +73,37 @@ public class BookController implements BookResource {
 
     }
 
-//    @RequestMapping(method = RequestMethod.PUT, value = "/rest/book/{bookId}")
-//    public ResponseEntity<BookDTO> UpdateBook(@RequestBody BookDTO bookDTO) {
-//        UpdateBookCommand command = updateBookCommand(bookDTO);
-//        UpdateBookResult result = commandExecutor.execute(command);
-//
-//        return new ResponseEntity<BookDTO>(HttpStatus.OK);
-//    }
-//
-//    private UpdateBookCommand updateBookCommand(BookDTO bookDTO) {
-//        return new UpdateBookCommand(
-//                bookDTO.getBookId(),
-//                bookDTO.getTitle(),
-//                bookDTO.getDescription(),
-//                bookDTO.getPrice(),
-//                bookDTO.getYear(),
-//                bookDTO.getAuthor(),
-//                bookDTO.getIsbn(),
-//                bookDTO.getCategoryId()
-//        );
-//    }
-//
-//    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/book/{bookId}")
-//    public ResponseEntity deleteBook(@PathVariable Long bookId) {
-//        DeleteBookCommand command = new DeleteBookCommand(bookId);
-//        DeleteBookResult result = commandExecutor.execute(command);
-//
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
-
     @Override
-    public BookDTO updateBook(Long bookId, BookDTO bookDTO) throws RestException {
-        return null;
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.PUT, value = "/rest/category/{categoryId}/book/{bookId}")
+    public void updateBook(
+            @PathVariable Long categoryId,
+            @PathVariable Long bookId,
+            @RequestBody BookDTO bookDTO) {
+        UpdateBookCommand command = updateBookCommand(bookDTO);
+        UpdateBookResult result = commandExecutor.execute(command);
+    }
+
+    private UpdateBookCommand updateBookCommand(BookDTO bookDTO) {
+        return new UpdateBookCommand(
+                bookDTO.getBookId(),
+                bookDTO.getTitle(),
+                bookDTO.getDescription(),
+                bookDTO.getPrice(),
+                bookDTO.getYear(),
+                bookDTO.getAuthor(),
+                bookDTO.getIsbn(),
+                bookDTO.getCategoryId()
+        );
     }
 
     @Override
-    public void deleteBook(Long bookId) throws RestException {
-
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.DELETE, value = "/rest/category/{categoryId}/book/{bookId}")
+    public void deleteBook(@PathVariable Long categoryId,
+                           @PathVariable Long bookId) {
+        DeleteBookCommand command = new DeleteBookCommand(bookId);
+        DeleteBookResult result = commandExecutor.execute(command);
     }
+
 }

@@ -7,13 +7,13 @@ import lv.javaguru.ee.bookshop.core.domain.Order;
  */
 public class UpdateOrderResult implements DomainCommandResult {
 
-    private Order category;
+    private Order order;
 
-    public UpdateOrderResult(Order category) {
-        this.category = category;
+    public UpdateOrderResult(Order order) {
+        this.order = order;
     }
 
     public Order getOrder() {
-        return category;
+        return order;
     }
 }

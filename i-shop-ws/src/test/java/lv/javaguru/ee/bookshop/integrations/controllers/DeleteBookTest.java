@@ -24,7 +24,7 @@ public class DeleteBookTest extends EmbeddedJettyTest {
 
         Long createdBookId = createdBookDTO.getBookId();
 
-        RestFixture.deleteBook(createdBookId);
+        RestFixture.deleteBook(createdCategoryId, createdBookId);
 
         try {
             RestFixture.getBook(createdCategoryId, createdBookId);

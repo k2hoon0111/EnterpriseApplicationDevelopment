@@ -30,7 +30,7 @@ public class DeleteOrderTest extends EmbeddedJettyTest {
 
         Long createdOrderId = createdOrderDTO.getOrderId();
 
-        RestFixture.deleteOrder(createdOrderId);
+        RestFixture.deleteOrder(createdAccountId, createdOrderId);
 
         try {
             RestFixture.getOrder(createdAccountId, createdOrderId);
