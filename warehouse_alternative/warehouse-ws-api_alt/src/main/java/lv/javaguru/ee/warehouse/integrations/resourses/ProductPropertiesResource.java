@@ -12,7 +12,7 @@ public interface ProductPropertiesResource {
     static final String GET_PROD_PROP_URL = "/rest/product/{productCode}/productproperties/{prodPropName}";
     static final String CREATE_PROD_PROP_URL = "/rest/product/{productCode}/productproperties";
     static final String UPDATE_PROD_PROP_URL = "/rest/product/{productCode}/productproperties/{prodPropName}";
-    static final String DELETE_PROD_PROP_URL = "/rest/product/{productCode}/productproperties/{prodProps}/product/{productCode}";
+    static final String DELETE_PROD_PROP_URL = "/rest/product/{productCode}/productproperties/{prodPropName}";
     
     ProductPropertiesDTO getProductProperties(Long productCode, String prodPropName) throws RestException;
     

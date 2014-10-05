@@ -14,12 +14,12 @@ public interface WarehouseResource {
     static final String UPDATE_WAREHOUSE_URL = "/rest/warehouse/{warehouseCode}";
     static final String DELETE_WAREHOUSE_URL = "/rest/warehouse/{warehouseCode}";
  
-    WarehouseDTO getWarehouse(Long warehouseCode) throws RestException;
+    WarehouseDTO getWarehouse(String warehouseCode) throws RestException;
     
     WarehouseDTO createWarehouse(WarehouseDTO warehouseDTO) throws RestException;
     
-    WarehouseDTO updateWarehouse(Long warehouseCode, WarehouseDTO warehouseDTO) throws RestException;
+    WarehouseDTO updateWarehouse(String warehouseCode, WarehouseDTO warehouseDTO) throws RestException;
     
-    WarehouseDTO deleteWarehouse(Long warehouseCode) throws RestException;
+    WarehouseDTO deleteWarehouse(String warehouseCode) throws RestException;
     
 }

@@ -21,9 +21,9 @@ public class WarehouseResourceImpl implements WarehouseResource {
     
     
     @Override
-    public WarehouseDTO getWarehouse(Long warehouseCode) throws RestException {
+    public WarehouseDTO getWarehouse(String warehouseCode) throws RestException {
         try {
-            String url = baseWebServiceUrl + GET_WAREHOUSE_URL.replace("{warehouseCode}", String.valueOf(warehouseCode));
+            String url = baseWebServiceUrl + GET_WAREHOUSE_URL.replace("{warehouseCode}", warehouseCode);
             return REST_TEMPLATE.getForObject(url, WarehouseDTO.class);
         } catch (Throwable ex) {
             throw new RestException(ex);
@@ -41,9 +41,9 @@ public class WarehouseResourceImpl implements WarehouseResource {
     }
 
     @Override
-    public WarehouseDTO updateWarehouse(Long warehouseCode, WarehouseDTO warehouseDTO) throws RestException {
+    public WarehouseDTO updateWarehouse(String warehouseCode, WarehouseDTO warehouseDTO) throws RestException {
         try {
-            String url = baseWebServiceUrl + UPDATE_WAREHOUSE_URL.replace("{warehouseCode}", String.valueOf(warehouseCode));
+            String url = baseWebServiceUrl + UPDATE_WAREHOUSE_URL.replace("{warehouseCode}", warehouseCode);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -59,10 +59,10 @@ public class WarehouseResourceImpl implements WarehouseResource {
     }
 
     @Override
-    public WarehouseDTO deleteWarehouse(Long warehouseCode) throws RestException {
+    public WarehouseDTO deleteWarehouse(String warehouseCode) throws RestException {
         try {
             String url = baseWebServiceUrl + 
-                    DELETE_WAREHOUSE_URL.replace("{warehouseCode}", String.valueOf(warehouseCode));
+                    DELETE_WAREHOUSE_URL.replace("{warehouseCode}", warehouseCode);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
