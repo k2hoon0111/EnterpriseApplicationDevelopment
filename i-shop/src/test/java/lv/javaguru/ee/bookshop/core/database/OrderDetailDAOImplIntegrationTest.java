@@ -8,12 +8,12 @@
 //import static org.hamcrest.MatcherAssert.assertThat;
 //
 ///**
-// * Created with IntelliJ IDEA.
-// * User: MumboJumbo
-// * Date: 10/09/14
-// * Time: 19:05
-// * To change this template use File | Settings | File Templates.
-// */
+//* Created with IntelliJ IDEA.
+//* User: MumboJumbo
+//* Date: 10/09/14
+//* Time: 19:05
+//* To change this template use File | Settings | File Templates.
+//*/
 //public class OrderDetailDAOImplIntegrationTest extends DatabaseIntegrationTest {
 //    @Test
 //    public void testCreateOrderDetail() {
