@@ -21,12 +21,7 @@ public class EmbeddedJettyTest {
         jettyServer = new EmbeddedJetty("/", port);
         jettyServer.start();
     }
-
-    @Test
-    public void testEmbeddedJettyRun() {
-        assertTrue(true);
-    }
-    
+   
     @AfterClass
     public static void clean() throws Exception {
         jettyServer.stop();

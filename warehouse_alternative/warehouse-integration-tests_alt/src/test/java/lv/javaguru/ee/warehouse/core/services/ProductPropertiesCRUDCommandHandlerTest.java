@@ -95,7 +95,7 @@ public class ProductPropertiesCRUDCommandHandlerTest extends DatabaseHibernateTe
         doInTransaction(new TransactionCallbackWithoutResult() {
             @Override
             protected void doInTransactionWithoutResult(TransactionStatus status) {
-                ProductProperties deleted = productPropertiesDAO.getByProductCodeAndName(product, command.getName());
+                ProductProperties deleted = productPropertiesDAO.getByProductAndPropertyName(product, command.getName());
                 assertThat(deleted, is(nullValue()));
             }
         });

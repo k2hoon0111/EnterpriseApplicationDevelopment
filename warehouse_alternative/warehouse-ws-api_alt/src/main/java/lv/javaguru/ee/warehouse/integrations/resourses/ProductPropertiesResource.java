@@ -18,7 +18,7 @@ public interface ProductPropertiesResource {
     
     ProductPropertiesDTO createProductProperties(Long productCode, ProductPropertiesDTO prodPropDTO) throws RestException;
     
-    ProductPropertiesDTO updateProductProperties(Long productCode, String prodPropName) throws RestException;
+    ProductPropertiesDTO updateProductProperties(Long productCode, String prodPropName, ProductPropertiesDTO prodPropDTO) throws RestException;
     
     ProductPropertiesDTO deleteProductProperties(Long productCode, String prodPropName) throws RestException;
     

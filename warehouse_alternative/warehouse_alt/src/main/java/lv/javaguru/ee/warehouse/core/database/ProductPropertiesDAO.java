@@ -9,6 +9,6 @@ import lv.javaguru.ee.warehouse.core.domain.ProductProperties;
  */
 public interface ProductPropertiesDAO extends CRUDOperationDAO<ProductProperties, Long>{
     
-    ProductProperties getByProductCodeAndName(Product product, String name);
+    ProductProperties getByProductAndPropertyName(Product product, String name);
     
 }

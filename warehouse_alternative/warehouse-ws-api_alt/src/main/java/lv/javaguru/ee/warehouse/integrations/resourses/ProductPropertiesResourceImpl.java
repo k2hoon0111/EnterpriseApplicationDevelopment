@@ -17,7 +17,11 @@ public class ProductPropertiesResourceImpl implements ProductPropertiesResource 
 
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 
-    private String baseWebServiceUrl;
+    private final String baseWebServiceUrl;
+
+    public ProductPropertiesResourceImpl(String baseWebServiceUrl) {
+        this.baseWebServiceUrl = baseWebServiceUrl;
+    }
     
     @Override
     public ProductPropertiesDTO getProductProperties(Long productCode, String prodPropName) throws RestException {
@@ -44,7 +48,7 @@ public class ProductPropertiesResourceImpl implements ProductPropertiesResource 
     }
 
     @Override
-    public ProductPropertiesDTO updateProductProperties(Long productCode, String prodPropName) throws RestException {
+    public ProductPropertiesDTO updateProductProperties(Long productCode, String prodPropName, ProductPropertiesDTO prodPropDTO) throws RestException {
         try {
             String url = baseWebServiceUrl + UPDATE_PROD_PROP_URL
                     .replace("{productCode}", String.valueOf(productCode))
@@ -52,7 +56,7 @@ public class ProductPropertiesResourceImpl implements ProductPropertiesResource 
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity httpEntity = new HttpEntity(headers);
+            HttpEntity httpEntity = new HttpEntity(prodPropDTO, headers);
             
             ResponseEntity<ProductPropertiesDTO> responseEntity
                     = REST_TEMPLATE.exchange(url, HttpMethod.PUT, httpEntity, ProductPropertiesDTO.class);
@@ -86,9 +90,5 @@ public class ProductPropertiesResourceImpl implements ProductPropertiesResource 
     public String getBaseWebServiceUrl() {
         return baseWebServiceUrl;
     }
-
-    public void setBaseWebServiceUrl(String baseWebServiceUrl) {
-        this.baseWebServiceUrl = baseWebServiceUrl;
-    }
-        
+           
 }

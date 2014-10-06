@@ -30,23 +30,27 @@ public class ProductPropertiesCRUDCommandHandler implements
 
         validate(command);
 
+        Product product = productDao.getByCode(command.getProduct().getCode());
+        requireNonNull(product, format("Product with code=%s not found", product.getCode()));
+        
         ProductProperties prodProp = null;
         switch (command.getAction()) {
             case GET:
-                prodProp = getByProductCodeAndName(command.getProduct(), command.getName());
+                prodProp = getByProductCodeAndName(product, command.getName());
                 break;
             case CREATE:
                 validateCreate(command);
-                prodProp = createProductFromCommand(command);
+                prodProp = createProdPropFromCommand(command);                
+                prodProp.setProduct(product);
                 prodPropDao.create(prodProp);
                 break;
             case UPDATE:
-                prodProp = getByProductCodeAndName(command.getProduct(), command.getName());
-                updateProductFromCommand(command, prodProp);
+                prodProp = getByProductCodeAndName(product, command.getName());
+                prodProp.setValue(command.getValue());
                 prodPropDao.update(prodProp);
                 break;
             case DELETE:                
-                prodProp = getByProductCodeAndName(command.getProduct(), command.getName());
+                prodProp = getByProductCodeAndName(product, command.getName());
                 prodProp.getProduct().getProductProperties().remove(command.getName());
                 prodPropDao.delete(prodProp);
                 break;
@@ -64,7 +68,7 @@ public class ProductPropertiesCRUDCommandHandler implements
     public void validate(ProductPropertiesCRUDCommand command) {
         requireNonNull(command, "ProductPropertiesCommand can not be empty");
         requireNonNull(command.getProduct(), "ProductPropertiesCommand product id can not be empty");
-        requireNonNull(command.getProduct().getId(), "ProductPropertiesCommand product id can not be empty");
+        requireNonNull(command.getProduct().getCode(), "ProductPropertiesCommand product id can not be empty");
         requireNonNull(command.getName(), "ProductProperty name is empty");
     }
 
@@ -72,22 +76,17 @@ public class ProductPropertiesCRUDCommandHandler implements
         requireNonNull(command.getValue(), "ProductProperty value is empty");
     }
 
-    private ProductProperties createProductFromCommand(ProductPropertiesCRUDCommand command) {
+    private ProductProperties createProdPropFromCommand(ProductPropertiesCRUDCommand command) {
         ProductProperties prodProp = new ProductProperties();
-        updateProductFromCommand(command, prodProp);
+        prodProp.setName(command.getName());
+        prodProp.setValue(command.getValue());        
         return prodProp;
     }
 
-    private void updateProductFromCommand(ProductPropertiesCRUDCommand command, ProductProperties prodProp) {
-        prodProp.setName(command.getName());
-        prodProp.setValue(command.getValue());
-        prodProp.setProduct(command.getProduct());
-    }
-
     private ProductProperties getByProductCodeAndName(Product product, String name) {
-        ProductProperties prodProp = prodPropDao.getByProductCodeAndName(product, name);        
+        ProductProperties prodProp = prodPropDao.getByProductAndPropertyName(product, name);        
         String msg = format("ProductProperty for product=%s with name=%s not found",
-                            product.getId(), name);
+                            product.getCode(), name);
         requireNonNull(prodProp, msg);
         return prodProp;
     }

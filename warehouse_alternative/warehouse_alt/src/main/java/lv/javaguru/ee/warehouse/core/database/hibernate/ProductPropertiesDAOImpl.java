@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class ProductPropertiesDAOImpl extends CRUDOperationDAOImpl<ProductProperties, Long> implements ProductPropertiesDAO {
     
     @Override
-    public ProductProperties getByProductCodeAndName(Product product, String name) {
+    public ProductProperties getByProductAndPropertyName(Product product, String name) {
         
         List<ProductProperties> prodProp = getCurrentSession().createCriteria(daoType) 
                                     .add(and(eq("product", product), eq("name", name)))                                    

@@ -54,8 +54,10 @@ public class ProductPropertiesController implements ProductPropertiesResource {
     @RequestMapping(value = UPDATE_PROD_PROP_URL, method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
     public ProductPropertiesDTO updateProductProperties(@PathVariable Long productCode, 
-            @PathVariable String prodPropName) throws RestException {
-        ProductPropertiesCRUDCommand command = createProductPropertiesCRUDCommand(productCode, prodPropName, Action.UPDATE);        
+            @PathVariable String prodPropName,
+            @RequestBody ProductPropertiesDTO prodPropDTO) throws RestException {
+        prodPropDTO.setName(prodPropName);
+        ProductPropertiesCRUDCommand command = createProductPropertiesCRUDCommand(productCode, prodPropDTO, Action.UPDATE);        
         ProductPropertiesCommandResult result = commandExecutor.execute(command);        
         return createProductPropertiesDTO(result.getResult());
     }

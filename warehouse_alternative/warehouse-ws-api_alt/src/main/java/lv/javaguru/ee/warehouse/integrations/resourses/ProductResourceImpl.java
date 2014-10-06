@@ -17,7 +17,11 @@ public class ProductResourceImpl implements ProductResource {
 
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 
-    private String baseWebServiceUrl;
+    private final String baseWebServiceUrl;
+
+    public ProductResourceImpl(String baseWebServiceUrl) {
+        this.baseWebServiceUrl = baseWebServiceUrl;
+    }
     
     @Override
     public ProductDTO getProduct(Long productCode) throws RestException {
@@ -82,9 +86,5 @@ public class ProductResourceImpl implements ProductResource {
     public String getBaseWebServiceUrl() {
         return baseWebServiceUrl;
     }
-
-    public void setBaseWebServiceUrl(String baseWebServiceUrl) {
-        this.baseWebServiceUrl = baseWebServiceUrl;
-    }
-    
+ 
 }

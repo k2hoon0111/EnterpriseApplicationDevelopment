@@ -12,7 +12,11 @@ public class OrderResourceImpl implements OrderResource {
 
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 
-    private String baseWebServiceUrl;
+    private final String baseWebServiceUrl;
+
+    public OrderResourceImpl(String baseWebServiceUrl) {
+        this.baseWebServiceUrl = baseWebServiceUrl;
+    }
     
     @Override
     public OrderDTO createIncomingOrder(OrderDTO orderDTO) throws RestException {        
@@ -38,9 +42,5 @@ public class OrderResourceImpl implements OrderResource {
     public String getBaseWebServiceUrl() {
         return baseWebServiceUrl;
     }
-
-    public void setBaseWebServiceUrl(String baseWebServiceUrl) {
-        this.baseWebServiceUrl = baseWebServiceUrl;
-    }
-            
+               
 }

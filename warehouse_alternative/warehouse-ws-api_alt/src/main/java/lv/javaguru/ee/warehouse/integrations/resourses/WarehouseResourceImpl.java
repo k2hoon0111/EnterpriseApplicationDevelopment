@@ -17,9 +17,12 @@ public class WarehouseResourceImpl implements WarehouseResource {
 
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 
-    private String baseWebServiceUrl;
-    
-    
+    private final String baseWebServiceUrl;
+
+    public WarehouseResourceImpl(String baseWebServiceUrl) {
+        this.baseWebServiceUrl = baseWebServiceUrl;
+    }
+            
     @Override
     public WarehouseDTO getWarehouse(String warehouseCode) throws RestException {
         try {
@@ -80,10 +83,6 @@ public class WarehouseResourceImpl implements WarehouseResource {
 
     public String getBaseWebServiceUrl() {
         return baseWebServiceUrl;
-    }
-
-    public void setBaseWebServiceUrl(String baseWebServiceUrl) {
-        this.baseWebServiceUrl = baseWebServiceUrl;
     }
 
 }
