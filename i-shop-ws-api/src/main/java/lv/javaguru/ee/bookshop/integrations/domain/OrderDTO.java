@@ -23,6 +23,7 @@ public class OrderDTO {
     private boolean billingSameAsShipping;
     private Date deliveryDate;
     private Date orderDate;
+//    private BigDecimal totalOrderPrice;
 
     public Long getOrderId() {
         return orderId;
