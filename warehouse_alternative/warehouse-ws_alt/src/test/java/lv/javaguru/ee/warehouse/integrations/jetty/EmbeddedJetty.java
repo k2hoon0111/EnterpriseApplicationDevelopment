@@ -1,5 +1,6 @@
 package lv.javaguru.ee.warehouse.integrations.jetty;
 
+import static java.lang.Thread.sleep;
 import org.eclipse.jetty.jmx.MBeanContainer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -66,6 +67,7 @@ public class EmbeddedJetty {
         if (getServer() != null) {
             getServer().stop();
             setServer(null);
+            sleep(3000);
         }
     }
 

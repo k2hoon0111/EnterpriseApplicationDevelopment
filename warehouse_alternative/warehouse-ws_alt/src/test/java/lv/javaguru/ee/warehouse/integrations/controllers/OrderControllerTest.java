@@ -9,24 +9,26 @@ import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 
 /**
  *
  * @author dell
  */
+//@Ignore
 public class OrderControllerTest extends EmbeddedJettyTest {
     
     private static WarehouseDTO warehouseDTO;
     private static ProductDTO productDTO;
     
     @BeforeClass
-    public static void setup() {
+    public static void initTest() {
         warehouseDTO = RestFixture.createWarehouse(RestFixture.getDefaultWarehouse());
         productDTO = RestFixture.createProduct(RestFixture.getDefaultProduct());
     }
     
     @AfterClass
-    public static void clean() {
+    public static void cleanTest() {
         warehouseDTO = null;
         productDTO = null;
     }

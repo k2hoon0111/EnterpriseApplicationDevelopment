@@ -3,9 +3,7 @@ package lv.javaguru.ee.warehouse.integrations.jetty;
 
 import lv.javaguru.ee.warehouse.integrations.PropertiesReader;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 /**
  * Created by Viktor on 16/09/2014.

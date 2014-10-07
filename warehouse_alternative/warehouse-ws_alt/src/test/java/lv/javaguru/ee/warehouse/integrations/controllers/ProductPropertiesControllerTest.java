@@ -3,31 +3,34 @@ package lv.javaguru.ee.warehouse.integrations.controllers;
 import lv.javaguru.ee.warehouse.integrations.domain.ProductDTO;
 import lv.javaguru.ee.warehouse.integrations.domain.ProductPropertiesDTO;
 import lv.javaguru.ee.warehouse.integrations.jetty.EmbeddedJettyTest;
-import org.hamcrest.CoreMatchers;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 
 /**
  *
  * @author dell
  */
+//@Ignore
 public class ProductPropertiesControllerTest extends EmbeddedJettyTest {
     
     private static ProductDTO productDTO;
     
     @BeforeClass    
-    public static void setup() {    
+    public static void initTest() {    
+        System.out.println("ProductPropertiesControllerTest init called!!!");
         ProductDTO prod = RestFixture.getDefaultProduct();
         prod.setCode(7799L);
         productDTO = RestFixture.createProduct(prod);
     }
 
     @AfterClass
-    public static void clean() {
+    public static void cleanTest() {
+        System.out.println("ProductPropertiesControllerTest clean called!!!");
         productDTO = null;        
     }
     
