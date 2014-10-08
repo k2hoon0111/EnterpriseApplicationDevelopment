@@ -25,7 +25,7 @@
         <module>warehouse_alternative/warehouse_alt</module>
         <module>warehouse_alternative/warehouse-integration-tests_alt</module>
         <module>warehouse_alternative/warehouse-ws_alt</module>
-        <module>warehouse_alternative/warehouse-ws-api_alt</module>        
+        <module>warehouse_alternative/warehouse-ws-api_alt</module>
     </modules>
 
     <repositories>
@@ -91,6 +91,11 @@
         <log4j.version>1.2.17</log4j.version>
         <com.google.guava.version>18.0</com.google.guava.version>
 
+        <!-- Apache Camel and JMS dependencies -->
+        <camel-core.version>2.13.0</camel-core.version>
+        <camel-spring.version>2.13.0</camel-spring.version>
+        <camel-jms.version>2.13.0</camel-jms.version>
+
         <!-- Testing lib dependencies -->
         <junit.version>4.11</junit.version>
         <mockito-all.version>1.9.5</mockito-all.version>
@@ -99,6 +104,7 @@
         <cucumber-java.version>1.1.8</cucumber-java.version>
         <cucumber-junit.version>1.1.8</cucumber-junit.version>
 
+        <jersey-client.version>2.13</jersey-client.version>
 
         <!-- commons-lang3 dependencies -->
         <commons-lang3.version>3.3.2</commons-lang3.version>
@@ -112,6 +118,7 @@
         <liquibase-maven-plugin.version>3.2.1</liquibase-maven-plugin.version>
         <maven-surefire-plugin.version>2.11</maven-surefire-plugin.version>
         <surefire-junit47.version>2.12</surefire-junit47.version>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     </properties>
@@ -240,6 +247,12 @@
                 <version>${swagger-springmvc.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>${jersey-client.version}</version>
+            </dependency>
+
             <!-- Hibernate dependencies -->
             <dependency>
                 <groupId>org.hibernate</groupId>
@@ -358,6 +371,26 @@
                 <artifactId>cucumber-junit</artifactId>
                 <version>${cucumber-junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+
+            <!-- Apache Camel and JMS dependencies -->
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-core</artifactId>
+                <version>${camel-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-spring</artifactId>
+                <version>${camel-spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-jms</artifactId>
+                <version>${camel-jms.version}</version>
             </dependency>
 
         </dependencies>

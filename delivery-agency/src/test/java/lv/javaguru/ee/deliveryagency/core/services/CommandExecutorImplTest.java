@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryAddressCommand;
+import lv.javaguru.ee.deliveryagency.core.commands.deliveryaddress.CreateDeliveryAddressCommand;
 
 
 public class CommandExecutorImplTest {

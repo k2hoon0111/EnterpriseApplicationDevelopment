@@ -13,4 +13,4 @@ Feature: Delivery
   Scenario: Get delivery by invalid id
     When the client requests GET with invalid id
     Then the response should be exception
-    Then the response exception status code should be "UNPROCESSABLE_ENTITY"
+    Then the response exception status code should be "422"

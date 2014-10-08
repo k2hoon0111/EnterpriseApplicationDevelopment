@@ -4,11 +4,11 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
 import lv.javaguru.ee.deliveryagency.core.CommandExecutor;
-import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryResult;
+import lv.javaguru.ee.deliveryagency.core.commands.delivery.CreateDeliveryResult;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import lv.javaguru.ee.deliveryagency.core.commands.CreateDeliveryCommand;
+import lv.javaguru.ee.deliveryagency.core.commands.delivery.CreateDeliveryCommand;
 import lv.javaguru.ee.deliveryagency.core.database.hibernate.DatabaseHibernateTest;
 
 /**

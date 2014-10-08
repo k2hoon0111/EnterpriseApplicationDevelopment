@@ -52,4 +52,12 @@ public class RestFixture {
 	    return clientResource.getClient(deliveryId, clientId);
     }
 
+    public static ClientDTO deleteClient(Long deliveryId, Long clientId) {
+        return clientResource.deleteClient(deliveryId, clientId);
+    }
+
+    public static ClientDTO updateClient(Long deliveryId, Long clientId, ClientDTO clientDTO) {
+        return clientResource.updateClient(deliveryId, clientId, clientDTO);
+    }
+
 }

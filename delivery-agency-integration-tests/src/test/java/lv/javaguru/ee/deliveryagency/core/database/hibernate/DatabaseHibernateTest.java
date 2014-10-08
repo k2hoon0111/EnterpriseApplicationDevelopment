@@ -37,7 +37,6 @@ import lv.javaguru.ee.deliveryagency.core.domain.DeliveryInfo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = CoreConfig.class)
-//@ActiveProfiles("test")
 @TransactionConfiguration(transactionManager = "hibernateTX", defaultRollback = false)
 public abstract class DatabaseHibernateTest {
 

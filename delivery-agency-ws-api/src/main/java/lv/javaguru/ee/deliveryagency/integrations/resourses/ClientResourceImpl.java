@@ -1,34 +1,34 @@
 package lv.javaguru.ee.deliveryagency.integrations.resourses;
 
-import java.util.HashMap;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
 import lv.javaguru.ee.deliveryagency.integrations.RestException;
 import lv.javaguru.ee.deliveryagency.integrations.domain.ClientDTO;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 
 /**
  * Created by Viktor on 19/09/2014.
  */
 public class ClientResourceImpl implements ClientResource {
 
-    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
-
     private String baseWebServiceUrl;
+    private Client client;
 
 
     public ClientResourceImpl(String baseWebServiceUrl) {
         this.baseWebServiceUrl = baseWebServiceUrl;
+        client = ClientBuilder.newClient();
     }
 
     public ClientDTO createClient(Long deliveryId, ClientDTO clientDTO) throws RestException {
         try {
-	        String createClientUrl = CREATE_CLIENT_URL.replace("{deliveryId}", deliveryId.toString());
-            ResponseEntity<ClientDTO> responseEntity = REST_TEMPLATE.postForEntity(baseWebServiceUrl + createClientUrl,
-                    clientDTO, ClientDTO.class, new HashMap<String, String>()
-            );
-            return responseEntity.getBody();
+	        String clientUrl = baseWebServiceUrl + CREATE_CLIENT_URL.replace("{deliveryId}", deliveryId.toString());
+            WebTarget target = client.target(clientUrl);
+            return target.request(MediaType.APPLICATION_XML)
+                    .post(Entity.entity(clientDTO, MediaType.APPLICATION_XML), ClientDTO.class);
         } catch (Throwable e) {
             throw new RestException(e);
         }
@@ -36,12 +36,33 @@ public class ClientResourceImpl implements ClientResource {
 
     public ClientDTO getClient(Long deliveryId, Long clientId) throws RestException {
         try {
-            String getClientUrl = GET_CLIENT_URL.replace("{deliveryId}", deliveryId.toString())
-		                                        .replace("{clientId}", clientId.toString());
-            ResponseEntity<ClientDTO> responseEntity = REST_TEMPLATE.getForEntity(baseWebServiceUrl + getClientUrl,
-                    ClientDTO.class, new HashMap<String, String>()
-            );
-            return responseEntity.getBody();
+            String clientUrl = baseWebServiceUrl + CLIENT_URL.replace("{deliveryId}", deliveryId.toString())
+                    .replace("{clientId}", clientId.toString());
+            WebTarget target = client.target(clientUrl);
+            return target.request(MediaType.APPLICATION_XML).get(ClientDTO.class);
+        } catch (Throwable e) {
+            throw new RestException(e);
+        }
+    }
+
+    public ClientDTO deleteClient(Long deliveryId, Long clientId) throws RestException {
+        try {
+            String clientUrl = baseWebServiceUrl + CLIENT_URL.replace("{deliveryId}", deliveryId.toString())
+                    .replace("{clientId}", clientId.toString());
+            WebTarget target = client.target(clientUrl);
+            return target.request(MediaType.APPLICATION_XML).delete(ClientDTO.class);
+        } catch (Throwable e) {
+            throw new RestException(e);
+        }
+    }
+
+    public ClientDTO updateClient(Long deliveryId, Long clientId, ClientDTO clientDTO) throws RestException {
+        try {
+            String clientUrl = baseWebServiceUrl + CLIENT_URL.replace("{deliveryId}", deliveryId.toString())
+                    .replace("{clientId}", clientId.toString());
+            WebTarget target = client.target(clientUrl);
+            return target.request(MediaType.APPLICATION_XML)
+                    .put(Entity.entity(clientDTO, MediaType.APPLICATION_XML), ClientDTO.class);
         } catch (Throwable e) {
             throw new RestException(e);
         }
