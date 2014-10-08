@@ -1,5 +1,6 @@
 package lv.javaguru.ee.warehouse.integrations.jetty;
 
+import static java.lang.String.format;
 import static java.lang.Thread.sleep;
 import org.eclipse.jetty.jmx.MBeanContainer;
 import org.eclipse.jetty.server.Server;
@@ -72,6 +73,6 @@ public class EmbeddedJetty {
     }
 
     public String getBaseUrl() {
-        return "http://localhost:" + httpPort + rootContext;
+        return format("http://localhost:%s%s",httpPort, rootContext);
     }
 }
