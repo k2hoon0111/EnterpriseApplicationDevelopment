@@ -3,6 +3,8 @@ package lv.javaguru.ee.bookshop.integrations.controllers.fixtures;
 import lv.javaguru.ee.bookshop.integrations.PropertiesReader;
 import lv.javaguru.ee.bookshop.integrations.domain.*;
 import lv.javaguru.ee.bookshop.integrations.resourses.*;
+import lv.javaguru.ee.bookshop.integrations.resourses.REST_TEMPLATE.AccountResource;
+import lv.javaguru.ee.bookshop.integrations.resourses.REST_TEMPLATE.AccountResourceImpl;
 
 public class RestFixture {
     private static CategoryResource categoryResource = createCategoryResource();
@@ -50,13 +52,13 @@ public class RestFixture {
         return accountResource.getAccount(accountId);
     }
 
-    public static void deleteAccount(Long accountId) {
-        accountResource.deleteAccount(accountId);
+    public static AccountDTO deleteAccount(Long accountId) {
+        return accountResource.deleteAccount(accountId);
     }
 
-    public static void updateAccount(Long accountId, AccountDTO accountDTO) {
+    public static AccountDTO updateAccount(Long accountId, AccountDTO accountDTO) {
 
-        accountResource.updateAccount(accountId, accountDTO);
+        return accountResource.updateAccount(accountId, accountDTO);
     }
 
     /////////// Book methods /////////////

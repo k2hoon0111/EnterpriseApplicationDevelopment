@@ -4,7 +4,7 @@ import lv.javaguru.ee.bookshop.core.CommandExecutor;
 import lv.javaguru.ee.bookshop.core.commands.*;
 import lv.javaguru.ee.bookshop.core.domain.Account;
 import lv.javaguru.ee.bookshop.integrations.domain.AccountDTO;
-import lv.javaguru.ee.bookshop.integrations.resourses.AccountResource;
+import lv.javaguru.ee.bookshop.integrations.resourses.REST_TEMPLATE.AccountResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
