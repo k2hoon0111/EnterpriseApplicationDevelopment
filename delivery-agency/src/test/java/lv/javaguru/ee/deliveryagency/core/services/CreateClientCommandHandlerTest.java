@@ -4,13 +4,14 @@ import static lv.javaguru.ee.deliveryagency.core.commands.builders.CreateClientC
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import lv.javaguru.ee.deliveryagency.core.services.client.CreateClientCommandHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import lv.javaguru.ee.deliveryagency.core.commands.CreateClientCommand;
+import lv.javaguru.ee.deliveryagency.core.commands.client.CreateClientCommand;
 import lv.javaguru.ee.deliveryagency.core.database.ClientDAO;
 import lv.javaguru.ee.deliveryagency.core.database.DeliveryDAO;
 

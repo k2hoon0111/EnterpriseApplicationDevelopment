@@ -8,8 +8,7 @@ import lv.javaguru.ee.deliveryagency.integrations.domain.DeliveryDTO;
  */
 public interface DeliveryResource {
 
-    static final String CREATE_DELIVERY_URL = "/rest/delivery";
-    static final String GET_DELIVERY_URL = "/rest/delivery/{id}";
+    static final String DELIVERY_URL = "/rest/delivery";
 
 
     DeliveryDTO createDelivery(DeliveryDTO deliveryDTO) throws RestException;

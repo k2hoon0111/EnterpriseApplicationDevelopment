@@ -3,8 +3,6 @@ package lv.javaguru.ee.deliveryagency.integrations;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
-import org.springframework.http.HttpStatus;
-
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import lv.javaguru.ee.deliveryagency.integrations.domain.DeliveryDTO;
@@ -58,8 +56,7 @@ public class DeliveryStepDefinitions {
 
     @Then("^the response exception status code should be \"([^\"]*)\"$")
     public void response_exception_status_code_should_be(String responseStatus) {
-        HttpStatus statusCode = HttpStatus.valueOf(responseStatus);
-        assertThat(statusCode, is(exception.getHttpStatus()));
+        assertThat(Integer.parseInt(responseStatus), is(exception.getHttpStatus()));
     }
 
     @Then("^the response should be exception")

@@ -109,6 +109,21 @@
             <artifactId>guava</artifactId>
         </dependency>
 
+        <!-- Apache Camel and JMS dependencies -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms</artifactId>
+        </dependency>
 
         <!-- Testing lib dependencies -->
         <dependency>

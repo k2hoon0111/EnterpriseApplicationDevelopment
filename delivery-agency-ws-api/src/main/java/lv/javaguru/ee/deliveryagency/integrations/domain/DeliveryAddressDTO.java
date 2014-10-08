@@ -1,5 +1,8 @@
 package lv.javaguru.ee.deliveryagency.integrations.domain;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "deliveryAddressDTO")
 public class DeliveryAddressDTO {
 
 	private Long deliveryAddressId;

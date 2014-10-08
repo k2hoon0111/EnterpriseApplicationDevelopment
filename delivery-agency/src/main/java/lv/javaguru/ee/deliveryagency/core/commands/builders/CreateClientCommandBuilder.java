@@ -1,6 +1,6 @@
 package lv.javaguru.ee.deliveryagency.core.commands.builders;
 
-import lv.javaguru.ee.deliveryagency.core.commands.CreateClientCommand;
+import lv.javaguru.ee.deliveryagency.core.commands.client.CreateClientCommand;
 
 public class CreateClientCommandBuilder {
 
