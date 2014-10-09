@@ -1,11 +1,10 @@
 package lv.javaguru.ee.bookshop.integrations.domain;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * Created by MumboJumbo on 17/09/14.
  */
-@XmlRootElement(name = "categoryDTO")
+//@XmlRootElement(name = "categoryDTO")
+
 public class CategoryDTO {
     private Long categoryId;
     private String name;

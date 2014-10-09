@@ -26,13 +26,13 @@ public class RestFixture {
     return categoryResource.getCategory(categoryId);
   }
 
-  public static void deleteCategory(Long categoryId) {
-    categoryResource.deleteCategory(categoryId);
+  public static CategoryDTO deleteCategory(Long categoryId) {
+    return categoryResource.deleteCategory(categoryId);
   }
 
-  public static void updateCategory(Long categoryId, CategoryDTO categoryDTO) {
+  public static CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO) {
 
-    categoryResource.updateCategory(categoryId, categoryDTO);
+    return categoryResource.updateCategory(categoryId, categoryDTO);
   }
 
   /////////// Account methods /////////////
