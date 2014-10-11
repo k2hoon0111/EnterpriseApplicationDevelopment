@@ -22,8 +22,12 @@ public class OrderControllerTest extends EmbeddedJettyTest {
     private static ProductDTO productDTO;
     
     @BeforeClass
-    public static void initTest() {
-        warehouseDTO = RestFixture.createWarehouse(RestFixture.getDefaultWarehouse());
+    public static void initTest() {        
+        WarehouseDTO warehouse = RestFixture.getDefaultWarehouse();
+        warehouse.setTitle("WH-222");
+        warehouseDTO = RestFixture.createWarehouse(warehouse);
+        ProductDTO product = RestFixture.getDefaultProduct();
+        product.setCode(5599L);
         productDTO = RestFixture.createProduct(RestFixture.getDefaultProduct());
     }
     

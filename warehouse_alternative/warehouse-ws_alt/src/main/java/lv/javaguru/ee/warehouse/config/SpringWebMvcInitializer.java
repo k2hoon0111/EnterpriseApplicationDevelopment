@@ -13,8 +13,7 @@ public class SpringWebMvcInitializer extends AbstractDispatcherServletInitialize
     protected WebApplicationContext createRootApplicationContext() {
         AnnotationConfigWebApplicationContext applicationContext =
                 new AnnotationConfigWebApplicationContext();
-        applicationContext.register(CoreConfig.class); 
-        applicationContext.refresh();
+        applicationContext.register(CoreConfig.class);
         return applicationContext;
     }
 
@@ -23,7 +22,6 @@ public class SpringWebMvcInitializer extends AbstractDispatcherServletInitialize
         AnnotationConfigWebApplicationContext applicationContext =
                 new AnnotationConfigWebApplicationContext();
         applicationContext.register(WebMVCConfig.class);
-        applicationContext.refresh();
         return applicationContext;
     }
 

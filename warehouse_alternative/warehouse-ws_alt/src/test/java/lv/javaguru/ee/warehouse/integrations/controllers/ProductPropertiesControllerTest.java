@@ -35,7 +35,7 @@ public class ProductPropertiesControllerTest extends EmbeddedJettyTest {
     }
     
     @Test
-    public void getProductPropertiesTest() {        
+    public void getProductPropertiesTest() {    
         String propertyName = "property_1";
         ProductPropertiesDTO prodPropsDTO = createProdPropsWithName(propertyName);
         
@@ -55,7 +55,7 @@ public class ProductPropertiesControllerTest extends EmbeddedJettyTest {
     }
     
     @Test
-    public void updateProductPropertiesTest() {        
+    public void updateProductPropertiesTest() {    
         String propertyName = "property_3";
         ProductPropertiesDTO prodPropsDTO = createProdPropsWithName(propertyName);
         

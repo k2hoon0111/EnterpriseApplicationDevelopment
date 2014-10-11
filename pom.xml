@@ -26,6 +26,7 @@
         <module>warehouse_alternative/warehouse-integration-tests_alt</module>
         <module>warehouse_alternative/warehouse-ws_alt</module>
         <module>warehouse_alternative/warehouse-ws-api_alt</module>
+        <module>warehouse_alternative/warehouse-ws-acceptance-tests_alt</module>
     </modules>
 
     <repositories>

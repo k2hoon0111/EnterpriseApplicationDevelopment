@@ -5,7 +5,6 @@ import lv.javaguru.ee.warehouse.core.domain.Warehouse;
 import lv.javaguru.ee.warehouse.core.domain.WarehouseProduct;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
