@@ -1,6 +1,11 @@
 package lv.javaguru.ee.warehouse.integrations.controllers;
 
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 import lv.javaguru.ee.warehouse.core.CommandExecutor;
 import lv.javaguru.ee.warehouse.core.command.Action;
 import lv.javaguru.ee.warehouse.core.command.ProductCRUDCommand;
@@ -12,7 +17,6 @@ import lv.javaguru.ee.warehouse.integrations.resourses.ProductResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author dell
  */
-
+@Api(value = "Product", description = "Product CRUD API")
 @RestController
 @RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ProductController implements ProductResource {
@@ -33,37 +37,55 @@ public class ProductController implements ProductResource {
     private CommandExecutor commandExecutor;
 
     @Override    
+    @ApiOperation(value = "Get product", notes = "Get product by warehouseCode")
+    @ApiResponses({@ApiResponse(code = 422, message = "Unprocessable Entity")})
     @RequestMapping(value = GET_PRODUCT_URL, method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)    
-    public ProductDTO getProduct(@PathVariable Long productCode) throws RestException {        
+    public ProductDTO getProduct(@PathVariable 
+            @ApiParam(name = "productCode", required = true, value = "product code")
+            Long productCode) throws RestException {        
         ProductCRUDCommand command = createProductCRUDCommand(productCode, Action.GET);        
         ProductCommandResult result = commandExecutor.execute(command);        
         return createProductDTO(result.getResult());        
     }
 
     @Override
+    @ApiOperation(value = "Create product", notes = "Create new product")
+    @ApiResponses({@ApiResponse(code = 422, message = "Unprocessable Entity")})
     @RequestMapping(value = CREATE_PRODUCT_URL, method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductDTO createProduct(@RequestBody ProductDTO productDTO) throws RestException {        
+    public ProductDTO createProduct(@RequestBody 
+            @ApiParam(name = "product", required = true, value = "product to add")
+            ProductDTO productDTO) throws RestException {        
         ProductCRUDCommand command = createProductCRUDCommand(productDTO, Action.CREATE);        
         ProductCommandResult result = commandExecutor.execute(command);        
         return createProductDTO(result.getResult());
     }
 
     @Override
+    @ApiOperation(value = "Update product", notes = "Update product")
+    @ApiResponses({@ApiResponse(code = 422, message = "Unprocessable Entity")})
     @RequestMapping(value = UPDATE_PRODUCT_URL, method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public ProductDTO updateProduct(@PathVariable Long productCode, 
-            @RequestBody ProductDTO productDTO) throws RestException {        
+    public ProductDTO updateProduct(@PathVariable 
+            @ApiParam(name = "productCode", required = true, value = "product code to update")
+            Long productCode, 
+            @RequestBody 
+            @ApiParam(name = "product", required = true, value = "product to update")        
+            ProductDTO productDTO) throws RestException {        
         ProductCRUDCommand command = createProductCRUDCommand(productCode, productDTO, Action.UPDATE);        
         ProductCommandResult result = commandExecutor.execute(command);        
         return createProductDTO(result.getResult());
     }
 
     @Override
+    @ApiOperation(value = "Delete product", notes = "Delete product by product code")
+    @ApiResponses({@ApiResponse(code = 422, message = "Unprocessable Entity")})
     @RequestMapping(value = DELETE_PRODUCT_URL, method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public ProductDTO deleteProduct(@PathVariable Long productCode) throws RestException {
+    public ProductDTO deleteProduct(@PathVariable 
+            @ApiParam(name = "productCode", required = true, value = "product code to delete")
+            Long productCode) throws RestException {
         ProductCRUDCommand command = createProductCRUDCommand(productCode, Action.DELETE);        
         ProductCommandResult result = commandExecutor.execute(command);        
         return createProductDTO(result.getResult());

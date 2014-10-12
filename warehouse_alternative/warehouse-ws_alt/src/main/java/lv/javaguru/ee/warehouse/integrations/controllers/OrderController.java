@@ -1,5 +1,10 @@
 package lv.javaguru.ee.warehouse.integrations.controllers;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 import lv.javaguru.ee.warehouse.core.CommandExecutor;
 import lv.javaguru.ee.warehouse.core.command.CreateIncomingOrderCommand;
 import lv.javaguru.ee.warehouse.core.command.CreateIncomingOrderCommandResult;
@@ -24,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author dell
  */
+@Api(value = "Order", description = "Warehouse incoming/outgoing order API")
 @RestController
 @RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
 public class OrderController implements OrderResource {
@@ -32,18 +38,26 @@ public class OrderController implements OrderResource {
     private CommandExecutor commandExecutor;
 
     @Override
+    @ApiOperation(value = "Create incoming order", notes = "Create incoming order (increase product qty in warehouse)")
+    @ApiResponses({@ApiResponse(code = 422, message = "Unprocessable Entity")})
     @RequestMapping(value = CREATE_IN_ORDER_URL, method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDTO createIncomingOrder(@RequestBody OrderDTO orderDTO) throws RestException {
+    public OrderDTO createIncomingOrder(@RequestBody 
+            @ApiParam(name = "order", required = true, value = "incoming order to create")
+            OrderDTO orderDTO) throws RestException {
         CreateIncomingOrderCommand command = createIncomingOrderCommand(orderDTO);        
         CreateIncomingOrderCommandResult result = commandExecutor.execute(command);        
         return createOrderDTO(result.getResult());
     }
 
     @Override
+    @ApiOperation(value = "Create outgoing order", notes = "Create outgoing order (decrease product qty in warehouse)")
+    @ApiResponses({@ApiResponse(code = 422, message = "Unprocessable Entity")})
     @RequestMapping(value = CREATE_OUT_ORDER_URL, method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDTO createOutgoingOrder(@RequestBody OrderDTO orderDTO) throws RestException {
+    public OrderDTO createOutgoingOrder(@RequestBody 
+            @ApiParam(name = "order", required = true, value = "outgoing order to create")
+            OrderDTO orderDTO) throws RestException {
         CreateOutgoingOrderCommand command = createOutgoingOrderCommand(orderDTO);        
         CreateOutgoingOrderCommandResult result = commandExecutor.execute(command);        
         return createOrderDTO(result.getResult());

@@ -1,5 +1,11 @@
 package lv.javaguru.ee.warehouse.config;
 
+import java.util.Arrays;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
@@ -9,6 +15,8 @@ import org.springframework.web.servlet.support.AbstractDispatcherServletInitiali
  */
 public class SpringWebMvcInitializer extends AbstractDispatcherServletInitializer {
 
+    private static final Logger log = LoggerFactory.getLogger(SpringWebMvcInitializer.class);
+    
     @Override
     protected WebApplicationContext createRootApplicationContext() {
         AnnotationConfigWebApplicationContext applicationContext =
@@ -21,7 +29,7 @@ public class SpringWebMvcInitializer extends AbstractDispatcherServletInitialize
     protected WebApplicationContext createServletApplicationContext() {
         AnnotationConfigWebApplicationContext applicationContext =
                 new AnnotationConfigWebApplicationContext();
-        applicationContext.register(WebMVCConfig.class);
+        applicationContext.register(WebMVCConfig.class);        
         return applicationContext;
     }
 
@@ -29,4 +37,11 @@ public class SpringWebMvcInitializer extends AbstractDispatcherServletInitialize
     protected String[] getServletMappings() {
         return new String[]{"/*"};
     }
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        super.customizeRegistration(registration); 
+        log.info("Servlet mappings : {}", registration.getMappings().toArray());
+    }
+     
 }

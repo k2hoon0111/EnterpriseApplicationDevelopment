@@ -1,5 +1,10 @@
 package lv.javaguru.ee.warehouse.integrations.controllers;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 import lv.javaguru.ee.warehouse.core.CommandExecutor;
 import lv.javaguru.ee.warehouse.core.command.Action;
 import lv.javaguru.ee.warehouse.core.command.WarehouseCRUDCommand;
@@ -23,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author dell
  */
+@Api(value = "Warehouse", description = "Warehouse CRUD API")
 @RestController
 @RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
 public class WarehouseController implements WarehouseResource {
@@ -31,37 +37,55 @@ public class WarehouseController implements WarehouseResource {
     private CommandExecutor commandExecutor;
     
     @Override    
+    @ApiOperation(value = "Get warehouse", notes = "Get warehouse by warehouseCode")
+    @ApiResponses({@ApiResponse(code = 422, message = "Unprocessable Entity")})
     @RequestMapping(value = GET_WAREHOUSE_URL, method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)    
-    public WarehouseDTO getWarehouse(@PathVariable String warehouseCode) throws RestException {
+    public WarehouseDTO getWarehouse(@PathVariable 
+            @ApiParam(name = "warehouseCode", required = true, value = "warehouse code") 
+            String warehouseCode) throws RestException {
         WarehouseCRUDCommand command = createWarehouseCRUDCommand(warehouseCode, Action.GET);        
         WarehouseCommandResult result = commandExecutor.execute(command);        
         return createWarehouseDTO(result.getResult());
     }
 
     @Override
+    @ApiOperation(value = "Create warehouse", notes = "Create new warehouse")
+    @ApiResponses({@ApiResponse(code = 422, message = "Unprocessable Entity")})
     @RequestMapping(value = CREATE_WAREHOUSE_URL, method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public WarehouseDTO createWarehouse(@RequestBody WarehouseDTO warehouseDTO) throws RestException {
+    public WarehouseDTO createWarehouse(@RequestBody 
+            @ApiParam(name = "warehouse", required = true, value = "warehouse to add")
+            WarehouseDTO warehouseDTO) throws RestException {
         WarehouseCRUDCommand command = createWarehouseCRUDCommand(warehouseDTO, Action.CREATE);        
         WarehouseCommandResult result = commandExecutor.execute(command);        
         return createWarehouseDTO(result.getResult());
     }
 
     @Override
+    @ApiOperation(value = "Update warehouse", notes = "Update warehouse")
+    @ApiResponses({@ApiResponse(code = 422, message = "Unprocessable Entity")})
     @RequestMapping(value = UPDATE_WAREHOUSE_URL, method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public WarehouseDTO updateWarehouse(@PathVariable String warehouseCode, 
-            @RequestBody WarehouseDTO warehouseDTO) throws RestException {
+    public WarehouseDTO updateWarehouse(@PathVariable
+            @ApiParam(name = "warehouseCode", required = true, value = "warehouse code to update") 
+            String warehouseCode, 
+            @ApiParam(name = "warehouse", required = true, value = "warehouse fields to update")
+            @RequestBody 
+            WarehouseDTO warehouseDTO) throws RestException {
         WarehouseCRUDCommand command = createWarehouseCRUDCommand(warehouseCode, warehouseDTO, Action.UPDATE);        
         WarehouseCommandResult result = commandExecutor.execute(command);        
         return createWarehouseDTO(result.getResult());
     }
 
     @Override
+    @ApiOperation(value = "Delete warehouse", notes = "Delete warehouse by warehouse code")
+    @ApiResponses({@ApiResponse(code = 422, message = "Unprocessable Entity")})
     @RequestMapping(value = DELETE_WAREHOUSE_URL, method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public WarehouseDTO deleteWarehouse(@PathVariable String warehouseCode) throws RestException {
+    public WarehouseDTO deleteWarehouse(@PathVariable 
+            @ApiParam(name = "warehouseCode", required = true, value = "warehouse code to delete") 
+            String warehouseCode) throws RestException {
         WarehouseCRUDCommand command = createWarehouseCRUDCommand(warehouseCode, Action.DELETE);        
         WarehouseCommandResult result = commandExecutor.execute(command);        
         return createWarehouseDTO(result.getResult());

@@ -47,7 +47,7 @@ public class WarehouseControllerTest extends EmbeddedJettyTest {
     
     @Test
     public void deleteWarehouseTest() {
-        String warehouseCode = "WH-5555";
+        String warehouseCode = "WH-5558";
         WarehouseDTO warehouseDTO = createWarehouseWithCode(warehouseCode);
         
         WarehouseDTO warehouse = RestFixture.deleteWarehouse(warehouseCode);
@@ -66,12 +66,12 @@ public class WarehouseControllerTest extends EmbeddedJettyTest {
     
     
     private WarehouseDTO createWarehouseWithCode(String warehouseCode) {        
-        WarehouseDTO warehouseDTO = RestFixture.createWarehouse(getProductWithCode(warehouseCode));
+        WarehouseDTO warehouseDTO = RestFixture.createWarehouse(getWarehouseWithCode(warehouseCode));
         assertNotNull(warehouseDTO);
         return warehouseDTO;
     }
     
-    private WarehouseDTO getProductWithCode(String warehouseCode) {    
+    private WarehouseDTO getWarehouseWithCode(String warehouseCode) {    
         WarehouseDTO warehouseDTO = RestFixture.getDefaultWarehouse();
         warehouseDTO.setTitle(warehouseCode);
         return warehouseDTO;
