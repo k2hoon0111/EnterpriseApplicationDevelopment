@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories>
+    <category>
+        <categoryId>1</categoryId>>
+        <name>Java</name>
+    </category>
+    <category>
+        <categoryId>2</categoryId>>
+        <name>C++</name>
+    </category>
+</categories>

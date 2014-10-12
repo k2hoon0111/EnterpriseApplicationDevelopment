@@ -1,12 +1,11 @@
 package lv.javaguru.ee.bookshop.integrations.domain;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
  * Created by MumboJumbo on 20/09/14.
  */
-@XmlRootElement(name = "orderDTO")
+//@XmlRootElement(name = "orderDTO")
 public class OrderDTO {
     private Long orderId;
     private Long accountId;

@@ -82,7 +82,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-envers</artifactId>
         </dependency>
-        
+
         <!-- Logging dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>

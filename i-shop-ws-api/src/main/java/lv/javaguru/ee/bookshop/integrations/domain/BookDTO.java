@@ -1,12 +1,11 @@
 package lv.javaguru.ee.bookshop.integrations.domain;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
 /**
  * Created by MumboJumbo on 17/09/14.
  */
-@XmlRootElement(name = "bookDTO")
+//@XmlRootElement(name = "bookDTO")
 public class BookDTO {
     private Long bookId;
     private String title;

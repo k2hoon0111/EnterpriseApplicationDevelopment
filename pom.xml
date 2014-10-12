@@ -95,6 +95,8 @@
         <camel-core.version>2.13.0</camel-core.version>
         <camel-spring.version>2.13.0</camel-spring.version>
         <camel-jms.version>2.13.0</camel-jms.version>
+        <camel-ftp.version>2.13.0</camel-ftp.version>
+        <activemq-core.version>5.7.0</activemq-core.version>
 
         <!-- Testing lib dependencies -->
         <junit.version>4.11</junit.version>
@@ -391,6 +393,18 @@
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-jms</artifactId>
                 <version>${camel-jms.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-ftp</artifactId>
+                <version>${camel-ftp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-core</artifactId>
+                <version>${activemq-core.version}</version>
             </dependency>
 
         </dependencies>

@@ -1,6 +1,10 @@
 package lv.javaguru.ee.bookshop.core.domain;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -12,6 +16,8 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "categories")
+@XmlRootElement(name = "categories")
+@XmlAccessorType(XmlAccessType.FIELD)
 //@Cacheable
 //@Cache(region = "categories", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Category implements Serializable {
@@ -19,9 +25,11 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "categoryId")
+    @XmlAttribute
     private Long categoryId;
 
     @Column(name = "name")
+    @XmlAttribute
     private String name;
 
     public Category() {
@@ -45,5 +53,13 @@ public class Category implements Serializable {
 
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoryId=" + categoryId +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
