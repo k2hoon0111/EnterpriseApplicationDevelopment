@@ -1,26 +1,24 @@
 package lv.javaguru.ee.warehouse.integrations.resourses;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import lv.javaguru.ee.warehouse.integrations.RestException;
 import lv.javaguru.ee.warehouse.integrations.domain.ProductPropertiesDTO;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 /**
  *
  * @author dell
  */
 public class ProductPropertiesResourceImpl implements ProductPropertiesResource {
-
-    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
-
+    
     private final String baseWebServiceUrl;
-
+    private final Client client;
+    
     public ProductPropertiesResourceImpl(String baseWebServiceUrl) {
         this.baseWebServiceUrl = baseWebServiceUrl;
+        this.client = ClientBuilder.newClient();
     }
     
     @Override
@@ -29,8 +27,9 @@ public class ProductPropertiesResourceImpl implements ProductPropertiesResource 
             String url = baseWebServiceUrl + GET_PROD_PROP_URL
                     .replace("{productCode}", String.valueOf(productCode))
                     .replace("{prodPropName}", prodPropName);
-            
-            return REST_TEMPLATE.getForObject(url, ProductPropertiesDTO.class);
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get(ProductPropertiesDTO.class);            
         } catch (Throwable ex) {
             throw new RestException(ex);
         }
@@ -41,7 +40,9 @@ public class ProductPropertiesResourceImpl implements ProductPropertiesResource 
         try {
             String url = baseWebServiceUrl + CREATE_PROD_PROP_URL
                     .replace("{productCode}", String.valueOf(productCode));
-            return REST_TEMPLATE.postForObject(url, prodPropDTO, ProductPropertiesDTO.class);
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .post(Entity.json(prodPropDTO), ProductPropertiesDTO.class);
         } catch (Throwable ex) {
             throw new RestException(ex);
         }  
@@ -53,15 +54,9 @@ public class ProductPropertiesResourceImpl implements ProductPropertiesResource 
             String url = baseWebServiceUrl + UPDATE_PROD_PROP_URL
                     .replace("{productCode}", String.valueOf(productCode))
                     .replace("{prodPropName}", prodPropName);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity httpEntity = new HttpEntity(prodPropDTO, headers);
-            
-            ResponseEntity<ProductPropertiesDTO> responseEntity
-                    = REST_TEMPLATE.exchange(url, HttpMethod.PUT, httpEntity, ProductPropertiesDTO.class);
-
-            return responseEntity.getBody();
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .put(Entity.json(prodPropDTO), ProductPropertiesDTO.class);
         } catch (Throwable ex) {
             throw new RestException(ex);
         }
@@ -73,15 +68,10 @@ public class ProductPropertiesResourceImpl implements ProductPropertiesResource 
             String url = baseWebServiceUrl + DELETE_PROD_PROP_URL
                     .replace("{productCode}", String.valueOf(productCode))
                     .replace("{prodPropName}", prodPropName);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity httpEntity = new HttpEntity(headers);
-            
-            ResponseEntity<ProductPropertiesDTO> responseEntity
-                    = REST_TEMPLATE.exchange(url, HttpMethod.DELETE, httpEntity, ProductPropertiesDTO.class);
-
-            return responseEntity.getBody();
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .header("Content-Type", "application/json;charset=utf-8")
+                    .delete(ProductPropertiesDTO.class);
         } catch (Throwable ex) {
             throw new RestException(ex);
         }

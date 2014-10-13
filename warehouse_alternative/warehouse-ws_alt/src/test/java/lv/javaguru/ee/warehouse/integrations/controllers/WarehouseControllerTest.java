@@ -60,7 +60,7 @@ public class WarehouseControllerTest extends EmbeddedJettyTest {
         try {
             RestFixture.getWarehouse("zzzzzzzzzzzzzzzzzzzzzz");
         } catch (RestException e) {
-            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getHttpStatus());
+            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY.value(), e.getHttpStatus());
         }
     }
     

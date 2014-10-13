@@ -1,23 +1,23 @@
 package lv.javaguru.ee.warehouse.integrations;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
+import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.core.Response;
 
 /**
  * Created by Viktor on 19/09/2014.
  */
 public class RestException extends RuntimeException {
 
-    private HttpStatus httpStatus;
+    private Response.StatusType httpStatus;
 
     public RestException(Throwable e) {
-        if(e instanceof HttpClientErrorException) {
-            this.httpStatus = ((HttpClientErrorException) e).getStatusCode();
+        if(e instanceof ClientErrorException) {
+            this.httpStatus = ((ClientErrorException) e).getResponse().getStatusInfo();
         }
     }
 
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
+    public int getHttpStatus() {
+        return httpStatus.getStatusCode();
     }
 
 }

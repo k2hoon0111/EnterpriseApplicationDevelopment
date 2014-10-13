@@ -57,7 +57,7 @@ public class ProductControllerTest extends EmbeddedJettyTest {
         try {
             RestFixture.getProduct(Long.MAX_VALUE);
         } catch (RestException e) {
-            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, e.getHttpStatus());
+            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY.value(), e.getHttpStatus());
         }
     }
     

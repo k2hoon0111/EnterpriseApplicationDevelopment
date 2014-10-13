@@ -1,26 +1,25 @@
 package lv.javaguru.ee.warehouse.integrations.resourses;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import lv.javaguru.ee.warehouse.integrations.RestException;
 import lv.javaguru.ee.warehouse.integrations.domain.ProductDTO;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 /**
  *
  * @author dell
  */
 public class ProductResourceImpl implements ProductResource {
-
-    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
-
+    
     private final String baseWebServiceUrl;
-
+    private final Client client;
+    
+    
     public ProductResourceImpl(String baseWebServiceUrl) {
         this.baseWebServiceUrl = baseWebServiceUrl;
+        this.client = ClientBuilder.newClient();
     }
     
     @Override
@@ -28,8 +27,9 @@ public class ProductResourceImpl implements ProductResource {
        try {
             String url = baseWebServiceUrl + 
                     GET_PRODUCT_URL.replace("{productCode}", String.valueOf(productCode));
-            
-            return REST_TEMPLATE.getForObject(url, ProductDTO.class);
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get(ProductDTO.class);             
         } catch (Throwable ex) {
             throw new RestException(ex);
         }
@@ -39,7 +39,9 @@ public class ProductResourceImpl implements ProductResource {
     public ProductDTO createProduct(ProductDTO productDTO) throws RestException {        
         try {
             String url = baseWebServiceUrl + CREATE_PRODUCT_URL;
-            return REST_TEMPLATE.postForObject(url, productDTO, ProductDTO.class);
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .post(Entity.json(productDTO), ProductDTO.class);            
         } catch (Throwable ex) {
             throw new RestException(ex);
         }        
@@ -50,15 +52,9 @@ public class ProductResourceImpl implements ProductResource {
         try {
             String url = baseWebServiceUrl + 
                     UPDATE_PRODUCT_URL.replace("{productCode}", String.valueOf(productCode));
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            HttpEntity<ProductDTO> httpEntity = new HttpEntity<>(productDTO, headers);
-            ResponseEntity<ProductDTO> responseEntity
-                    = REST_TEMPLATE.exchange(url, HttpMethod.PUT, httpEntity, ProductDTO.class);
-
-            return responseEntity.getBody();
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .put(Entity.json(productDTO), ProductDTO.class);            
         } catch (Throwable ex) {
             throw new RestException(ex);
         }
@@ -69,15 +65,10 @@ public class ProductResourceImpl implements ProductResource {
         try {
             String url = baseWebServiceUrl + 
                     DELETE_PRODUCT_URL.replace("{productCode}", String.valueOf(productCode));
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            HttpEntity<ProductDTO> httpEntity = new HttpEntity<>(headers);
-            ResponseEntity<ProductDTO> responseEntity
-                    = REST_TEMPLATE.exchange(url, HttpMethod.DELETE, httpEntity, ProductDTO.class);
-
-            return responseEntity.getBody();
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .header("Content-Type", "application/json;charset=utf-8")
+                    .delete(ProductDTO.class);            
         } catch (Throwable ex) {
             throw new RestException(ex);
         }

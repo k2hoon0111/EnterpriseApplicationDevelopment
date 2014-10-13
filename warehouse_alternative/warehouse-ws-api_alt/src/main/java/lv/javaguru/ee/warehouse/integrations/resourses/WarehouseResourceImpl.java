@@ -1,33 +1,33 @@
 package lv.javaguru.ee.warehouse.integrations.resourses;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import lv.javaguru.ee.warehouse.integrations.RestException;
 import lv.javaguru.ee.warehouse.integrations.domain.WarehouseDTO;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 /**
  *
  * @author dell
  */
 public class WarehouseResourceImpl implements WarehouseResource {
-
-    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
-
+    
     private final String baseWebServiceUrl;
-
+    private final Client client;
+    
     public WarehouseResourceImpl(String baseWebServiceUrl) {
         this.baseWebServiceUrl = baseWebServiceUrl;
+        this.client = ClientBuilder.newClient();
     }
             
     @Override
     public WarehouseDTO getWarehouse(String warehouseCode) throws RestException {
         try {
-            String url = baseWebServiceUrl + GET_WAREHOUSE_URL.replace("{warehouseCode}", warehouseCode);
-            return REST_TEMPLATE.getForObject(url, WarehouseDTO.class);
+            String url = baseWebServiceUrl + GET_WAREHOUSE_URL.replace("{warehouseCode}", warehouseCode);            
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .get(WarehouseDTO.class);                          
         } catch (Throwable ex) {
             throw new RestException(ex);
         }
@@ -37,7 +37,9 @@ public class WarehouseResourceImpl implements WarehouseResource {
     public WarehouseDTO createWarehouse(WarehouseDTO warehouseDTO) throws RestException {
         try {
             String url = baseWebServiceUrl + CREATE_WAREHOUSE_URL;
-            return REST_TEMPLATE.postForObject(url, warehouseDTO, WarehouseDTO.class);
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .post(Entity.json(warehouseDTO), WarehouseDTO.class);
         } catch (Throwable ex) {
             throw new RestException(ex);
         }
@@ -47,15 +49,9 @@ public class WarehouseResourceImpl implements WarehouseResource {
     public WarehouseDTO updateWarehouse(String warehouseCode, WarehouseDTO warehouseDTO) throws RestException {
         try {
             String url = baseWebServiceUrl + UPDATE_WAREHOUSE_URL.replace("{warehouseCode}", warehouseCode);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            HttpEntity<WarehouseDTO> httpEntity = new HttpEntity<>(warehouseDTO, headers);
-            ResponseEntity<WarehouseDTO> responseEntity
-                    = REST_TEMPLATE.exchange(url, HttpMethod.PUT, httpEntity, WarehouseDTO.class);
-
-            return responseEntity.getBody();
+            return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .put(Entity.json(warehouseDTO), WarehouseDTO.class);                        
         } catch (Throwable ex) {
             throw new RestException(ex);
         }
@@ -66,15 +62,10 @@ public class WarehouseResourceImpl implements WarehouseResource {
         try {
             String url = baseWebServiceUrl + 
                     DELETE_WAREHOUSE_URL.replace("{warehouseCode}", warehouseCode);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            HttpEntity<WarehouseDTO> httpEntity = new HttpEntity<>(headers);
-            ResponseEntity<WarehouseDTO> responseEntity
-                    = REST_TEMPLATE.exchange(url, HttpMethod.DELETE, httpEntity, WarehouseDTO.class);
-
-            return responseEntity.getBody();
+             return this.client.target(url)
+                    .request(MediaType.APPLICATION_JSON_TYPE)
+                    .header("Content-Type", "application/json;charset=utf-8")
+                    .delete(WarehouseDTO.class);
         } catch (Throwable ex) {
             throw new RestException(ex);
         }
