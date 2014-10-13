@@ -27,8 +27,35 @@ public class AppRestExceptionHandler extends ResponseEntityExceptionHandler {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-
-        return handleExceptionInternal(e, ire.getMessage(), headers, HttpStatus.UNPROCESSABLE_ENTITY, request);
+        
+        ErrorBean errorBean = new ErrorBean(HttpStatus.UNPROCESSABLE_ENTITY.value(), ire.getMessage());
+        return handleExceptionInternal(e, errorBean, headers, HttpStatus.UNPROCESSABLE_ENTITY, request);
     }
 
+    private class ErrorBean {
+        private String message;
+        private Integer code;
+        
+        public ErrorBean(Integer code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public void setCode(Integer code) {
+            this.code = code;
+        }
+    }
+    
 }
