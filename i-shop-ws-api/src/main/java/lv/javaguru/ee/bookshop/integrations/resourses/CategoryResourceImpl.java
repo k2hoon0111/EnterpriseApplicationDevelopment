@@ -2,71 +2,70 @@ package lv.javaguru.ee.bookshop.integrations.resourses;
 
 import lv.javaguru.ee.bookshop.integrations.RestException;
 import lv.javaguru.ee.bookshop.integrations.domain.CategoryDTO;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 
 /**
  * Created by Viktor on 19/09/2014.
  */
 public class CategoryResourceImpl implements CategoryResource {
 
-    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
+  private String baseWebServiceUrl;
+  private Client client;
 
-    private String baseWebServiceUrl;
 
+  public CategoryResourceImpl(String baseWebServiceUrl) {
+    this.baseWebServiceUrl = baseWebServiceUrl;
+    this.client = ClientBuilder.newClient();
+  }
 
-    public CategoryResourceImpl(String baseWebServiceUrl) {
-        this.baseWebServiceUrl = baseWebServiceUrl;
+  @Override
+  public CategoryDTO createCategory(CategoryDTO categoryDTO) throws RestException {
+    try {
+      String categoryUrl = baseWebServiceUrl + CREATE_CATEGORY_URL;
+      WebTarget target = client.target(categoryUrl);
+      return target.request(MediaType.APPLICATION_XML)
+          .post(Entity.entity(categoryDTO, MediaType.APPLICATION_XML), CategoryDTO.class);
+    } catch (Throwable e) {
+      throw new RestException(e);
     }
+  }
 
-    @Override
-    public CategoryDTO createCategory(CategoryDTO categoryDTO) throws RestException {
-        try {
-            ResponseEntity<CategoryDTO> responseEntity = REST_TEMPLATE.postForEntity(baseWebServiceUrl + CREATE_CATEGORY_URL,
-                    categoryDTO, CategoryDTO.class, new HashMap<String, String>()
-            );
-            return responseEntity.getBody();
-        } catch (Throwable e) {
-            throw new RestException(e);
-        }
+  @Override
+  public CategoryDTO getCategory(Long categoryId) throws RestException {
+    try {
+      String getCategoryUrl = baseWebServiceUrl + CATEGORY_URL.replace("{categoryId}", categoryId.toString());
+      WebTarget target = client.target(getCategoryUrl);
+      return target.request(MediaType.APPLICATION_XML).get(CategoryDTO.class);
+    } catch (Throwable e) {
+      throw new RestException(e);
     }
+  }
 
-    @Override
-    public CategoryDTO getCategory(Long categoryId) throws RestException {
-        try {
-            String getCategoryUrl = GET_CATEGORY_URL.replace("{categoryId}", categoryId.toString());
-            ResponseEntity<CategoryDTO> responseEntity = REST_TEMPLATE.getForEntity(baseWebServiceUrl + getCategoryUrl,
-                    CategoryDTO.class, new HashMap<String, String>()
-            );
-            return responseEntity.getBody();
-        } catch (Throwable e) {
-            throw new RestException(e);
-        }
+  @Override
+  public CategoryDTO updateCategory(Long categoryId, CategoryDTO categoryDTO) throws RestException {
+    try {
+      String updateCategoryUrl = baseWebServiceUrl + CATEGORY_URL.replace("{categoryId}", categoryId.toString());
+      WebTarget target = client.target(updateCategoryUrl);
+      return target.request(MediaType.APPLICATION_XML)
+          .put(Entity.entity(categoryDTO, MediaType.APPLICATION_XML), CategoryDTO.class);
+    } catch (Throwable e) {
+      throw new RestException(e);
     }
+  }
 
-    @Override
-    public void updateCategory(Long categoryId, CategoryDTO categoryDTO) throws RestException {
-        try {
-            String updateCategoryUrl = UPDATE_CATEGORY_URL.replace("{categoryId}", categoryId.toString());
-            REST_TEMPLATE.put(baseWebServiceUrl + updateCategoryUrl,
-                    categoryDTO, CategoryDTO.class, new HashMap<String, String>()
-            );
-        } catch (Throwable e) {
-            e.printStackTrace();
-            throw new RestException(e);
-        }
+  @Override
+  public CategoryDTO deleteCategory(Long categoryId) throws RestException {
+    try {
+      String deleteCategoryUrl = baseWebServiceUrl + CATEGORY_URL.replace("{categoryId}", categoryId.toString());
+      WebTarget target = client.target(deleteCategoryUrl);
+      return target.request(MediaType.APPLICATION_XML).delete(CategoryDTO.class);
+    } catch (Throwable e) {
+      throw new RestException(e);
     }
-
-    @Override
-    public void deleteCategory(Long categoryId) throws RestException {
-        try {
-            String deleteCategoryUrl = DELETE_CATEGORY_URL.replace("{categoryId}", categoryId.toString());
-            REST_TEMPLATE.delete(baseWebServiceUrl + deleteCategoryUrl);
-        } catch (Throwable e) {
-            e.printStackTrace();
-            throw new RestException(e);
-        }
-    }
+  }
 }

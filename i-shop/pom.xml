@@ -79,8 +79,8 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>net.sf.ehcache</groupId>-->
-            <!--<artifactId>ehcache-core</artifactId>-->
+        <!--<groupId>net.sf.ehcache</groupId>-->
+        <!--<artifactId>ehcache-core</artifactId>-->
         <!--</dependency>-->
 
         <dependency>
@@ -118,6 +118,49 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
+        </dependency>
+
+        <!-- Apache Camel and JMS dependencies -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-ftp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-javaconfig</artifactId>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.camel</groupId>-->
+            <!--<artifactId>camel-spring-osgi</artifactId>-->
+            <!--<version>2.3.0</version>-->
+            <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-xmljson</artifactId>
         </dependency>
 
         <!-- Testing lib dependencies -->
@@ -164,31 +207,31 @@
             </plugin>
 
             <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-deploy-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<skip>true</skip>-->
-                <!--</configuration>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-deploy-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<skip>true</skip>-->
+            <!--</configuration>-->
             <!--</plugin>-->
 
             <!--<plugin>-->
-                <!--<groupId>org.sonatype.plugins</groupId>-->
-                <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
-                <!--<version>1.5.1</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>default-deploy</id>-->
-                        <!--<phase>deploy</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>deploy</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                    <!--<serverId>nexus</serverId>-->
-                    <!--<nexusUrl>http://localhost:8080/nexus/</nexusUrl>-->
-                    <!--<skipStaging>true</skipStaging>-->
-                <!--</configuration>-->
+            <!--<groupId>org.sonatype.plugins</groupId>-->
+            <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
+            <!--<version>1.5.1</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>default-deploy</id>-->
+            <!--<phase>deploy</phase>-->
+            <!--<goals>-->
+            <!--<goal>deploy</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--<configuration>-->
+            <!--<serverId>nexus</serverId>-->
+            <!--<nexusUrl>http://localhost:8080/nexus/</nexusUrl>-->
+            <!--<skipStaging>true</skipStaging>-->
+            <!--</configuration>-->
             <!--</plugin>-->
 
         </plugins>
