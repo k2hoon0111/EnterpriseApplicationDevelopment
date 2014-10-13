@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 public class ScheduledBackgroundJob implements Runnable {
 
 	private static final Logger log = LoggerFactory.getLogger(ScheduledBackgroundJob.class);
-	
+
+
+//	@Scheduled(fixedRate=2000)
 	@Override
 	public void run() {
 		log.info("ScheduledBackgroundTask started!");

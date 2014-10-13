@@ -11,11 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
-/**
- * Server route
- */
 @Component
-public class FtpServerRouteBuilder extends SpringRouteBuilder {
+public class FromFtpServerRouteBuilder extends SpringRouteBuilder {
 
     @Override
     public void configure() throws Exception {
@@ -28,27 +25,16 @@ public class FtpServerRouteBuilder extends SpringRouteBuilder {
         xmlJsonFormat.setRemoveNamespacePrefixes(true);
         xmlJsonFormat.setExpandableProperties(Arrays.asList("d", "e"));
 
-
         // configure properties component
         PropertiesComponent pc = getContext().getComponent("properties", PropertiesComponent.class);
         pc.setLocation("classpath:ftp.properties");
 
-        // lets shutdown faster in case of in-flight messages stack up
-        getContext().getShutdownStrategy().setTimeout(10);
-
         from("{{ftp.server}}")
-//                .split().tokenizeXML("category")
                 .marshal(xmlJsonFormat)
-                .to("file:/Users/MumboJumbo/camel/")
+                .to("file:/Users/MumboJumbo/camel/?fileName=${file:name.noext}_${date:now:yyyyMMddhhmmssSS}.json")
                 .log("Downloaded file ${file:name} ${file:size} complete.");
-//        split().tokenizeXML("row").streaming()
-//        split().tokenizeXML("categoryDTO").streaming()
-//        .convertBodyTo(CategoryDTO.class)
-//        from("{{ftp.server}}")
-//                .to("file:/Users/MumboJumbo/camel/")
-//                .split().tokenizeXML("row").streaming().marshal(xmlJsonFormat).
-//                to("mock:json");
-//        .log("Downloaded file ${file:name} ${file:size} complete.");
-// use system out so it stand out
+
+        from("direct:start").to("mock:result");
+
     }
 }

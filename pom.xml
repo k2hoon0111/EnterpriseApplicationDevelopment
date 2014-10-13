@@ -96,6 +96,8 @@
         <camel-spring.version>2.13.0</camel-spring.version>
         <camel-jms.version>2.13.0</camel-jms.version>
         <camel-ftp.version>2.13.0</camel-ftp.version>
+        <camel-spring-javaconfig.version>2.13.0</camel-spring-javaconfig.version>
+        <camel-xmljson.version>2.13.0</camel-xmljson.version>
         <activemq-core.version>5.7.0</activemq-core.version>
 
         <!-- Testing lib dependencies -->
@@ -405,6 +407,18 @@
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>activemq-core</artifactId>
                 <version>${activemq-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-spring-javaconfig</artifactId>
+                <version>${camel-spring-javaconfig.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-xmljson</artifactId>
+                <version>${camel-xmljson.version}</version>
             </dependency>
 
         </dependencies>
