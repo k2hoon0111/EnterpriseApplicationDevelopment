@@ -3,9 +3,6 @@ package lv.javaguru.ee.warehouse.integrations;
 import cucumber.api.java.Before;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
-
-import org.springframework.http.HttpStatus;
-
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import lv.javaguru.ee.warehouse.integrations.domain.WarehouseDTO;
@@ -67,8 +64,7 @@ public class WarehouseStepDefinitions {
     }
     
     @Then("^the response exception status code should be \"(\\d*)\" from warehouse resource$")
-    public void response_exception_status_code_should_be(Integer responseStatus) {        
-        HttpStatus statusCode = HttpStatus.valueOf(responseStatus);
+    public void response_exception_status_code_should_be(Integer statusCode) {        
         assertThat(statusCode, is(exception.getHttpStatus()));
     }
         

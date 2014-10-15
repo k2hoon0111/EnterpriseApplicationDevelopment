@@ -7,7 +7,6 @@ import lv.javaguru.ee.warehouse.integrations.domain.ProductDTO;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import org.springframework.http.HttpStatus;
 
 /**
  *
@@ -69,8 +68,7 @@ public class ProductStepDefinitions {
     }
     
     @Then("^the response exception status code should be \"(\\d*)\" from product resource$")
-    public void response_exception_status_code_should_be(Integer responseStatus) {        
-        HttpStatus statusCode = HttpStatus.valueOf(responseStatus);
+    public void response_exception_status_code_should_be(Integer statusCode) {        
         assertThat(statusCode, is(exception.getHttpStatus()));
     }
         

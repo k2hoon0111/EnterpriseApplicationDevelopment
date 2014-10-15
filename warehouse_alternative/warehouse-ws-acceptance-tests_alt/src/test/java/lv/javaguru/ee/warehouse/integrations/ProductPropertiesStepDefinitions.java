@@ -5,11 +5,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import lv.javaguru.ee.warehouse.integrations.domain.ProductDTO;
 import lv.javaguru.ee.warehouse.integrations.domain.ProductPropertiesDTO;
-import lv.javaguru.ee.warehouse.integrations.domain.WarehouseDTO;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import org.springframework.http.HttpStatus;
+
 
 /**
  *
@@ -75,8 +74,7 @@ public class ProductPropertiesStepDefinitions {
     }
     
     @Then("^the response exception status code should be \"(\\d*)\" from product properties resource$")
-    public void response_exception_status_code_should_be(Integer responseStatus) {        
-        HttpStatus statusCode = HttpStatus.valueOf(responseStatus);
+    public void response_exception_status_code_should_be(Integer statusCode) {
         assertThat(statusCode, is(exception.getHttpStatus()));
     }
         
