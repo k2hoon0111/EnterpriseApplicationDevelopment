@@ -48,7 +48,7 @@ public class CategoryDAOMongoImplTest {
         Category updatedCategory = categoryDAO.getById(1L);
         assertThat(updatedCategory.getName(), is("JAVA"));
 
-        categoryDAO.delete(category);
+        categoryDAO.delete(updatedCategory);
     }
 
     @Test
@@ -82,8 +82,6 @@ public class CategoryDAOMongoImplTest {
         Category createdCategory = categoryDAO.getById(2L);
         assertThat(createdCategory.getName(), is("JAVA"));
 
-        category.setCategoryId(2L);
-        category.setName("JAVA");
         categoryDAO.delete(category);
 
         Category deletedCategory = categoryDAO.getById(2L);
