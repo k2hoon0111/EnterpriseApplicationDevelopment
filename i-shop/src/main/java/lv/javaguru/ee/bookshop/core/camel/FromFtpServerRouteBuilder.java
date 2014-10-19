@@ -34,7 +34,11 @@ public class FromFtpServerRouteBuilder extends SpringRouteBuilder {
                 .to("file:/Users/MumboJumbo/camel/?fileName=${file:name.noext}_${date:now:yyyyMMddhhmmssSS}.json")
                 .log("Downloaded file ${file:name} ${file:size} complete.");
 
-        from("direct:start").to("mock:result");
+//        from("direct:start").to("mock:result");
+//
+//        from("{{ftp.server}}")
+//                .to("activemq:queue:demo")
+//                .log("Downloaded file ${file:name} ${file:size} complete.");
 
     }
 }
