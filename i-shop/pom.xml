@@ -62,6 +62,25 @@
             <artifactId>spring-data-jpa</artifactId>
         </dependency>
 
+        <!-- Spring & Spring Data MongoDB -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+        </dependency>
+
+        <!-- Querydsl -->
+
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-mongodb</artifactId>
+        </dependency>
+
         <!-- Hibernate dependencies -->
         <dependency>
             <groupId>org.hibernate</groupId>

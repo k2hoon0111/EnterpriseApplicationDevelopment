@@ -10,13 +10,14 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @ComponentScan(basePackages = {"lv.javaguru.ee.bookshop"})
 @Import({DataSourceConfig.class,
-        HibernateConfig.class,
-        JPAConfig.class,
-        TransactionConfig.class,
-        AppPropertiesConfig.class,
-        CamelConfig.class,
-        JMSConfig.class,
-        BackgroundJobConfig.class})
+    HibernateConfig.class,
+    JPAConfig.class,
+    TransactionConfig.class,
+    AppPropertiesConfig.class,
+    CamelConfig.class,
+    JMSConfig.class,
+    BackgroundJobConfig.class,
+    MongoConfig.class})
 public class CoreConfig {
 
 }

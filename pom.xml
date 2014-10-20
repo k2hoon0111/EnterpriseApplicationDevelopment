@@ -65,11 +65,19 @@
         <liquibase-core.version>3.2.2</liquibase-core.version>
 
         <!-- Spring Framework dependencies -->
-        <spring-context.version>4.1.0.RELEASE</spring-context.version>
-        <spring-tx.version>4.1.0.RELEASE</spring-tx.version>
-        <spring-orm.version>4.1.0.RELEASE</spring-orm.version>
+        <spring-context.version>4.1.1.RELEASE</spring-context.version>
+        <spring-tx.version>4.1.1.RELEASE</spring-tx.version>
+        <spring-orm.version>4.1.1.RELEASE</spring-orm.version>
         <spring-data-jpa.version>1.5.2.RELEASE</spring-data-jpa.version>
-        <spring-webmvc.version>4.1.0.RELEASE</spring-webmvc.version>
+
+        <!-- Spring & Spring Data MongoDB -->
+        <spring-data-mongodb.version>1.6.0.RELEASE</spring-data-mongodb.version>
+        <spring-expression.version>4.1.1.RELEASE</spring-expression.version>
+
+        <!-- Querydsl -->
+        <querydsl-mongodb.version>3.5.0</querydsl-mongodb.version>
+
+        <spring-webmvc.version>4.1.1.RELEASE</spring-webmvc.version>
 
         <jackson-core.version>2.3.3</jackson-core.version>
         <jackson-databind.version>2.3.3</jackson-databind.version>
@@ -223,6 +231,26 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${spring-data-jpa.version}</version>
+            </dependency>
+
+            <!-- Spring & Spring Data MongoDB -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-mongodb</artifactId>
+                <version>${spring-data-mongodb.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring-expression.version}</version>
+            </dependency>
+
+            <!-- Querydsl -->
+            <dependency>
+                <groupId>com.mysema.querydsl</groupId>
+                <artifactId>querydsl-mongodb</artifactId>
+                <version>${querydsl-mongodb.version}</version>
             </dependency>
 
             <dependency>
