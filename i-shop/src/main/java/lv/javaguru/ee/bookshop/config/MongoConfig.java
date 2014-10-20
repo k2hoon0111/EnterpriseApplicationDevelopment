@@ -1,9 +1,7 @@
 package lv.javaguru.ee.bookshop.config;
 
-import java.util.List;
-
-import javax.sql.DataSource;
-
+import com.mongodb.Mongo;
+import com.mongodb.WriteConcern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +11,8 @@ import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.mongodb.Mongo;
-import com.mongodb.WriteConcern;
+import javax.sql.DataSource;
+import java.util.List;
 
 /**
  * Spring JavaConfig configuration class to setup a Spring container and infrastructure components like a
@@ -60,4 +58,5 @@ class MongoConfig extends AbstractMongoConfiguration {
   public CustomConversions customConversions() {
     return new CustomConversions(converters);
   }
+
 }
