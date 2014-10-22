@@ -2,6 +2,7 @@ package lv.javaguru.ee.warehouse.core.services;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Objects.requireNonNull;
+import java.util.Set;
 import lv.javaguru.ee.warehouse.core.command.CreateOutgoingOrderCommand;
 import lv.javaguru.ee.warehouse.core.command.CreateOutgoingOrderCommandResult;
 import lv.javaguru.ee.warehouse.core.database.OrderDAO;
@@ -35,15 +36,20 @@ public class CreateOutgoingOrderCommandHandler implements
         
         validate(command);
         
-        Product product = command.getProduct();        
-        product = productDAO.getByCode(product.getCode());
-        requireNonNull(product, "OutgoingOrder product not found");
-                
         Warehouse warehouse = command.getWarehouse();
         warehouse = warehouseDAO.getByTitle(warehouse.getTitle());
         requireNonNull(warehouse, "OutgoingOrder warehouse not found");
         
-        Order order = createOutgoingOrderFromCommand(command, product, warehouse);        
+        Order order = createOutgoingOrderFromCommand(command, warehouse);
+        
+        Set<Product> products = command.getProducts(); 
+        for (Product product : products) {
+            product = productDAO.getByCode(product.getCode());
+            requireNonNull(product, "OutgoingOrder product not found");
+            requireNonNull(product.getCode(), "OutgoingOrder product code can not be empty");
+            order.addProduct(product);
+        }
+                  
         orderDAO.create(order);
         
         //todo sdelatj spisanije tovara
@@ -59,8 +65,8 @@ public class CreateOutgoingOrderCommandHandler implements
     @Override
     public void validate(CreateOutgoingOrderCommand command) {
         requireNonNull(command, "OutgoingOrder can not be empty");
-        requireNonNull(command.getProduct(), "OutgoingOrder product can not be empty");
-        requireNonNull(command.getProduct().getCode(), "OutgoingOrder product code can not be empty");
+        requireNonNull(command.getProducts(), "OutgoingOrder product can not be empty");
+        checkArgument(!command.getProducts().isEmpty(), "OutgoingOrder products can not be empty");
         requireNonNull(command.getWarehouse(), "OutgoingOrder warehouse can not be empty");
         requireNonNull(command.getWarehouse().getTitle(), "OutgoingOrder warehouse title can not be empty");
         requireNonNull(command.getAmount(), "OutgoingOrder amount can not be empty");
@@ -69,10 +75,9 @@ public class CreateOutgoingOrderCommandHandler implements
         checkArgument(command.getAmount() != 0, "OutgoingOrder quantity can not be 0");
     }
 
-    private Order createOutgoingOrderFromCommand(CreateOutgoingOrderCommand command, Product product, Warehouse warehouse) {
+    private Order createOutgoingOrderFromCommand(CreateOutgoingOrderCommand command, Warehouse warehouse) {
         Order order = new Order();
-        order.setDirection(Order.Direction.OUTGOING);
-        order.setProduct(product);
+        order.setDirection(Order.Direction.OUTGOING);        
         order.setWarehouse(warehouse);
         order.setAmount(command.getAmount());
         order.setQuantity(command.getQuantity());                

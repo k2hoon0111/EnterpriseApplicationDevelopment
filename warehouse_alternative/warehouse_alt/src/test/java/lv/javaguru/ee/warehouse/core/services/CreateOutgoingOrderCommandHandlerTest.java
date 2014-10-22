@@ -42,7 +42,7 @@ public class CreateOutgoingOrderCommandHandlerTest {
     @Test
     public void testExecuteShouldThrowExceptionWhenDeliveryIdIsNull() {        
         CreateOutgoingOrderCommand command = new CreateOutgoingOrderCommand();
-        executeValidation(command, "OutgoingOrder product can not be empty");
+        executeValidation(command, "OutgoingOrder products can not be empty");
     }
 
     private void executeValidation(CreateOutgoingOrderCommand command, String errorMessage) {

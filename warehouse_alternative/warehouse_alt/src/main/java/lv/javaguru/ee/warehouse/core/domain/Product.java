@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,8 +34,7 @@ public class Product {
     private Long id;
     
     @Version
-    @Column(name = "VERSION", nullable = false)
-    //@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @Column(name = "VERSION", nullable = false)    
     @NotAudited
     private Long version;
     
@@ -129,5 +129,53 @@ public class Product {
         this.addWarehouseProduct(wp);
         warehouse.addWarehouseProduct(wp);        
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.version);
+        hash = 37 * hash + Objects.hashCode(this.code);
+        hash = 37 * hash + Objects.hashCode(this.title);
+        hash = 37 * hash + Objects.hashCode(this.description);
+        //hash = 37 * hash + Objects.hashCode(this.warehouseProducts);
+        hash = 37 * hash + Objects.hashCode(this.productProperties);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.version, other.version)) {
+            return false;
+        }
+        if (!Objects.equals(this.code, other.code)) {
+            return false;
+        }
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+//        if (!Objects.equals(this.warehouseProducts, other.warehouseProducts)) {
+//            return false;
+//        }
+        if (!Objects.equals(this.productProperties, other.productProperties)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
 }

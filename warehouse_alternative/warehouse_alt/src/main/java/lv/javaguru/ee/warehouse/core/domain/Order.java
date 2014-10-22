@@ -1,6 +1,9 @@
 package lv.javaguru.ee.warehouse.core.domain;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,8 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,9 +45,11 @@ public class Order {
     @Column(name = "DIRECTION", length = 10)
     private Direction direction;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="PRODUCT_ID", nullable = false)    
-    private Product product;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)     
+    @JoinTable(name="ORDER_PRODUCTS", 
+               joinColumns={@JoinColumn(name="ORDER_ID", nullable = false)}, 
+               inverseJoinColumns={@JoinColumn(name="PRODUCT_ID", nullable = false)})
+    private Set<Product> products = new HashSet<>();
     
     @ManyToOne(fetch = FetchType.EAGER)    
     @JoinColumn(name="WAREHOUSE_ID", nullable = false)
@@ -89,15 +95,19 @@ public class Order {
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
-
-    public Product getProduct() {
-        return product;
+    
+    public void addProduct(Product product) {
+        this.products.add(product);
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public Set<Product> getProducts() {
+        return products;
     }
 
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+        
     public Warehouse getWarehouse() {
         return warehouse;
     }

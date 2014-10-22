@@ -1,5 +1,8 @@
 package lv.javaguru.ee.warehouse.core.command;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import lv.javaguru.ee.warehouse.core.domain.Product;
 import lv.javaguru.ee.warehouse.core.domain.Warehouse;
 
@@ -9,7 +12,7 @@ import lv.javaguru.ee.warehouse.core.domain.Warehouse;
  */
 public class CreateIncomingOrderCommand implements DomainCommand<CreateIncomingOrderCommandResult> {
 
-    private Product product;
+    private Set<Product> products = new HashSet<>();
 
     private Warehouse warehouse;
 
@@ -18,23 +21,34 @@ public class CreateIncomingOrderCommand implements DomainCommand<CreateIncomingO
     private Integer amount;
 
     public CreateIncomingOrderCommand(Product product, Warehouse warehouse, Integer quantity, Integer amount) {
-        this.product = product;
+        this.products.add(product);
         this.warehouse = warehouse;
         this.quantity = quantity;
         this.amount = amount;
     }
-
+        
     public CreateIncomingOrderCommand() {
     }
 
-    public Product getProduct() {
-        return product;
+    public Set<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void addProduct(Product product) {
+        this.products.add(product);
     }
 
+    public void addProduct(Product... product) {
+        if (product == null || product.length==0) {
+            throw new RuntimeException("Can not add null to the order products");
+        }
+        this.products.addAll(Arrays.asList(product));
+    }
+    
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+        
     public Warehouse getWarehouse() {
         return warehouse;
     }

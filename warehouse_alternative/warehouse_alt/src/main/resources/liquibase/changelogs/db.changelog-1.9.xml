@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="ainar" context="main">  
+        <dropForeignKeyConstraint baseTableName="ORDERS" constraintName="FK_ORDERS_PRODUCTS"/>   
+        <dropColumn tableName="ORDERS" columnName="PRODUCT_ID"/>                   
+    </changeSet>
+    
+    <changeSet id="2" author="ainar" context="main">  
+        
+        <createTable tableName="ORDER_PRODUCTS">
+            <column name="ORDER_ID" type="BIGINT(20)">
+                <constraints nullable="false"/>                
+            </column>
+            <column name="PRODUCT_ID" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addPrimaryKey tableName="ORDER_PRODUCTS" columnNames="ORDER_ID,PRODUCT_ID"/>
+                            
+        <addForeignKeyConstraint baseTableName="ORDER_PRODUCTS"
+                                 baseColumnNames="PRODUCT_ID"                                 
+                                 constraintName="FK_ORDER_PRODUCTS_PRODUCTS"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"                                 
+                                 referencedColumnNames="ID"
+                                 referencedTableName="PRODUCTS"/>   
+        
+        <addForeignKeyConstraint baseTableName="ORDER_PRODUCTS"
+                                 baseColumnNames="ORDER_ID"                                 
+                                 constraintName="FK_ORDER_PRODUCTS_ORDERS"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"                                 
+                                 referencedColumnNames="ID"
+                                 referencedTableName="ORDERS"/> 
+                        
+    </changeSet>
+    
+</databaseChangeLog>
