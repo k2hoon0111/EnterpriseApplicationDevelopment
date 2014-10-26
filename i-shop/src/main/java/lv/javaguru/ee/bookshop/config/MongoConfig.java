@@ -14,49 +14,49 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 import java.util.List;
 
+
 /**
  * Spring JavaConfig configuration class to setup a Spring container and infrastructure components like a
- * {@link DataSource}, a {@link EntityManagerFactory} and a {@link PlatformTransactionManager}.
+ * {@link javax.sql.DataSource}, a {@link EntityManagerFactory} and a {@link org.springframework.transaction.PlatformTransactionManager}.
  *
  * @author Oliver Gierke
  */
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages = {"lv.javaguru.ee.bookshop.core.domain.mongo"})
 @EnableMongoRepositories
-class MongoConfig extends AbstractMongoConfiguration {
+public class MongoConfig extends AbstractMongoConfiguration {
 
-  @Autowired
-  private List<Converter<?, ?>> converters;
+    @Autowired
+    private List<Converter<?, ?>> converters;
 
-  /*
-   * (non-Javadoc)
-   * @see org.springframework.data.mongodb.config.AbstractMongoConfiguration#getDatabaseName()
-   */
-  @Override
-  protected String getDatabaseName() {
-    return "i-shop";
-  }
+    /*
+     * (non-Javadoc)
+     * @see org.springframework.data.mongodb.config.AbstractMongoConfiguration#getDatabaseName()
+     */
+    @Override
+    protected String getDatabaseName() {
+        return "e-store";
+    }
 
-  /*
-   * (non-Javadoc)
-   * @see org.springframework.data.mongodb.config.AbstractMongoConfiguration#mongo()
-   */
-  @Override
-  public Mongo mongo() throws Exception {
+    /*
+     * (non-Javadoc)
+     * @see org.springframework.data.mongodb.config.AbstractMongoConfiguration#mongo()
+     */
+    @Override
+    public Mongo mongo() throws Exception {
 
-    Mongo mongo = new Mongo();
-    mongo.setWriteConcern(WriteConcern.SAFE);
+        Mongo mongo = new Mongo("178.62.248.4", 27017);
+        mongo.setWriteConcern(WriteConcern.SAFE);
 
-    return mongo;
-  }
+        return mongo;
+    }
 
-  /*
-   * (non-Javadoc)
-   * @see org.springframework.data.mongodb.config.AbstractMongoConfiguration#customConversions()
-   */
-  @Override
-  public CustomConversions customConversions() {
-    return new CustomConversions(converters);
-  }
-
+    /*
+     * (non-Javadoc)
+     * @see org.springframework.data.mongodb.config.AbstractMongoConfiguration#customConversions()
+     */
+    @Override
+    public CustomConversions customConversions() {
+        return new CustomConversions(converters);
+    }
 }
