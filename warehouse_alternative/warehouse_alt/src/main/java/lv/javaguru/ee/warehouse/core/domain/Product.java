@@ -139,7 +139,7 @@ public class Product {
         hash = 37 * hash + Objects.hashCode(this.title);
         hash = 37 * hash + Objects.hashCode(this.description);
         //hash = 37 * hash + Objects.hashCode(this.warehouseProducts);
-        hash = 37 * hash + Objects.hashCode(this.productProperties);
+        //hash = 37 * hash + Objects.hashCode(this.productProperties);
         return hash;
     }
 
@@ -170,9 +170,9 @@ public class Product {
 //        if (!Objects.equals(this.warehouseProducts, other.warehouseProducts)) {
 //            return false;
 //        }
-        if (!Objects.equals(this.productProperties, other.productProperties)) {
-            return false;
-        }
+//        if (!Objects.equals(this.productProperties, other.productProperties)) {
+//            return false;
+//        }
         return true;
     }
     
