@@ -1,12 +1,15 @@
 package lv.javaguru.ee.warehouse.integrations.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author dell
  */
 public class OrderDTO {
  
-    private Long productCode;
+    private final Set<Long> productCodes = new HashSet<>();
 
     private String warehouseCode;
 
@@ -17,21 +20,24 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(Long productCode, String warehouseCode, Integer quantity, Integer amount) {
-        this.productCode = productCode;
+    public OrderDTO(Set<Long> productCodes, String warehouseCode, Integer quantity, Integer amount) {
+        this.productCodes.addAll(productCodes);
         this.warehouseCode = warehouseCode;
         this.quantity = quantity;
         this.amount = amount;
     }
 
-    
-    
-    public Long getProductCode() {
-        return productCode;
+    public Set<Long> getProductCodess() {
+        return this.productCodes;
     }
-
-    public void setProductCode(Long productCode) {
-        this.productCode = productCode;
+    
+    public void setProductCodes(Set<Long> productCode) {
+        this.productCodes.clear();
+        this.productCodes.addAll(productCode);
+    }
+    
+    public void addProductCode(Long productCode) {
+        this.productCodes.add(productCode);    
     }
     
     public String getWarehouseCode() {
@@ -57,7 +63,5 @@ public class OrderDTO {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
-    
-    
     
 }

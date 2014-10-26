@@ -37,11 +37,5 @@ public class SpringWebMvcInitializer extends AbstractDispatcherServletInitialize
     protected String[] getServletMappings() {
         return new String[]{"/*"};
     }
-
-    @Override
-    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        super.customizeRegistration(registration); 
-        log.info("Servlet mappings : {}", registration.getMappings().toArray());
-    }
-     
+         
 }

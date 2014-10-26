@@ -1,10 +1,12 @@
 package lv.javaguru.ee.warehouse.integrations.domain.builders;
 
+import java.util.HashSet;
+import java.util.Set;
 import lv.javaguru.ee.warehouse.integrations.domain.OrderDTO;
 
 public class OrderDTOBuilder {
 
-    private Long productCode;
+    private final Set<Long> productCodes = new HashSet<>();
     private String warehouseCode;
     private Integer quantity;
     private Integer amount;
@@ -16,11 +18,17 @@ public class OrderDTOBuilder {
         return new OrderDTOBuilder();
     }
 
-    public OrderDTOBuilder setProductCode(Long productCode) {
-        this.productCode = productCode;
+    public OrderDTOBuilder setProductCode(Set<Long> productCodes) {
+        this.productCodes.clear();
+        this.productCodes.addAll(productCodes);
         return this;
     }
 
+    public OrderDTOBuilder addProductCode(Long productCode) {
+        this.productCodes.add(productCode);
+        return this;
+    }
+    
     public OrderDTOBuilder setWarehouseCode(String warehouseCode) {
         this.warehouseCode = warehouseCode;
         return this;
@@ -39,7 +47,7 @@ public class OrderDTOBuilder {
     public OrderDTO build() {
         OrderDTO order = new OrderDTO();
         order.setWarehouseCode(warehouseCode);
-        order.setProductCode(productCode);
+        order.setProductCodes(productCodes);
         order.setAmount(amount);
         order.setQuantity(quantity);        
         return order;

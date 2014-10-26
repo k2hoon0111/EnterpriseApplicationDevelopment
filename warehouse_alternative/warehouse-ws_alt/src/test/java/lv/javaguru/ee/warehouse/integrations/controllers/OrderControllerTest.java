@@ -9,7 +9,6 @@ import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 
 /**
  *
@@ -43,7 +42,8 @@ public class OrderControllerTest extends EmbeddedJettyTest {
         OrderDTO order = RestFixture.createIncomingOrder(orderDTO);
         assertNotNull(order);
         assertThat(order.getWarehouseCode(), is(orderDTO.getWarehouseCode()));
-        assertThat(order.getProductCode(), is(orderDTO.getProductCode()));
+        assertThat(order.getProductCodess().size(), is(1));
+        assertTrue(order.getProductCodess().containsAll(orderDTO.getProductCodess()));
     }
     
     @Test
@@ -55,13 +55,14 @@ public class OrderControllerTest extends EmbeddedJettyTest {
         RestFixture.createOutgoingOrder(orderDTO);
         assertNotNull(order);
         assertThat(order.getWarehouseCode(), is(orderDTO.getWarehouseCode()));
-        assertThat(order.getProductCode(), is(orderDTO.getProductCode()));
+        assertThat(order.getProductCodess().size(), is(1));
+        assertTrue(order.getProductCodess().containsAll(orderDTO.getProductCodess()));
     }
     
     private OrderDTO getDefaultOrderDTO() {    
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setWarehouseCode(warehouseDTO.getTitle());
-        orderDTO.setProductCode(productDTO.getCode());
+        orderDTO.addProductCode(productDTO.getCode());
         orderDTO.setAmount(10);
         orderDTO.setQuantity(1);
         return orderDTO;

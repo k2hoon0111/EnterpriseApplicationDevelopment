@@ -5,6 +5,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
+import java.util.Set;
 import lv.javaguru.ee.warehouse.core.CommandExecutor;
 import lv.javaguru.ee.warehouse.core.command.CreateIncomingOrderCommand;
 import lv.javaguru.ee.warehouse.core.command.CreateIncomingOrderCommandResult;
@@ -68,9 +69,14 @@ public class OrderController implements OrderResource {
         Warehouse warehouse = new Warehouse();
         warehouse.setTitle(orderDTO.getWarehouseCode());
         command.setWarehouse(warehouse);
-        Product product = new Product();
-        product.setCode(orderDTO.getProductCode());
-        command.setProduct(product);
+        
+        Set<Long> productCodes = orderDTO.getProductCodess();
+        for (Long productCode : productCodes) {
+            Product product = new Product();
+            product.setCode(productCode);
+            command.addProduct(product);
+        }
+               
         command.setAmount(orderDTO.getAmount());
         command.setQuantity(orderDTO.getQuantity());        
         return command;        
@@ -81,9 +87,14 @@ public class OrderController implements OrderResource {
         Warehouse warehouse = new Warehouse();
         warehouse.setTitle(orderDTO.getWarehouseCode());
         command.setWarehouse(warehouse);
-        Product product = new Product();
-        product.setCode(orderDTO.getProductCode());
-        command.setProduct(product);
+        
+        Set<Long> productCodes = orderDTO.getProductCodess();
+        for (Long productCode : productCodes) {
+            Product product = new Product();
+            product.setCode(productCode);
+            command.addProduct(product);
+        }
+                
         command.setAmount(orderDTO.getAmount());
         command.setQuantity(orderDTO.getQuantity());        
         return command;   
@@ -92,7 +103,12 @@ public class OrderController implements OrderResource {
     private OrderDTO createOrderDTO(Order result) {        
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setWarehouseCode(result.getWarehouse().getTitle());
-        orderDTO.setProductCode(result.getProduct().getCode());
+            
+        Set<Product> productes = result.getProducts();
+        for (Product product : productes) {
+            orderDTO.addProductCode(product.getCode());
+        }
+        
         orderDTO.setAmount(result.getAmount());
         orderDTO.setQuantity(result.getQuantity());
         return orderDTO;

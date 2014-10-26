@@ -62,7 +62,7 @@ public class RestFixture {
     public static OrderDTO getDefaultOrder(String warehouseCode, Long productCode) {    
         OrderDTO order = new OrderDTO();
         order.setWarehouseCode(warehouseCode);
-        order.setProductCode(productCode);
+        order.addProductCode(productCode);
         order.setAmount(10);
         order.setQuantity(1);
         return order;
