@@ -16,7 +16,8 @@ import org.springframework.context.annotation.Import;
         AppPropertiesConfig.class,
         CamelConfig.class,
         JMSConfig.class,
-        BackgroundJobConfig.class})
+        BackgroundJobConfig.class,
+        MongoConfig.class})
 public class CoreConfig {
 
 }

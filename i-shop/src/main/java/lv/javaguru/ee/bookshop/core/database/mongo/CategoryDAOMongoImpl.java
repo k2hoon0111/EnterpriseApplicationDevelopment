@@ -24,7 +24,7 @@ public class CategoryDAOMongoImpl implements CategoryDAO {
         MongoClient mongoClient = null;
         try {
             mongoClient = getMongoClient();
-            DB db = mongoClient.getDB("Nikolay");
+            DB db = mongoClient.getDB("i-shop");
 
             DBCollection categories = db.getCollection("categories");
 
@@ -48,7 +48,7 @@ public class CategoryDAOMongoImpl implements CategoryDAO {
         MongoClient mongoClient = null;
         try {
             mongoClient = getMongoClient();
-            DB db = mongoClient.getDB("Nikolay");
+            DB db = mongoClient.getDB("i-shop");
 
             DBCollection categories = db.getCollection("categories");
 
@@ -74,7 +74,7 @@ public class CategoryDAOMongoImpl implements CategoryDAO {
         MongoClient mongoClient = null;
         try {
             mongoClient = getMongoClient();
-            DB db = mongoClient.getDB("Nikolay");
+            DB db = mongoClient.getDB("i-shop");
 
             DBCollection categories = db.getCollection("categories");
 
@@ -97,7 +97,7 @@ public class CategoryDAOMongoImpl implements CategoryDAO {
         MongoClient mongoClient = null;
         try {
             mongoClient = getMongoClient();
-            DB db = mongoClient.getDB("Nikolay");
+            DB db = mongoClient.getDB("i-shop");
 
             DBCollection categories = db.getCollection("categories");
 
@@ -122,7 +122,7 @@ public class CategoryDAOMongoImpl implements CategoryDAO {
         MongoClient mongoClient = null;
         try {
             mongoClient = getMongoClient();
-            DB db = mongoClient.getDB("Nikolay");
+            DB db = mongoClient.getDB("i-shop");
 
             DBCollection categories = db.getCollection("categories");
 

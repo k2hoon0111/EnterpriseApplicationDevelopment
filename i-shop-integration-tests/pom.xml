@@ -151,6 +151,36 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--////////////////-->
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+        </dependency>
+
+        <!-- Querydsl -->
+
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-mongodb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
@@ -167,31 +197,31 @@
             </plugin>
 
             <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-deploy-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<skip>true</skip>-->
-                <!--</configuration>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-deploy-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<skip>true</skip>-->
+            <!--</configuration>-->
             <!--</plugin>-->
 
             <!--<plugin>-->
-                <!--<groupId>org.sonatype.plugins</groupId>-->
-                <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
-                <!--<version>1.5.1</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>default-deploy</id>-->
-                        <!--<phase>deploy</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>deploy</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                    <!--<serverId>nexus</serverId>-->
-                    <!--<nexusUrl>http://localhost:8080/nexus/</nexusUrl>-->
-                    <!--<skipStaging>true</skipStaging>-->
-                <!--</configuration>-->
+            <!--<groupId>org.sonatype.plugins</groupId>-->
+            <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
+            <!--<version>1.5.1</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>default-deploy</id>-->
+            <!--<phase>deploy</phase>-->
+            <!--<goals>-->
+            <!--<goal>deploy</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--<configuration>-->
+            <!--<serverId>nexus</serverId>-->
+            <!--<nexusUrl>http://localhost:8080/nexus/</nexusUrl>-->
+            <!--<skipStaging>true</skipStaging>-->
+            <!--</configuration>-->
             <!--</plugin>-->
 
         </plugins>
