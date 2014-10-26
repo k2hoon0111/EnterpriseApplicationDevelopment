@@ -33,6 +33,8 @@ public class LiquibaseSchemaUpdate {
 	private void updateSchema(DataSource dataSource) {
 		StopWatch watch = watchTime();
 
+                log.info("Liquibase updating shema...");
+                
 		databaseMigrationService.update(dataSource, context);
 
 		log.info("Database populated in {} ms", elapsedTimeInMillis(watch));

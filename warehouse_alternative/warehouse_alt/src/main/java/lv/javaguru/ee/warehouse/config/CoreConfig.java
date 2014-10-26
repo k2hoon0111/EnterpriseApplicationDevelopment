@@ -12,8 +12,8 @@ import org.springframework.core.env.AbstractEnvironment;
  */
 @Configuration
 @ComponentScan(basePackages = {"lv.javaguru.ee.warehouse"})
-@Import({DataSourceConfig.class, HibernateConfig.class,
-        TransactionConfig.class, AppPropertiesConfig.class})
+@Import({AppPropertiesConfig.class, DataSourceConfig.class, 
+    HibernateConfig.class, TransactionConfig.class, })
 public class CoreConfig {
 
 

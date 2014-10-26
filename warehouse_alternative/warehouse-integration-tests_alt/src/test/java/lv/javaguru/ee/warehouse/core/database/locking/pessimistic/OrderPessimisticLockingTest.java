@@ -26,7 +26,7 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 public class OrderPessimisticLockingTest extends DatabaseHibernateTest {
  
     @Test
-    public void testClientOptimisticLocking() throws ExecutionException, InterruptedException {
+    public void testOrderOptimisticLocking() throws ExecutionException, InterruptedException {
         final AtomicLong id = new AtomicLong();
 
         doInTransaction(new TransactionCallbackWithoutResult() {

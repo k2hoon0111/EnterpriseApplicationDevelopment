@@ -24,7 +24,7 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 public class WarehouseOptimisticLockingTest extends DatabaseHibernateTest {
     
     @Test
-    public void testProductOptimisticLocking() throws ExecutionException, InterruptedException {
+    public void testWarehouseOptimisticLocking() throws ExecutionException, InterruptedException {
         final AtomicLong id = new AtomicLong();
 
         doInTransaction(new TransactionCallbackWithoutResult() {

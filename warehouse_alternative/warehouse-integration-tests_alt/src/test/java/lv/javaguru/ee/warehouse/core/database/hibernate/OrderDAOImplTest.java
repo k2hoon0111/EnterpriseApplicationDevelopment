@@ -4,10 +4,8 @@ import lv.javaguru.ee.warehouse.core.domain.Order;
 import lv.javaguru.ee.warehouse.core.domain.Order.Direction;
 import lv.javaguru.ee.warehouse.core.domain.Product;
 import lv.javaguru.ee.warehouse.core.domain.Warehouse;
-import org.hamcrest.CoreMatchers;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
-import org.junit.Ignore;
 
 import org.junit.Test;
 import org.springframework.transaction.TransactionStatus;
@@ -33,7 +31,7 @@ public class OrderDAOImplTest extends DatabaseHibernateTest {
                 order.setAmount(10);
                 order.setQuantity(1);
                 orderDAO.create(order);
-                assertThat(order.getId(), is(CoreMatchers.notNullValue()));
+                assertThat(order.getId(), is(notNullValue()));
 
             }
         });

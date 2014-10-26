@@ -15,10 +15,8 @@ import lv.javaguru.ee.warehouse.core.domain.ProductProperties;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import org.junit.Ignore;
 
-//@Ignore
-public class ClientAuditTest extends DatabaseHibernateTest {
+public class ProductAuditTest extends DatabaseHibernateTest {
 
 	@Test
 	public void testProductRevisions() {
@@ -156,10 +154,11 @@ public class ClientAuditTest extends DatabaseHibernateTest {
 				List<Number> revisions = reader.getRevisions(ProductProperties.class, entityId.get());
 				assertThat(revisions.size(), is(3));
 				
-				ProductProperties ppAtRevision = (ProductProperties) reader.createQuery()
+                                ProductProperties ppAtRevision = (ProductProperties) reader.createQuery()
 						.forEntitiesAtRevision(ProductProperties.class, revisions.get(1))
 						.add(AuditEntity.id().eq(entityId.get()))
 						.getSingleResult();
+                                                                
 				assertThat(ppAtRevision.getValue(), is("ZZZ"));
 
 				ppAtRevision = (ProductProperties) reader.createQuery()

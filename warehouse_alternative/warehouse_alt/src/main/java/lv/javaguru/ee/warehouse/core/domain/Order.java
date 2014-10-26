@@ -45,7 +45,7 @@ public class Order {
     @Column(name = "DIRECTION", length = 10)
     private Direction direction;
     
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)     
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)     
     @JoinTable(name="ORDER_PRODUCTS", 
                joinColumns={@JoinColumn(name="ORDER_ID", nullable = false)}, 
                inverseJoinColumns={@JoinColumn(name="PRODUCT_ID", nullable = false)})

@@ -27,7 +27,7 @@ public class OrderOptimisticLockingTest extends DatabaseHibernateTest {
  
     
     @Test
-    public void testProductOptimisticLocking() throws ExecutionException, InterruptedException {
+    public void testOrderOptimisticLocking() throws ExecutionException, InterruptedException {
         final AtomicLong id = new AtomicLong();
 
         doInTransaction(new TransactionCallbackWithoutResult() {

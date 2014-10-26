@@ -81,7 +81,8 @@ public abstract class DatabaseHibernateTest {
         tableNames.add("REVINFO");
                 
         // real tables
-        tableNames.add("ORDERS");
+        tableNames.add("ORDER_PRODUCTS");
+        tableNames.add("ORDERS");        
         tableNames.add("PRODUCT_PROPERTIES");
         tableNames.add("WAREHOUSE_PRODUCTS");
         tableNames.add("PRODUCTS");
@@ -118,7 +119,7 @@ public abstract class DatabaseHibernateTest {
         Order order = new Order();    
         order.setDirection(INCOMING);
         order.setWarehouse(warehouse);
-        order.setProduct(product);
+        order.addProduct(product);
         order.setAmount(10);
         order.setQuantity(1);
         return order;
