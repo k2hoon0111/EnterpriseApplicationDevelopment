@@ -39,11 +39,4 @@ public class ApplicationMongoConfigTest {
 		ApplicationContext context = new AnnotationConfigApplicationContext(MongoConfig.class);
 		assertThat(context, is(notNullValue()));
 	}
-
-//	@Test
-//	public void bootstrapAppFromXml() {
-//
-//		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/application-context.xml");
-//		assertThat(context, is(notNullValue()));
-//	}
 }

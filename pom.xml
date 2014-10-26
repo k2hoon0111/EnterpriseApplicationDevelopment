@@ -20,7 +20,6 @@
         <module>i-shop-ws</module>
         <module>i-shop-integration-tests</module>
         <module>i-shop-acceptance-tests</module>
-        <module>mongodb</module>
         <module>warehouse</module>
         <module>PlanetExpress</module>
         <module>warehouse_alternative/warehouse_alt</module>

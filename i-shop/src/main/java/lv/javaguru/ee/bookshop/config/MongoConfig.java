@@ -1,7 +1,6 @@
 package lv.javaguru.ee.bookshop.config;
 
-import com.mongodb.Mongo;
-import com.mongodb.WriteConcern;
+import com.mongodb.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +11,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -22,12 +22,12 @@ import java.util.List;
  * @author Oliver Gierke
  */
 @Configuration
-@ComponentScan(basePackages = {"lv.javaguru.ee.bookshop.core.domain.mongo"})
+@ComponentScan(basePackages = {"lv.javaguru.ee.bookshop.core.database.mongo"})
 @EnableMongoRepositories
 public class MongoConfig extends AbstractMongoConfiguration {
 
-    @Autowired
-    private List<Converter<?, ?>> converters;
+//    @Autowired
+//    private List<Converter<?, ?>> converters;
 
     /*
      * (non-Javadoc)
@@ -35,7 +35,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
      */
     @Override
     protected String getDatabaseName() {
-        return "e-store";
+        return "i-shop";
     }
 
     /*
@@ -45,18 +45,29 @@ public class MongoConfig extends AbstractMongoConfiguration {
     @Override
     public Mongo mongo() throws Exception {
 
-        Mongo mongo = new Mongo("178.62.248.4", 27017);
-        mongo.setWriteConcern(WriteConcern.SAFE);
+        MongoCredential credential = MongoCredential.createMongoCRCredential("admin", "admin", "JavaGuru".toCharArray());
 
-        return mongo;
-    }
+        List<ServerAddress> serverAddresses = Arrays.asList(
+                new ServerAddress("178.62.248.4", 27017),
+                new ServerAddress("178.62.247.188", 27017),
+                new ServerAddress("178.62.247.189", 27017)
+        );
 
-    /*
-     * (non-Javadoc)
-     * @see org.springframework.data.mongodb.config.AbstractMongoConfiguration#customConversions()
-     */
-    @Override
-    public CustomConversions customConversions() {
-        return new CustomConversions(converters);
+        MongoClient mongoClient = new MongoClient(
+                serverAddresses,
+                Arrays.asList(credential));
+
+//        mongoClient.setWriteConcern(WriteConcern.SAFE);
+
+        return mongoClient;
     }
+//
+//    /*
+//     * (non-Javadoc)
+//     * @see org.springframework.data.mongodb.config.AbstractMongoConfiguration#customConversions()
+//     */
+//    @Override
+//    public CustomConversions customConversions() {
+//        return new CustomConversions(converters);
+//    }
 }
