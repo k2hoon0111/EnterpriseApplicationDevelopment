@@ -13,7 +13,8 @@ import org.springframework.core.env.AbstractEnvironment;
 @Configuration
 @ComponentScan(basePackages = {"lv.javaguru.ee.warehouse"})
 @Import({AppPropertiesConfig.class, DataSourceConfig.class, 
-    HibernateConfig.class, TransactionConfig.class, })
+    HibernateConfig.class, TransactionConfig.class, 
+    BackgroundJobConfig.class})
 public class CoreConfig {
 
 
